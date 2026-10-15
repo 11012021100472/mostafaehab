@@ -35,12 +35,20 @@
     .nav-cta { border:1px solid rgba(199,71,53,.7); padding:10px 15px; border-radius:3px; color:var(--warm-white); }
     .hero { min-height: 620px; display:grid; grid-template-columns: .93fr 1.07fr; align-items:center; gap:30px; padding:26px 0 44px; position:relative; }
     .hero:before { content:""; position:absolute; width:520px; height:520px; left:0; top:22%; background:radial-gradient(circle, rgba(199,71,53,.28) 0%, rgba(199,71,53,.10) 35%, rgba(199,71,53,0) 72%); pointer-events:none; filter:blur(10px); }
-    .hero-stats { grid-column:1 / -1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); max-width:760px; gap:0; position:relative; z-index:2; border:1px solid var(--line); background:linear-gradient(110deg,rgba(27,25,26,.92),rgba(13,13,15,.55)); backdrop-filter:blur(12px); }
-    .hero-stat { padding:14px 22px 13px; border-right:1px solid var(--line); }
-    .hero-stat:last-child { border-right:0; }
-    .hero-stat strong { display:block; color:var(--warm-white); font:800 clamp(23px,3vw,34px)/1.1 Manrope,sans-serif; letter-spacing:-.06em; }
-    .hero-stat strong em { color:var(--flame-bright); font-style:normal; }
-    .hero-stat span { display:block; color:#938B84; font-size:9px; letter-spacing:.13em; text-transform:uppercase; margin-top:5px; }
+    .hero-stats { grid-column:1 / -1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); max-width:850px; width:100%; gap:0; position:relative; z-index:2; padding:8px 0 18px; margin-bottom:4px; border-bottom:1px solid rgba(243,237,227,.16); }
+    .hero-stat { min-width:0; padding:4px 22px 2px; position:relative; }
+    .hero-stat:first-child { padding-left:0; }
+    .hero-stat + .hero-stat:before { content:""; position:absolute; left:0; top:9px; bottom:8px; width:1px; background:linear-gradient(180deg,transparent,rgba(243,237,227,.22),transparent); }
+    .hero-stat strong { display:flex; align-items:baseline; gap:3px; color:var(--warm-white); font:800 clamp(29px,4vw,43px)/1 Manrope,sans-serif; letter-spacing:-.075em; white-space:nowrap; font-variant-numeric:tabular-nums; }
+    .hero-stat .counter-suffix { color:var(--flame-bright); font-size:.48em; font-weight:800; letter-spacing:-.02em; }
+    .hero-stat span.label { display:block; color:#938B84; font-size:9px; letter-spacing:.15em; text-transform:uppercase; margin-top:9px; }
+    .hero-stat strong.counting { animation:countPop .45s cubic-bezier(.2,.8,.2,1) both; }
+    @keyframes countPop { from { opacity:.45; transform:translateY(7px); filter:blur(2px); } to { opacity:1; transform:translateY(0); filter:blur(0); } }
+    .hero-stat:after { content:""; position:absolute; left:22px; bottom:-19px; width:0; height:2px; background:var(--flame-bright); transition:width .55s ease; }
+    .hero-stat:first-child:after { left:0; }
+    .hero-stats.is-counted .hero-stat:after { width:26px; }
+    .hero-stats.is-counted .hero-stat:nth-child(2):after { transition-delay:.12s; }
+    .hero-stats.is-counted .hero-stat:nth-child(3):after { transition-delay:.24s; }
     .portrait-wrap { align-self:stretch; min-height:510px; position:relative; display:flex; align-items:flex-end; justify-content:center; overflow:visible; isolation:isolate; }
     .portrait-wrap:before { content:""; position:absolute; z-index:-1; width:88%; aspect-ratio:1; bottom:12%; left:6%; border-radius:50%; background:radial-gradient(circle,rgba(199,71,53,.30) 0%,rgba(199,71,53,.13) 40%,rgba(199,71,53,0) 72%); filter:blur(24px); animation:portraitGlow 5s ease-in-out infinite alternate; }
     .portrait-wrap:after { content:""; position:absolute; z-index:2; inset:auto 0 0; height:22%; background:linear-gradient(0deg,var(--black),transparent); pointer-events:none; }
@@ -64,7 +72,13 @@
     .btn-ghost { border:1px solid var(--line); color:var(--warm-white); }
     .scroll-note { margin-top:48px; display:flex; gap:12px; align-items:center; color:#77716B; text-transform:uppercase; font-size:9px; letter-spacing:.18em; }
     .scroll-note span { width:32px; height:1px; background:var(--flame); }
-    .section { padding:82px 0; border-top:1px solid var(--line); }
+    .section { padding:82px 0; border-top:1px solid var(--line); scroll-margin-top:18px; }
+    .reveal { opacity:0; transform:translateY(24px); filter:blur(3px); transition:opacity .75s ease, transform .75s cubic-bezier(.2,.8,.2,1), filter .75s ease; }
+    .reveal.is-visible { opacity:1; transform:translateY(0); filter:blur(0); }
+    .reveal-delay-1 { transition-delay:.08s; }
+    .reveal-delay-2 { transition-delay:.16s; }
+    .reveal-delay-3 { transition-delay:.24s; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *, *:before, *:after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; } .reveal { opacity:1; transform:none; filter:none; } }
     .section-head { display:flex; justify-content:space-between; gap:28px; align-items:end; margin-bottom:32px; }
     .kicker { color:var(--flame-bright); font-size:10px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; }
     h2 { font:700 clamp(30px,4vw,48px)/1.08 Manrope,sans-serif; letter-spacing:-.05em; margin:10px 0 0; }
@@ -125,8 +139,8 @@
       .wrap { width:min(100% - 32px,var(--max)); }
       nav { gap:14px; } nav a:not(.nav-cta) { display:none; }
       .hero { grid-template-columns:.85fr 1.15fr; gap:8px; min-height:530px; padding:22px 0 35px; }
-      .hero-stats { max-width:100%; }
-      .hero-stat { padding:12px 14px; }
+      .hero-stats { max-width:100%; padding-bottom:15px; }
+      .hero-stat { padding:4px 12px 2px; }
       .portrait-wrap { min-height:420px; }
       .portrait { width:125%; max-width:none; }
       h1 { font-size:clamp(40px,8vw,64px); }
@@ -143,10 +157,13 @@
       .brand { font-size:12px; }
       .nav-cta { padding:8px 10px; font-size:10px; }
       .hero { grid-template-columns:1fr; padding-top:14px; gap:0; }
-      .hero-stats { grid-column:1; grid-row:1; margin-bottom:18px; }
-      .hero-stat { padding:11px 8px; text-align:center; }
-      .hero-stat strong { font-size:22px; }
-      .hero-stat span { font-size:8px; letter-spacing:.06em; }
+      .hero-stats { grid-column:1; grid-row:1; margin-bottom:18px; padding:8px 0 15px; }
+      .hero-stat { padding:4px 8px 2px; text-align:center; }
+      .hero-stat:first-child { padding-left:0; }
+      .hero-stat strong { justify-content:center; font-size:clamp(20px,6.3vw,27px); letter-spacing:-.07em; }
+      .hero-stat span.label { font-size:7px; letter-spacing:.045em; margin-top:7px; }
+      .hero-stat:after { left:8px; bottom:-16px; }
+      .hero-stat:first-child:after { left:0; }
       .hero-copy { grid-row:2; padding:22px 0 8px; }
       .portrait-wrap { grid-row:3; min-height:340px; max-height:390px; margin-top:-8px; }
       .portrait { width:min(100%,390px); max-height:390px; }
@@ -187,9 +204,9 @@
   <main>
     <section class="wrap hero" id="home">
       <div class="hero-stats" aria-label="Performance overview">
-        <div class="hero-stat"><strong data-count="brands">—<em>+</em></strong><span>Brands worked with</span></div>
-        <div class="hero-stat"><strong data-count="spend">—</strong><span>Total ad spend</span></div>
-        <div class="hero-stat"><strong data-count="orders">—<em>+</em></strong><span>Orders generated</span></div>
+        <div class="hero-stat"><strong><span class="counter-number" data-target="21">0</span><span class="counter-suffix">+</span></strong><span class="label">Brands worked with</span></div>
+        <div class="hero-stat"><strong><span class="counter-number" data-target="51000000" data-format="compact">0</span><span class="counter-suffix"> EGP</span></strong><span class="label">Total ad spend</span></div>
+        <div class="hero-stat"><strong><span class="counter-number" data-target="401000" data-format="compact">0</span><span class="counter-suffix">+</span></strong><span class="label">Orders generated</span></div>
       </div>
       <div class="portrait-wrap">
         <img class="portrait" src="mostafa-portrait.png" alt="Portrait of Mostafa Ehab with arms crossed">
@@ -210,11 +227,11 @@
 
     <section class="section" id="work">
       <div class="wrap">
-        <div class="section-head collab-section-head">
+        <div class="section-head collab-section-head reveal">
           <div><div class="kicker">Selected Collaborations</div><h2>Creators & brands I've worked with.</h2></div>
           <p class="section-desc">A circle of selected collaborations across creator-led courses, digital products, and e-commerce growth.</p>
         </div>
-        <div class="collabs-window">
+        <div class="collabs-window reveal reveal-delay-1">
           <div class="collabs">
             <a class="collab" href="#contact"><span class="symbol">C1</span><strong>Creator 01</strong><small>Digital products</small></a>
             <a class="collab" href="#contact"><span class="symbol">C2</span><strong>Creator 02</strong><small>Course launch</small></a>
@@ -237,7 +254,7 @@
           <div><div class="kicker">Featured Case Study</div><h2>Proof over promises.</h2></div>
           <p class="section-desc">One deep-dive story: the business challenge, the strategy, what changed, and the measurable outcome.</p>
         </div>
-        <article class="feature-case">
+        <article class="feature-case reveal">
           <div class="case-visual">
             <span class="case-chip">Featured Project · Details to verify</span>
             <div class="case-graphic" aria-label="Decorative performance chart"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
@@ -266,7 +283,7 @@
           <div><div class="kicker">Selected Results</div><h2>Numbers with context.</h2></div>
           <p class="section-desc">A quick scan of campaign outcomes. Each number will include its timeframe, business context, and your specific contribution.</p>
         </div>
-        <div class="results-grid">
+        <div class="results-grid reveal">
           <article class="result-card"><div class="result-value">—</div><h3>Acquisition Efficiency</h3><p>CPA / CAC improvement with period and baseline.</p></article>
           <article class="result-card"><div class="result-value">—</div><h3>Revenue & Orders</h3><p>Verified sales outcomes from a defined campaign.</p></article>
           <article class="result-card"><div class="result-value">—</div><h3>Return on Ad Spend</h3><p>ROAS with spend, attribution window, and context.</p></article>
@@ -280,7 +297,7 @@
           <div><div class="kicker">Testimonials</div><h2>Trust, in their words.</h2></div>
           <p class="section-desc">Real client feedback, shown as approved screenshots or quoted testimonials. No fabricated reviews.</p>
         </div>
-        <div class="reviews-grid">
+        <div class="reviews-grid reveal">
           <article class="review"><div class="quote">“</div><blockquote>Place the original client review here. Keep the wording authentic and publish only with permission.</blockquote><div class="reviewer"><strong>Client name</strong>Role / project · Screenshot to be added</div></article>
           <article class="review"><div class="quote">“</div><blockquote>Place the original client review here. A short, specific review is more convincing than a generic compliment.</blockquote><div class="reviewer"><strong>Client name</strong>Role / project · Screenshot to be added</div></article>
           <article class="review"><div class="quote">“</div><blockquote>Place the original client review here. We can use a cropped screenshot if the client approves it.</blockquote><div class="reviewer"><strong>Client name</strong>Role / project · Screenshot to be added</div></article>
@@ -294,7 +311,7 @@
           <div><div class="kicker">Certifications</div><h2>Learning that compounds.</h2></div>
           <p class="section-desc">Certificates will be displayed with their original images, issuing organizations, and years.</p>
         </div>
-        <div class="cert-grid">
+        <div class="cert-grid reveal">
           <article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
           <article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
           <article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
@@ -303,7 +320,7 @@
     </section>
 
     <section class="contact" id="contact">
-      <div class="wrap contact-inner">
+      <div class="wrap contact-inner reveal">
         <div><div class="kicker">Let's Work Together</div><h2>Have a growth challenge?<br>Let's talk numbers.</h2><p>For performance marketing, e-commerce growth, and digital product launches.</p></div>
         <a class="btn btn-primary" href="mailto:hello@example.com">Get in Touch ↗</a>
       </div>
@@ -312,33 +329,64 @@
   <footer><div class="wrap footer-inner"><div>© <span id="year"></span> Mostafa Ehab. All rights reserved.</div><span>Performance Media Buyer · Built around measurable growth.</span></div></footer>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-    // Counter values intentionally remain blank until verified metrics are supplied.
-    // Add numeric data-count-value attributes after Mostafa confirms the figures.
-    const statEls = document.querySelectorAll('.hero-stat strong[data-count]');
-    const animateCounter = (el, target, suffix = '') => {
-      const duration = 1300;
+
+    // Count-up animation: add confirmed numeric targets to data-target after metrics are approved.
+    const stats = document.querySelector('.hero-stats');
+    const counters = document.querySelectorAll('.counter-number[data-target]');
+    const formatNumber = (value, format) => {
+      if (format === 'compact') {
+        if (value >= 1000000) return (value / 1000000).toLocaleString('en-US', { maximumFractionDigits: 1 }) + 'M';
+        if (value >= 1000) return (value / 1000).toLocaleString('en-US', { maximumFractionDigits: 1 }) + 'K';
+      }
+      return Math.round(value).toLocaleString('en-US');
+    };
+    const animateCounter = (el, target, duration = 850) => {
       const start = performance.now();
-      const tick = (now) => {
+      const format = el.dataset.format || 'full';
+      el.closest('strong')?.classList.add('counting');
+      const tick = now => {
         const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.round(target * eased).toLocaleString('en-US') + suffix;
+        // Smooth ease-out with a gentle acceleration at the start.
+        const eased = 1 - Math.pow(1 - progress, 4);
+        el.textContent = formatNumber(target * eased, format);
         if (progress < 1) requestAnimationFrame(tick);
+        else el.textContent = formatNumber(target, format);
       };
       requestAnimationFrame(tick);
     };
-    // Future-ready: set data-count-value on each metric when the real figures are confirmed.
-    const statsObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const value = Number(el.dataset.countValue);
-        if (Number.isFinite(value) && value >= 0 && !el.dataset.animated) {
-          el.dataset.animated = 'true';
-          animateCounter(el, value, el.dataset.suffix || '');
+    let countersStarted = false;
+    const startCounters = () => {
+      if (countersStarted) return;
+      countersStarted = true;
+      stats?.classList.add('is-counted');
+      counters.forEach((el, index) => {
+        const target = Number(el.dataset.target);
+        if (el.dataset.target.trim() !== '' && Number.isFinite(target) && target >= 0) {
+          window.setTimeout(() => animateCounter(el, target), index * 90);
         }
       });
-    }, { threshold: .6 });
-    statEls.forEach(el => statsObserver.observe(el));
+    };
+    // Start as soon as the visitor lands on the page.
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', startCounters, { once: true });
+    } else {
+      startCounters();
+    }
+
+    // Smooth, understated reveal as each section enters the viewport.
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -35px 0px' });
+      revealItems.forEach(item => revealObserver.observe(item));
+    } else {
+      revealItems.forEach(item => item.classList.add('is-visible'));
+    }
   </script>
 </body>
 </html>

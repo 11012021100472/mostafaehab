@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0D0D0F">
+  <meta name="description" content="Mostafa Ehab — Performance Media Buyer focused on e-commerce growth and digital products.">
+  <title>Mostafa Ehab — Performance Media Buyer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0D0D0F;
+      --panel: #171719;
+      --panel-2: #202023;
+      --flame: #C74735;
+      --flame-bright: #E05A45;
+      --warm-white: #F3EDE3;
+      --muted: #AAA49D;
+      --line: rgba(243,237,227,.13);
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--black); color: var(--warm-white); font-family: "DM Sans", sans-serif; line-height: 1.55; }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .wrap { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
+    .topbar { height: 76px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); }
+    .brand { font: 800 15px Manrope,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
+    .brand span { color:var(--flame-bright); }
+    nav { display:flex; gap:26px; align-items:center; color:#C8C1B9; font-size:12px; }
+    nav a:hover { color:var(--warm-white); }
+    .nav-cta { border:1px solid rgba(199,71,53,.7); padding:10px 15px; border-radius:3px; color:var(--warm-white); }
+    .hero { min-height: 620px; display:grid; grid-template-columns: .93fr 1.07fr; align-items:center; gap:30px; padding:54px 0 44px; position:relative; }
+    .hero:before { content:""; position:absolute; width:380px; height:380px; left:3%; top:19%; background:radial-gradient(circle, rgba(199,71,53,.20), rgba(199,71,53,0) 70%); pointer-events:none; }
+    .portrait-wrap { align-self:stretch; min-height:510px; position:relative; display:flex; align-items:flex-end; justify-content:center; overflow:hidden; }
+    .portrait-wrap:after { content:""; position:absolute; inset:auto 4% 0; height:28%; background:linear-gradient(0deg,var(--black),transparent); pointer-events:none; }
+    .portrait { position:relative; z-index:1; display:block; width:min(100%, 500px); max-height:600px; object-fit:contain; object-position:bottom; filter: drop-shadow(0 20px 35px rgba(0,0,0,.45)); }
+    .portrait-label { position:absolute; z-index:2; bottom:20px; left:4px; color:#A9A29A; font-size:10px; letter-spacing:.22em; text-transform:uppercase; }
+    .hero-copy { position:relative; z-index:2; padding:24px 0 35px; }
+    .eyebrow { color:var(--flame-bright); text-transform:uppercase; font-size:11px; letter-spacing:.23em; font-weight:700; display:flex; align-items:center; gap:11px; }
+    .eyebrow:before { content:""; width:26px; height:1px; background:var(--flame-bright); }
+    h1 { font:800 clamp(46px, 6.4vw, 82px)/.98 Manrope,sans-serif; letter-spacing:-.065em; margin:22px 0 15px; }
+    h1 .surname { color:var(--warm-white); }
+    .role { font:600 clamp(18px,2.1vw,25px)/1.3 Manrope,sans-serif; color:#D6CEC5; margin:0 0 18px; }
+    .intro { max-width:480px; color:#AAA49D; font-size:15px; line-height:1.8; margin:0; }
+    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:28px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:14px 18px; font-size:12px; font-weight:700; letter-spacing:.02em; border-radius:3px; transition:transform .2s, background .2s; }
+    .btn:hover { transform:translateY(-2px); }
+    .btn-primary { background:var(--flame); color:#fff8f0; }
+    .btn-primary:hover { background:var(--flame-bright); }
+    .btn-ghost { border:1px solid var(--line); color:var(--warm-white); }
+    .scroll-note { margin-top:48px; display:flex; gap:12px; align-items:center; color:#77716B; text-transform:uppercase; font-size:9px; letter-spacing:.18em; }
+    .scroll-note span { width:32px; height:1px; background:var(--flame); }
+    .section { padding:82px 0; border-top:1px solid var(--line); }
+    .section-head { display:flex; justify-content:space-between; gap:28px; align-items:end; margin-bottom:32px; }
+    .kicker { color:var(--flame-bright); font-size:10px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; }
+    h2 { font:700 clamp(30px,4vw,48px)/1.08 Manrope,sans-serif; letter-spacing:-.05em; margin:10px 0 0; }
+    .section-desc { color:var(--muted); max-width:360px; font-size:13px; margin:0; }
+    .collabs { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+    .collab { min-height:145px; border:1px solid var(--line); background:linear-gradient(145deg,#1B1B1E,#111113); padding:20px; display:flex; flex-direction:column; justify-content:space-between; transition:border-color .2s, transform .2s; }
+    .collab:hover { border-color:rgba(199,71,53,.7); transform:translateY(-3px); }
+    .collab .symbol { width:38px; height:38px; border-radius:50%; border:1px solid rgba(199,71,53,.5); display:grid; place-items:center; color:var(--flame-bright); font:700 14px Manrope,sans-serif; }
+    .collab strong { font:700 15px Manrope,sans-serif; }
+    .collab small { display:block; color:#8D8780; font-size:10px; margin-top:4px; }
+    .feature-case { display:grid; grid-template-columns:1.05fr .95fr; background:var(--panel); border:1px solid var(--line); overflow:hidden; }
+    .case-visual { min-height:350px; background:radial-gradient(circle at 75% 25%,rgba(199,71,53,.32),transparent 34%),linear-gradient(135deg,#252326,#111113); padding:30px; display:flex; flex-direction:column; justify-content:space-between; }
+    .case-chip { display:inline-flex; align-self:flex-start; border:1px solid rgba(243,237,227,.22); padding:7px 10px; color:#D4CCC3; font-size:9px; text-transform:uppercase; letter-spacing:.13em; }
+    .case-graphic { display:flex; align-items:end; gap:10px; height:120px; border-bottom:1px solid rgba(243,237,227,.18); padding:0 10px; }
+    .bar { flex:1; background:linear-gradient(0deg,rgba(199,71,53,.35),var(--flame)); border-radius:3px 3px 0 0; }
+    .bar:nth-child(1){height:35%}.bar:nth-child(2){height:50%;opacity:.8}.bar:nth-child(3){height:42%;opacity:.9}.bar:nth-child(4){height:73%}.bar:nth-child(5){height:100%}
+    .case-visual-note { color:#AAA49D; font-size:10px; }
+    .case-content { padding:clamp(25px,4vw,48px); }
+    .case-content h3 { font:700 clamp(24px,3vw,34px)/1.15 Manrope,sans-serif; letter-spacing:-.04em; margin:15px 0; }
+    .case-content p { color:var(--muted); font-size:13px; line-height:1.8; }
+    .metrics { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin:24px 0; }
+    .metric { border-top:1px solid var(--line); padding-top:13px; }
+    .metric b { display:block; color:var(--warm-white); font:700 27px Manrope,sans-serif; letter-spacing:-.05em; }
+    .metric span { color:#918A83; font-size:10px; }
+    .notice { font-size:10px!important; color:#77716B!important; }
+    .results-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .result-card { padding:24px; background:var(--panel); border:1px solid var(--line); min-height:170px; }
+    .result-card .result-value { font:800 36px Manrope,sans-serif; letter-spacing:-.06em; color:var(--flame-bright); }
+    .result-card h3 { font:600 14px Manrope,sans-serif; margin:10px 0 5px; }
+    .result-card p { color:#928B84; font-size:11px; margin:0; }
+    .reviews-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .review { border:1px solid var(--line); padding:24px; background:linear-gradient(150deg,#19191B,#111113); }
+    .quote { font:700 30px Manrope,sans-serif; color:var(--flame); }
+    .review blockquote { margin:10px 0 22px; color:#D3CCC4; font-size:13px; line-height:1.8; }
+    .reviewer { border-top:1px solid var(--line); padding-top:15px; color:#8D8780; font-size:10px; }
+    .reviewer strong { display:block; color:var(--warm-white); font-size:12px; margin-bottom:3px; }
+    .cert-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .cert { min-height:150px; background:var(--panel); border:1px dashed rgba(243,237,227,.2); padding:22px; display:flex; flex-direction:column; justify-content:space-between; }
+    .cert-icon { color:var(--flame-bright); }
+    .cert strong { font:600 14px Manrope,sans-serif; }
+    .cert small { color:#8D8780; font-size:10px; margin-top:5px; }
+    .contact { padding:64px 0 74px; background:linear-gradient(110deg,rgba(199,71,53,.14),transparent 60%); border-top:1px solid var(--line); }
+    .contact-inner { display:flex; justify-content:space-between; align-items:center; gap:30px; }
+    .contact h2 { max-width:650px; }
+    .contact p { color:var(--muted); font-size:13px; }
+    footer { border-top:1px solid var(--line); padding:20px 0; color:#77716B; font-size:10px; }
+    .footer-inner { display:flex; justify-content:space-between; gap:20px; }
+    .tag { display:inline-block; color:#CFC7BE; border:1px solid var(--line); padding:6px 9px; font-size:9px; margin:5px 4px 0 0; }
+    @media (max-width:800px) {
+      .wrap { width:min(100% - 32px,var(--max)); }
+      nav { gap:14px; } nav a:not(.nav-cta) { display:none; }
+      .hero { grid-template-columns:.85fr 1.15fr; gap:8px; min-height:530px; padding:25px 0 35px; }
+      .portrait-wrap { min-height:420px; }
+      .portrait { width:125%; max-width:none; }
+      h1 { font-size:clamp(40px,8vw,64px); }
+      .intro { font-size:13px; }
+      .collabs { grid-template-columns:repeat(2,1fr); }
+      .feature-case { grid-template-columns:1fr; }
+      .case-visual { min-height:260px; }
+      .results-grid,.reviews-grid { grid-template-columns:repeat(2,1fr); }
+      .cert-grid { grid-template-columns:repeat(2,1fr); }
+      .section { padding:62px 0; }
+    }
+    @media (max-width:520px) {
+      .topbar { height:64px; }
+      .brand { font-size:12px; }
+      .nav-cta { padding:8px 10px; font-size:10px; }
+      .hero { grid-template-columns:1fr; padding-top:20px; gap:0; }
+      .hero-copy { grid-row:1; padding:30px 0 8px; }
+      .portrait-wrap { grid-row:2; min-height:340px; max-height:390px; margin-top:-8px; }
+      .portrait { width:min(100%,390px); max-height:390px; }
+      .portrait-label { left:12px; bottom:12px; }
+      .hero:before { width:280px; height:280px; left:10%; top:36%; }
+      h1 { font-size:58px; margin-top:16px; }
+      .role { font-size:18px; }
+      .intro { max-width:390px; }
+      .scroll-note { margin-top:26px; }
+      .section-head { display:block; }
+      .section-desc { margin-top:15px; }
+      .collabs { grid-template-columns:repeat(2,1fr); }
+      .collab { min-height:125px; padding:15px; }
+      .results-grid,.reviews-grid,.cert-grid { grid-template-columns:1fr; }
+      .result-card { min-height:140px; }
+      .contact-inner { display:block; }
+      .contact-inner .btn { margin-top:10px; }
+      .footer-inner { display:block; }
+      .footer-inner span { display:block; margin-top:7px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand" href="#home">ME<span>.</span> / PORTFOLIO</a>
+    <nav aria-label="Main navigation">
+      <a href="#work">Work</a><a href="#results">Results</a><a href="#reviews">Reviews</a><a href="#certifications">Certifications</a>
+      <a class="nav-cta" href="#contact">Let's Talk ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="wrap hero" id="home">
+      <div class="portrait-wrap">
+        <img class="portrait" src="assets/mostafa-portrait.png" alt="Portrait of Mostafa Ehab with arms crossed">
+        <div class="portrait-label">Performance Marketing · Egypt</div>
+      </div>
+      <div class="hero-copy">
+        <div class="eyebrow">Performance Marketing</div>
+        <h1>Mostafa<br><span class="surname">Ehab.</span></h1>
+        <p class="role">Performance Media Buyer</p>
+        <p class="intro">Turning ad spend into measurable business growth — through performance marketing, e-commerce scaling, and digital product launches.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#work">Explore My Work <span>↘</span></a>
+          <a class="btn btn-ghost" href="#contact">Contact Me <span>↗</span></a>
+        </div>
+        <div class="scroll-note"><span></span> Strategy. Performance. Growth.</div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">Selected Collaborations</div><h2>People & projects<br>I've worked with.</h2></div>
+          <p class="section-desc">A selection of creator-led educational products and marketing projects. Final portraits, course covers, and exact role descriptions will be added after assets are provided and approved.</p>
+        </div>
+        <div class="collabs">
+          <a class="collab" href="#contact"><span class="symbol">01</span><div><strong>Creator / Course 01</strong><small>Creator-led digital product</small></div></a>
+          <a class="collab" href="#contact"><span class="symbol">02</span><div><strong>Creator / Course 02</strong><small>Course launch & marketing</small></div></a>
+          <a class="collab" href="#contact"><span class="symbol">03</span><div><strong>Creator / Course 03</strong><small>Digital product growth</small></div></a>
+          <a class="collab" href="#contact"><span class="symbol">04</span><div><strong>E-commerce Brands</strong><small>Paid acquisition & scaling</small></div></a>
+        </div>
+        <div style="margin-top:16px">
+          <span class="tag">Meta Ads</span><span class="tag">Performance Strategy</span><span class="tag">Course Marketing</span><span class="tag">CRO</span><span class="tag">E-commerce</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="featured">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">Featured Case Study</div><h2>Proof over promises.</h2></div>
+          <p class="section-desc">One deep-dive story: the business challenge, the strategy, what changed, and the measurable outcome.</p>
+        </div>
+        <article class="feature-case">
+          <div class="case-visual">
+            <span class="case-chip">Featured Project · Details to verify</span>
+            <div class="case-graphic" aria-label="Decorative performance chart"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+            <div class="case-visual-note">REAL CAMPAIGN DATA WILL REPLACE THIS VISUAL</div>
+          </div>
+          <div class="case-content">
+            <div class="kicker">E-commerce / Performance Marketing</div>
+            <h3>Scaling performance with smarter acquisition.</h3>
+            <p>This case study will document the starting point, campaign structure, creative testing, optimization decisions, and business impact — using verified data from one selected project.</p>
+            <div class="metrics">
+              <div class="metric"><b>—</b><span>Ad Spend</span></div>
+              <div class="metric"><b>—</b><span>Revenue / Sales</span></div>
+              <div class="metric"><b>—</b><span>CPA / CAC</span></div>
+              <div class="metric"><b>—</b><span>ROAS</span></div>
+            </div>
+            <a class="btn btn-primary" href="#contact">Discuss a Similar Challenge ↗</a>
+            <p class="notice">Metrics intentionally left blank until the project, timeframe, and source data are confirmed.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">Selected Results</div><h2>Numbers with context.</h2></div>
+          <p class="section-desc">A quick scan of campaign outcomes. Each number will include its timeframe, business context, and your specific contribution.</p>
+        </div>
+        <div class="results-grid">
+          <article class="result-card"><div class="result-value">—</div><h3>Acquisition Efficiency</h3><p>CPA / CAC improvement with period and baseline.</p></article>
+          <article class="result-card"><div class="result-value">—</div><h3>Revenue & Orders</h3><p>Verified sales outcomes from a defined campaign.</p></article>
+          <article class="result-card"><div class="result-value">—</div><h3>Return on Ad Spend</h3><p>ROAS with spend, attribution window, and context.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reviews">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">Testimonials</div><h2>Trust, in their words.</h2></div>
+          <p class="section-desc">Real client feedback, shown as approved screenshots or quoted testimonials. No fabricated reviews.</p>
+        </div>
+        <div class="reviews-grid">
+          <article class="review"><div class="quote">“</div><blockquote>Place the original client review here. Keep the wording authentic and publish only with permission.</blockquote><div class="reviewer"><strong>Client name</strong>Role / project · Screenshot to be added</div></article>
+          <article class="review"><div class="quote">“</div><blockquote>Place the original client review here. A short, specific review is more convincing than a generic compliment.</blockquote><div class="reviewer"><strong>Client name</strong>Role / project · Screenshot to be added</div></article>
+          <article class="review"><div class="quote">“</div><blockquote>Place the original client review here. We can use a cropped screenshot if the client approves it.</blockquote><div class="reviewer"><strong>Client name</strong>Role / project · Screenshot to be added</div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="certifications">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">Certifications</div><h2>Learning that compounds.</h2></div>
+          <p class="section-desc">Certificates will be displayed with their original images, issuing organizations, and years.</p>
+        </div>
+        <div class="cert-grid">
+          <article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
+          <article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
+          <article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap contact-inner">
+        <div><div class="kicker">Let's Work Together</div><h2>Have a growth challenge?<br>Let's talk numbers.</h2><p>For performance marketing, e-commerce growth, and digital product launches.</p></div>
+        <a class="btn btn-primary" href="mailto:hello@example.com">Get in Touch ↗</a>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap footer-inner"><div>© <span id="year"></span> Mostafa Ehab. All rights reserved.</div><span>Performance Media Buyer · Built around measurable growth.</span></div></footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

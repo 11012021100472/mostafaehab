@@ -33,11 +33,21 @@
     nav { display:flex; gap:26px; align-items:center; color:#C8C1B9; font-size:12px; }
     nav a:hover { color:var(--warm-white); }
     .nav-cta { border:1px solid rgba(199,71,53,.7); padding:10px 15px; border-radius:3px; color:var(--warm-white); }
-    .hero { min-height: 620px; display:grid; grid-template-columns: .93fr 1.07fr; align-items:center; gap:30px; padding:54px 0 44px; position:relative; }
-    .hero:before { content:""; position:absolute; width:380px; height:380px; left:3%; top:19%; background:radial-gradient(circle, rgba(199,71,53,.20), rgba(199,71,53,0) 70%); pointer-events:none; }
-    .portrait-wrap { align-self:stretch; min-height:510px; position:relative; display:flex; align-items:flex-end; justify-content:center; overflow:hidden; }
-    .portrait-wrap:after { content:""; position:absolute; inset:auto 4% 0; height:28%; background:linear-gradient(0deg,var(--black),transparent); pointer-events:none; }
-    .portrait { position:relative; z-index:1; display:block; width:min(100%, 500px); max-height:600px; object-fit:contain; object-position:bottom; filter: drop-shadow(0 20px 35px rgba(0,0,0,.45)); }
+    .hero { min-height: 620px; display:grid; grid-template-columns: .93fr 1.07fr; align-items:center; gap:30px; padding:26px 0 44px; position:relative; }
+    .hero:before { content:""; position:absolute; width:520px; height:520px; left:0; top:22%; background:radial-gradient(circle, rgba(199,71,53,.28) 0%, rgba(199,71,53,.10) 35%, rgba(199,71,53,0) 72%); pointer-events:none; filter:blur(10px); }
+    .hero-stats { grid-column:1 / -1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); max-width:760px; gap:0; position:relative; z-index:2; border:1px solid var(--line); background:linear-gradient(110deg,rgba(27,25,26,.92),rgba(13,13,15,.55)); backdrop-filter:blur(12px); }
+    .hero-stat { padding:14px 22px 13px; border-right:1px solid var(--line); }
+    .hero-stat:last-child { border-right:0; }
+    .hero-stat strong { display:block; color:var(--warm-white); font:800 clamp(23px,3vw,34px)/1.1 Manrope,sans-serif; letter-spacing:-.06em; }
+    .hero-stat strong em { color:var(--flame-bright); font-style:normal; }
+    .hero-stat span { display:block; color:#938B84; font-size:9px; letter-spacing:.13em; text-transform:uppercase; margin-top:5px; }
+    .portrait-wrap { align-self:stretch; min-height:510px; position:relative; display:flex; align-items:flex-end; justify-content:center; overflow:visible; isolation:isolate; }
+    .portrait-wrap:before { content:""; position:absolute; z-index:-1; width:88%; aspect-ratio:1; bottom:12%; left:6%; border-radius:50%; background:radial-gradient(circle,rgba(199,71,53,.30) 0%,rgba(199,71,53,.13) 40%,rgba(199,71,53,0) 72%); filter:blur(24px); animation:portraitGlow 5s ease-in-out infinite alternate; }
+    .portrait-wrap:after { content:""; position:absolute; z-index:2; inset:auto 0 0; height:22%; background:linear-gradient(0deg,var(--black),transparent); pointer-events:none; }
+    .portrait { position:relative; z-index:1; display:block; width:min(112%, 560px); max-height:620px; object-fit:contain; object-position:bottom; filter: drop-shadow(0 22px 38px rgba(0,0,0,.5)) drop-shadow(0 0 22px rgba(199,71,53,.10)); animation:portraitRise .9s cubic-bezier(.2,.8,.2,1) both; }
+    @keyframes portraitGlow { from { opacity:.65; transform:scale(.92); } to { opacity:1; transform:scale(1.08); } }
+    @keyframes portraitRise { from { opacity:0; transform:translateY(24px) scale(.985); } to { opacity:1; transform:translateY(0) scale(1); } }
+    @keyframes countIn { from { opacity:.2; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
     .portrait-label { position:absolute; z-index:2; bottom:20px; left:4px; color:#A9A29A; font-size:10px; letter-spacing:.22em; text-transform:uppercase; }
     .hero-copy { position:relative; z-index:2; padding:24px 0 35px; }
     .eyebrow { color:var(--flame-bright); text-transform:uppercase; font-size:11px; letter-spacing:.23em; font-weight:700; display:flex; align-items:center; gap:11px; }
@@ -59,12 +69,20 @@
     .kicker { color:var(--flame-bright); font-size:10px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; }
     h2 { font:700 clamp(30px,4vw,48px)/1.08 Manrope,sans-serif; letter-spacing:-.05em; margin:10px 0 0; }
     .section-desc { color:var(--muted); max-width:360px; font-size:13px; margin:0; }
-    .collabs { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
-    .collab { min-height:145px; border:1px solid var(--line); background:linear-gradient(145deg,#1B1B1E,#111113); padding:20px; display:flex; flex-direction:column; justify-content:space-between; transition:border-color .2s, transform .2s; }
-    .collab:hover { border-color:rgba(199,71,53,.7); transform:translateY(-3px); }
-    .collab .symbol { width:38px; height:38px; border-radius:50%; border:1px solid rgba(199,71,53,.5); display:grid; place-items:center; color:var(--flame-bright); font:700 14px Manrope,sans-serif; }
-    .collab strong { font:700 15px Manrope,sans-serif; }
-    .collab small { display:block; color:#8D8780; font-size:10px; margin-top:4px; }
+    .collab-section-head { display:block; text-align:center; margin-bottom:30px; }
+    .collab-section-head .kicker { justify-content:center; }
+    .collab-section-head .kicker:before { content:""; display:inline-block; width:24px; height:1px; background:var(--flame-bright); vertical-align:middle; margin-right:10px; }
+    .collab-section-head h2 { margin-top:10px; }
+    .collab-section-head .section-desc { max-width:540px; margin:13px auto 0; }
+    .collabs-window { overflow:hidden; position:relative; padding:12px 0 20px; mask-image:linear-gradient(90deg,transparent,black 8%,black 92%,transparent); }
+    .collabs { display:flex; align-items:flex-start; justify-content:center; gap:clamp(14px,3vw,34px); width:max-content; margin:0 auto; }
+    .collab { width:116px; flex:0 0 116px; display:flex; flex-direction:column; align-items:center; gap:11px; text-align:center; transition:transform .25s ease; }
+    .collab:hover { transform:translateY(-7px); }
+    .collab .symbol { width:88px; height:88px; border-radius:50%; border:1px solid rgba(199,71,53,.8); display:grid; place-items:center; color:var(--warm-white); font:800 21px Manrope,sans-serif; background:radial-gradient(circle at 30% 20%,#4A2925,#1A1718 65%); box-shadow:0 0 0 5px rgba(199,71,53,.07),0 10px 28px rgba(0,0,0,.28); position:relative; overflow:hidden; }
+    .collab .symbol:after { content:""; position:absolute; inset:4px; border:1px solid rgba(243,237,227,.15); border-radius:50%; }
+    .collab strong { font:700 12px Manrope,sans-serif; color:var(--warm-white); }
+    .collab small { display:block; color:#8D8780; font-size:9px; margin-top:-7px; }
+    .collabs-note { color:#716A65; text-align:center; font-size:10px; margin:0; }
     .feature-case { display:grid; grid-template-columns:1.05fr .95fr; background:var(--panel); border:1px solid var(--line); overflow:hidden; }
     .case-visual { min-height:350px; background:radial-gradient(circle at 75% 25%,rgba(199,71,53,.32),transparent 34%),linear-gradient(135deg,#252326,#111113); padding:30px; display:flex; flex-direction:column; justify-content:space-between; }
     .case-chip { display:inline-flex; align-self:flex-start; border:1px solid rgba(243,237,227,.22); padding:7px 10px; color:#D4CCC3; font-size:9px; text-transform:uppercase; letter-spacing:.13em; }
@@ -106,7 +124,9 @@
     @media (max-width:800px) {
       .wrap { width:min(100% - 32px,var(--max)); }
       nav { gap:14px; } nav a:not(.nav-cta) { display:none; }
-      .hero { grid-template-columns:.85fr 1.15fr; gap:8px; min-height:530px; padding:25px 0 35px; }
+      .hero { grid-template-columns:.85fr 1.15fr; gap:8px; min-height:530px; padding:22px 0 35px; }
+      .hero-stats { max-width:100%; }
+      .hero-stat { padding:12px 14px; }
       .portrait-wrap { min-height:420px; }
       .portrait { width:125%; max-width:none; }
       h1 { font-size:clamp(40px,8vw,64px); }
@@ -122,9 +142,13 @@
       .topbar { height:64px; }
       .brand { font-size:12px; }
       .nav-cta { padding:8px 10px; font-size:10px; }
-      .hero { grid-template-columns:1fr; padding-top:20px; gap:0; }
-      .hero-copy { grid-row:1; padding:30px 0 8px; }
-      .portrait-wrap { grid-row:2; min-height:340px; max-height:390px; margin-top:-8px; }
+      .hero { grid-template-columns:1fr; padding-top:14px; gap:0; }
+      .hero-stats { grid-column:1; grid-row:1; margin-bottom:18px; }
+      .hero-stat { padding:11px 8px; text-align:center; }
+      .hero-stat strong { font-size:22px; }
+      .hero-stat span { font-size:8px; letter-spacing:.06em; }
+      .hero-copy { grid-row:2; padding:22px 0 8px; }
+      .portrait-wrap { grid-row:3; min-height:340px; max-height:390px; margin-top:-8px; }
       .portrait { width:min(100%,390px); max-height:390px; }
       .portrait-label { left:12px; bottom:12px; }
       .hero:before { width:280px; height:280px; left:10%; top:36%; }
@@ -134,8 +158,14 @@
       .scroll-note { margin-top:26px; }
       .section-head { display:block; }
       .section-desc { margin-top:15px; }
-      .collabs { grid-template-columns:repeat(2,1fr); }
-      .collab { min-height:125px; padding:15px; }
+      .collab-section-head h2 { font-size:32px; }
+      .collabs-window { margin-inline:-8px; }
+      .collabs { justify-content:flex-start; gap:16px; padding-inline:18px; animation:collabDrift 26s linear infinite; }
+      .collabs-window:hover .collabs { animation-play-state:paused; }
+      .collab { width:92px; flex-basis:92px; }
+      .collab .symbol { width:70px; height:70px; font-size:18px; }
+      .collab strong { font-size:11px; }
+      @keyframes collabDrift { from { transform:translateX(0); } to { transform:translateX(-12%); } }
       .results-grid,.reviews-grid,.cert-grid { grid-template-columns:1fr; }
       .result-card { min-height:140px; }
       .contact-inner { display:block; }
@@ -156,6 +186,11 @@
 
   <main>
     <section class="wrap hero" id="home">
+      <div class="hero-stats" aria-label="Performance overview">
+        <div class="hero-stat"><strong data-count="brands">—<em>+</em></strong><span>Brands worked with</span></div>
+        <div class="hero-stat"><strong data-count="spend">—</strong><span>Total ad spend</span></div>
+        <div class="hero-stat"><strong data-count="orders">—<em>+</em></strong><span>Orders generated</span></div>
+      </div>
       <div class="portrait-wrap">
         <img class="portrait" src="mostafa-portrait.png" alt="Portrait of Mostafa Ehab with arms crossed">
         <div class="portrait-label">Performance Marketing · Egypt</div>
@@ -175,16 +210,21 @@
 
     <section class="section" id="work">
       <div class="wrap">
-        <div class="section-head">
-          <div><div class="kicker">Selected Collaborations</div><h2>People & projects<br>I've worked with.</h2></div>
-          <p class="section-desc">A selection of creator-led educational products and marketing projects. Final portraits, course covers, and exact role descriptions will be added after assets are provided and approved.</p>
+        <div class="section-head collab-section-head">
+          <div><div class="kicker">Selected Collaborations</div><h2>Creators & brands I've worked with.</h2></div>
+          <p class="section-desc">A circle of selected collaborations across creator-led courses, digital products, and e-commerce growth.</p>
         </div>
-        <div class="collabs">
-          <a class="collab" href="#contact"><span class="symbol">01</span><div><strong>Creator / Course 01</strong><small>Creator-led digital product</small></div></a>
-          <a class="collab" href="#contact"><span class="symbol">02</span><div><strong>Creator / Course 02</strong><small>Course launch & marketing</small></div></a>
-          <a class="collab" href="#contact"><span class="symbol">03</span><div><strong>Creator / Course 03</strong><small>Digital product growth</small></div></a>
-          <a class="collab" href="#contact"><span class="symbol">04</span><div><strong>E-commerce Brands</strong><small>Paid acquisition & scaling</small></div></a>
+        <div class="collabs-window">
+          <div class="collabs">
+            <a class="collab" href="#contact"><span class="symbol">C1</span><strong>Creator 01</strong><small>Digital products</small></a>
+            <a class="collab" href="#contact"><span class="symbol">C2</span><strong>Creator 02</strong><small>Course launch</small></a>
+            <a class="collab" href="#contact"><span class="symbol">C3</span><strong>Creator 03</strong><small>Growth marketing</small></a>
+            <a class="collab" href="#contact"><span class="symbol">C4</span><strong>Creator 04</strong><small>Education</small></a>
+            <a class="collab" href="#contact"><span class="symbol">EC</span><strong>E-commerce</strong><small>Paid acquisition</small></a>
+            <a class="collab" href="#contact"><span class="symbol">DP</span><strong>Digital products</strong><small>Performance</small></a>
+          </div>
         </div>
+        <p class="collabs-note">Temporary visual placeholders — replace with approved creator photos and names before sharing publicly.</p>
         <div style="margin-top:16px">
           <span class="tag">Meta Ads</span><span class="tag">Performance Strategy</span><span class="tag">Course Marketing</span><span class="tag">CRO</span><span class="tag">E-commerce</span>
         </div>
@@ -270,6 +310,35 @@
     </section>
   </main>
   <footer><div class="wrap footer-inner"><div>© <span id="year"></span> Mostafa Ehab. All rights reserved.</div><span>Performance Media Buyer · Built around measurable growth.</span></div></footer>
-  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    // Counter values intentionally remain blank until verified metrics are supplied.
+    // Add numeric data-count-value attributes after Mostafa confirms the figures.
+    const statEls = document.querySelectorAll('.hero-stat strong[data-count]');
+    const animateCounter = (el, target, suffix = '') => {
+      const duration = 1300;
+      const start = performance.now();
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(target * eased).toLocaleString('en-US') + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    // Future-ready: set data-count-value on each metric when the real figures are confirmed.
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const value = Number(el.dataset.countValue);
+        if (Number.isFinite(value) && value >= 0 && !el.dataset.animated) {
+          el.dataset.animated = 'true';
+          animateCounter(el, value, el.dataset.suffix || '');
+        }
+      });
+    }, { threshold: .6 });
+    statEls.forEach(el => statsObserver.observe(el));
+  </script>
 </body>
 </html>

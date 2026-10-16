@@ -39,7 +39,7 @@
     .hero-stat { padding:8px 22px 9px; text-align:center; border-right:1px solid var(--line); }
     .hero-stat:last-child { border-right:0; }
     .hero-stat strong { display:block; color:var(--warm-white); font:800 clamp(26px,3.4vw,39px)/1.1 Manrope,sans-serif; letter-spacing:-.06em; white-space:nowrap; }
-    .hero-stat strong em { color:var(--flame-bright); font-style:normal; font-size:.48em; letter-spacing:0; vertical-align:middle; }
+    .hero-stat strong em { color:var(--flame-bright); font-style:normal; font-size:.68em; letter-spacing:0; vertical-align:middle; }
     .hero-stat span:not(.counter-number) { display:block; color:#938B84; font-size:9px; letter-spacing:.13em; text-transform:uppercase; margin-top:7px; }
     .counter-number { display:inline-block; min-width:.8em; animation:countIn .3s ease-out both; }
     .social-links { display:flex; align-items:center; gap:10px; margin-top:21px; }
@@ -339,32 +339,46 @@
   <footer><div class="wrap footer-inner"><div>© <span id="year"></span> Mostafa Ehab. All rights reserved.</div><div class="footer-socials"><a href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.facebook.com/share/181NWyfRXu/" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.linkedin.com/in/mostafa-ehab-2357a7293?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://www.behance.net/mostafaehab123" target="_blank" rel="noopener noreferrer">Behance</a></div><span>Performance Media Buyer · Built around measurable growth.</span></div></footer>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-    // Fast, reliable count-up: starts as soon as the script runs and settles in 500ms.
+    // Animate each counter when it first enters the viewport.
     (() => {
-      const runCounters = () => {
-        const counterEls = document.querySelectorAll('.counter-number[data-target]');
-        const animateCounter = (el, index) => {
-          const target = Number(el.dataset.target || 0);
-          const duration = 500;
-          const start = performance.now() + index * 70;
-          const tick = (now) => {
-            const progress = Math.min(Math.max((now - start) / duration, 0), 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.round(target * eased).toLocaleString('en-US');
-            if (progress < 1) requestAnimationFrame(tick);
-            else el.textContent = target.toLocaleString('en-US');
-          };
-          requestAnimationFrame(tick);
+      const counterEls = Array.from(document.querySelectorAll('.counter-number[data-target]'));
+      const animateCounter = (el, index = 0) => {
+        if (el.dataset.counted === 'true') return;
+        el.dataset.counted = 'true';
+        const target = Number(el.dataset.target || 0);
+        const duration = 650;
+        const delay = index * 65;
+        el.textContent = '0';
+        const startAt = performance.now() + delay;
+        const tick = (now) => {
+          if (now < startAt) {
+            requestAnimationFrame(tick);
+            return;
+          }
+          const progress = Math.min((now - startAt) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(target * eased).toLocaleString('en-US');
+          if (progress < 1) requestAnimationFrame(tick);
+          else el.textContent = target.toLocaleString('en-US');
         };
-        counterEls.forEach((el, index) => animateCounter(el, index));
+        requestAnimationFrame(tick);
       };
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', runCounters, { once: true });
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              animateCounter(el, counterEls.indexOf(el));
+              observer.unobserve(el);
+            }
+          });
+        }, { threshold: 0.25 });
+        counterEls.forEach((el) => observer.observe(el));
       } else {
-        runCounters();
+        counterEls.forEach((el, index) => animateCounter(el, index));
       }
     })();
-
   </script>
 </body>
 </html>

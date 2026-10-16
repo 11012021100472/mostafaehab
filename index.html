@@ -27,10 +27,7 @@
     a { color: inherit; text-decoration: none; }
     button, a { -webkit-tap-highlight-color: transparent; }
     .wrap { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
-    .topbar { height: 76px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); position:fixed; top:0; left:50%; transform:translateX(-50%); z-index:1000; background:rgba(13,13,15,.92); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); transition:transform .28s ease, background .25s ease; }
-    .topbar.nav-hidden { transform:translate(-50%, -115%); }
-    body { padding-top:76px; }
-    @media (prefers-reduced-motion: reduce) { .topbar { transition:none; } }
+    .topbar { height: 76px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); }
     .brand { font: 800 15px Manrope,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
     .brand span { color:var(--flame-bright); }
     nav { display:flex; gap:26px; align-items:center; color:#C8C1B9; font-size:12px; }
@@ -155,7 +152,6 @@
     }
     @media (max-width:520px) {
       .topbar { height:64px; }
-      body { padding-top:64px; }
       .brand { font-size:12px; }
       .nav-cta { padding:8px 10px; font-size:10px; }
       .hero { grid-template-columns:1fr; padding-top:14px; gap:0; }
@@ -343,44 +339,31 @@
   <footer><div class="wrap footer-inner"><div>© <span id="year"></span> Mostafa Ehab. All rights reserved.</div><div class="footer-socials"><a href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.facebook.com/share/181NWyfRXu/" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.linkedin.com/in/mostafa-ehab-2357a7293?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://www.behance.net/mostafaehab123" target="_blank" rel="noopener noreferrer">Behance</a></div><span>Performance Media Buyer · Built around measurable growth.</span></div></footer>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-    // Hide the fixed navbar while scrolling down; reveal it immediately when scrolling up.
-    const topbar = document.querySelector('.topbar');
-    let lastScrollY = window.scrollY;
-    let scrollTicking = false;
-    const updateNavbar = () => {
-      const currentY = window.scrollY;
-      const delta = currentY - lastScrollY;
-      if (currentY < 36) {
-        topbar.classList.remove('nav-hidden');
-      } else if (delta > 4) {
-        topbar.classList.add('nav-hidden');
-      } else if (delta < -4) {
-        topbar.classList.remove('nav-hidden');
-      }
-      lastScrollY = currentY;
-      scrollTicking = false;
-    };
-    window.addEventListener('scroll', () => {
-      if (!scrollTicking) {
-        window.requestAnimationFrame(updateNavbar);
-        scrollTicking = true;
-      }
-    }, { passive: true });
-    // Fast count-up: starts immediately on entry and settles in about 650ms.
-    const counterEls = document.querySelectorAll('.counter-number[data-target]');
-    const animateCounter = (el) => {
-      const target = Number(el.dataset.target || 0);
-      const duration = 650;
-      const start = performance.now();
-      const tick = (now) => {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.round(target * eased).toLocaleString('en-US');
-        if (progress < 1) requestAnimationFrame(tick);
+    // Fast, reliable count-up: starts as soon as the script runs and settles in 500ms.
+    (() => {
+      const runCounters = () => {
+        const counterEls = document.querySelectorAll('.counter-number[data-target]');
+        const animateCounter = (el, index) => {
+          const target = Number(el.dataset.target || 0);
+          const duration = 500;
+          const start = performance.now() + index * 70;
+          const tick = (now) => {
+            const progress = Math.min(Math.max((now - start) / duration, 0), 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(target * eased).toLocaleString('en-US');
+            if (progress < 1) requestAnimationFrame(tick);
+            else el.textContent = target.toLocaleString('en-US');
+          };
+          requestAnimationFrame(tick);
+        };
+        counterEls.forEach((el, index) => animateCounter(el, index));
       };
-      requestAnimationFrame(tick);
-    };
-    window.addEventListener('DOMContentLoaded', () => counterEls.forEach(animateCounter), { once: true });
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', runCounters, { once: true });
+      } else {
+        runCounters();
+      }
+    })();
 
   </script>
 </body>

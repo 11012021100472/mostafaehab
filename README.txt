@@ -1,19 +1,10 @@
-MOSTAFA EHAB PORTFOLIO — STARTER BUILD
+Mostafa Ehab portfolio update
 
-Files:
-- index.html: responsive portfolio website
-- assets/mostafa-portrait.png: approved crossed-arms portrait
+Upload/replace index.html and the assets folder contents in your existing GitHub repository. Keep mostafa-portrait.png in the repository root as before.
 
-How to preview:
-1. Extract the ZIP.
-2. Open index.html in a modern browser.
+Creator cards now show a confirmation dialog before opening the supplied Facebook links. Wahag stays first. The blue check-shaped marks are decorative UI elements, not verification claims.
 
-Before publishing:
-- Replace creator/course placeholders with approved names and images.
-- Add verified case study metrics and supporting screenshots.
-- Replace sample review text with genuine approved testimonials.
-- Add certificate images, names, issuing bodies, and years.
-- Replace hello@example.com with your preferred contact email.
-- Add LinkedIn / WhatsApp links if desired.
+Creators with photos and links included in this package: Wahag, Bahaa Henish, Ahmed Abu Zaid, Dr Saif Al Garrah, Ahmed El Ghandour, Solafa Selim, Gharib Elshaikh, Mostafa Salah, Yousef Ashraf, Bassem El Tarkawy, Hagar Raslan. Ibrahim Hendawy, Hossam El Zoka, and Dr Waleed El Shenawy still need their photos to be added as circular image cards.
 
-The site is a static HTML/CSS/JS project and can be hosted on a free static host.
+
+Latest creator update: added Ibrahim Handawy and Hossam El Zoka with their Facebook links. Dr Walid El Shenawy is not included.

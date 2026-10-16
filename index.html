@@ -1,15 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0D0D0F">
-  <meta name="description" content="Mostafa Ehab — Performance Media Buyer focused on e-commerce growth and digital products.">
-  <title>Mostafa Ehab — Performance Media Buyer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#0D0D0F" name="theme-color"/>
+<meta content="Mostafa Ehab — Performance Media Buyer focused on e-commerce growth and digital products." name="description"/>
+<title>Mostafa Ehab — Performance Media Buyer</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
     :root {
       --black: #0D0D0F;
       --panel: #171719;
@@ -84,13 +85,16 @@
     .collab-section-head h2 { margin-top:10px; }
     .collab-section-head .section-desc { max-width:540px; margin:13px auto 0; }
     .collabs-window { overflow-x:auto; overflow-y:hidden; position:relative; padding:12px 0 20px; -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain; scrollbar-width:thin; scrollbar-color:rgba(199,71,53,.55) transparent; mask-image:linear-gradient(90deg,transparent,black 4%,black 96%,transparent); touch-action:pan-x pan-y; }
-    .collabs { display:flex; align-items:flex-start; justify-content:flex-start; gap:clamp(14px,3vw,34px); width:max-content; margin:0 auto; padding:0 18px; }
+    .collabs { display:flex; align-items:flex-start; justify-content:flex-start; gap:clamp(14px,3vw,34px); width:max-content; margin:0; padding:0 18px; }
     .collab { width:116px; flex:0 0 116px; display:flex; flex-direction:column; align-items:center; gap:11px; text-align:center; transition:transform .25s ease; }
     .collab:hover { transform:translateY(-7px); }
-    .collab .symbol { width:88px; height:88px; border-radius:50%; border:1px solid rgba(199,71,53,.8); display:grid; place-items:center; color:var(--warm-white); font:800 21px Manrope,sans-serif; background:radial-gradient(circle at 30% 20%,#4A2925,#1A1718 65%); box-shadow:0 0 0 5px rgba(199,71,53,.07),0 10px 28px rgba(0,0,0,.28); position:relative; overflow:hidden; }
-    .collab .symbol:after { content:""; position:absolute; inset:4px; border:1px solid rgba(243,237,227,.15); border-radius:50%; }
-    .collab strong { font:700 12px Manrope,sans-serif; color:var(--warm-white); }
-    .collab small { display:block; color:#8D8780; font-size:9px; margin-top:-7px; }
+    .collab .symbol { width:88px; height:88px; border-radius:50%; border:1px solid rgba(199,71,53,.8); display:block; object-fit:cover; object-position:center; background:#171719; box-shadow:0 0 0 5px rgba(199,71,53,.07),0 10px 28px rgba(0,0,0,.28); }
+    .collab .symbol.brand-logo { object-fit:contain; padding:8px; background:#080808; }
+    .collab-name { display:flex; align-items:center; justify-content:center; gap:4px; min-height:28px; }
+    .collab strong { font:700 11px/1.3 Manrope,sans-serif; color:var(--warm-white); }
+    .verified-mark { width:13px; height:13px; flex:0 0 13px; display:inline-block; vertical-align:middle; }
+    .collab small { display:block; color:#8D8780; font-size:9px; line-height:1.35; margin-top:-6px; }
+    .collab:focus-visible { outline:2px solid var(--flame-bright); outline-offset:5px; border-radius:8px; }
     .collabs-note { color:#716A65; text-align:center; font-size:10px; margin:0; }
     .feature-case { display:grid; grid-template-columns:1.05fr .95fr; background:var(--panel); border:1px solid var(--line); overflow:hidden; }
     .case-visual { min-height:350px; background:radial-gradient(circle at 75% 25%,rgba(199,71,53,.32),transparent 34%),linear-gradient(135deg,#252326,#111113); padding:30px; display:flex; flex-direction:column; justify-content:space-between; }
@@ -177,7 +181,7 @@
       .collabs-window { margin-inline:-8px; padding-bottom:16px; }
       .collabs { justify-content:flex-start; gap:16px; padding-inline:18px; margin:0; animation:none; }
       .collab { width:92px; flex-basis:92px; }
-      .collab .symbol { width:70px; height:70px; font-size:18px; }
+      .collab .symbol { width:70px; height:70px; }
       .collab strong { font-size:11px; }
       .results-grid,.reviews-grid,.cert-grid { grid-template-columns:1fr; }
       .result-card { min-height:140px; }
@@ -187,157 +191,178 @@
       .footer-inner span { display:block; margin-top:7px; }
     }
   </style>
-</head>
+<style>
+.creator-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
+.creator-modal.is-open{display:flex}.creator-modal-card{position:relative;width:min(100%,390px);padding:28px 24px 24px;background:#171719;border:1px solid rgba(243,237,227,.16);border-radius:20px;box-shadow:0 24px 80px rgba(0,0,0,.45);color:#f3ede3;text-align:center}
+.creator-modal-card h3{font-size:22px;margin:4px 0 10px}.creator-modal-card p{color:#bdb5ad;line-height:1.6;margin:0 0 22px}.creator-modal-close{position:absolute;right:12px;top:8px;border:0;background:transparent;color:#f3ede3;font-size:28px;cursor:pointer}.creator-modal-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.creator-modal-actions a,.creator-modal-actions button{font:inherit;font-weight:700;border-radius:10px;padding:12px 15px;text-decoration:none;cursor:pointer}.creator-modal-visit{background:#c74735;color:#fff;border:1px solid #c74735}.creator-modal-stay{background:transparent;color:#f3ede3;border:1px solid rgba(243,237,227,.25)}
+</style></head>
 <body>
-  <header class="wrap topbar">
-    <a class="brand" href="#home">ME<span>.</span> / PORTFOLIO</a>
-    <nav aria-label="Main navigation">
-      <a href="#work">Work</a><a href="#results">Results</a><a href="#reviews">Reviews</a><a href="#certifications">Certifications</a>
-      <a class="nav-cta" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer">Let's Talk ↗</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="wrap hero" id="home">
-      <div class="portrait-wrap">
-        <img class="portrait" src="mostafa-portrait.png" alt="Portrait of Mostafa Ehab with arms crossed">
-        <div class="portrait-label">Performance Marketing · Egypt</div>
-      </div>
-      <div class="hero-copy">
-        <div class="eyebrow">Performance Marketing</div>
-        <h1>Mostafa<br><span class="surname">Ehab.</span></h1>
-        <p class="role">Performance Media Buyer</p>
-        <p class="intro">Turning ad spend into measurable business growth — through performance marketing, e-commerce scaling, and digital product launches.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer">Explore My Work <span>↘</span></a>
-          <a class="btn btn-ghost" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer">Contact Me <span>↗</span></a>
-        </div>
-        <div class="social-links" aria-label="Social profiles">
-          <a class="social-link whatsapp" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.1 1.6 5.9L0 24l6.5-1.7a11.8 11.8 0 0 0 5.6 1.4h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.5-8.4ZM12.1 21.7c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.9 1 1-3.8-.3-.4a9.8 9.8 0 1 1 8.5 4.7Zm5.4-7.3c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.6-1-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.9 4.3.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.4Z"/></svg>
-          </a>
-          <a class="social-link facebook" href="https://www.facebook.com/share/181NWyfRXu/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.4c0-3.03 1.79-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.95.93-1.95 1.88v2.29h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07Z"/></svg>
-          </a>
-          <a class="social-link linkedin" href="https://www.linkedin.com/in/mostafa-ehab-2357a7293?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V8.98h3.42v1.57h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.46v6.29ZM5.34 7.42a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12Zm1.78 13.03H3.56V8.98h3.56v11.47ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></svg>
-          </a>
-          <a class="social-link behance" href="https://www.behance.net/mostafaehab123" target="_blank" rel="noopener noreferrer" aria-label="Behance" title="Behance">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.4 11.1c1.3-.6 2-1.6 2-3.1C11.4 5.2 9.3 4 6.6 4H0v16h7c3 0 5.7-1.4 5.7-4.7 0-2-1.1-3.5-3.3-4.2ZM3.5 6.8h2.8c1.1 0 2.1.3 2.1 1.6 0 1.2-.8 1.7-1.9 1.7H3.5V6.8Zm3.6 10.4H3.5v-4.5h3.4c1.4 0 2.4.6 2.4 2.1 0 1.6-1.1 2.4-2.2 2.4ZM18.3 7.2h-5.1V5.1h5.1v2.1Zm5.6 7.7c0-3.8-2.2-6.7-6.1-6.7-3.8 0-6.3 2.8-6.3 6.5 0 3.8 2.4 6.5 6.3 6.5 3 0 5.1-1.4 5.9-4.2h-3.1c-.3 1-1.5 1.6-2.6 1.6-1.8 0-2.8-1-2.9-2.8h8.8v-.9Zm-8.8-1.2c.1-1.4 1.1-2.4 2.7-2.4 1.5 0 2.3 1.1 2.5 2.4h-5.2Z"/></svg>
-          </a>
-        </div>
-        <div class="scroll-note"><span></span> Strategy. Performance. Growth.</div>
-      </div>
-      <div class="hero-stats" aria-label="Performance overview">
-        <div class="hero-stat"><strong><span class="counter-number" data-target="21">0</span><em>+</em></strong><span>Brands worked with</span></div>
-        <div class="hero-stat"><strong><em>EGP </em><span class="counter-number" data-target="51">0</span><em>M+</em></strong><span>Total ad spend</span></div>
-        <div class="hero-stat"><strong><span class="counter-number" data-target="401">0</span><em>K+</em></strong><span>Orders generated</span></div>
-      </div>
-    </section>
-
-    <section class="section" id="work">
-      <div class="wrap">
-        <div class="section-head collab-section-head">
-          <div><div class="kicker">Selected Collaborations</div><h2>Creators & brands I've worked with.</h2></div>
-          <p class="section-desc">A circle of selected collaborations across creator-led courses, digital products, and e-commerce growth.</p>
-        </div>
-        <div class="collabs-window">
-          <div class="collabs">
-            <a class="collab" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer"><span class="symbol">C1</span><strong>Creator 01</strong><small>Digital products</small></a>
-            <a class="collab" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer"><span class="symbol">C2</span><strong>Creator 02</strong><small>Course launch</small></a>
-            <a class="collab" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer"><span class="symbol">C3</span><strong>Creator 03</strong><small>Growth marketing</small></a>
-            <a class="collab" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer"><span class="symbol">C4</span><strong>Creator 04</strong><small>Education</small></a>
-            <a class="collab" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer"><span class="symbol">EC</span><strong>E-commerce</strong><small>Paid acquisition</small></a>
-            <a class="collab" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer"><span class="symbol">DP</span><strong>Digital products</strong><small>Performance</small></a>
-          </div>
-        </div>
-        <p class="collabs-note">Temporary visual placeholders — replace with approved creator photos and names before sharing publicly.</p>
-        <div style="margin-top:16px">
-          <span class="tag">Meta Ads</span><span class="tag">Performance Strategy</span><span class="tag">Course Marketing</span><span class="tag">CRO</span><span class="tag">E-commerce</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="featured">
-      <div class="wrap">
-        <div class="section-head">
-          <div><div class="kicker">Featured Case Study</div><h2>Proof over promises.</h2></div>
-          <p class="section-desc">One deep-dive story: the business challenge, the strategy, what changed, and the measurable outcome.</p>
-        </div>
-        <article class="feature-case">
-          <div class="case-visual">
-            <span class="case-chip">Featured Project · Details to verify</span>
-            <div class="case-graphic" aria-label="Decorative performance chart"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
-            <div class="case-visual-note">REAL CAMPAIGN DATA WILL REPLACE THIS VISUAL</div>
-          </div>
-          <div class="case-content">
-            <div class="kicker">E-commerce / Performance Marketing</div>
-            <h3>Scaling performance with smarter acquisition.</h3>
-            <p>This case study will document the starting point, campaign structure, creative testing, optimization decisions, and business impact — using verified data from one selected project.</p>
-            <div class="metrics">
-              <div class="metric"><b>—</b><span>Ad Spend</span></div>
-              <div class="metric"><b>—</b><span>Revenue / Sales</span></div>
-              <div class="metric"><b>—</b><span>CPA / CAC</span></div>
-              <div class="metric"><b>—</b><span>ROAS</span></div>
-            </div>
-            <a class="btn btn-primary" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer">Discuss a Similar Challenge ↗</a>
-            <p class="notice">Metrics intentionally left blank until the project, timeframe, and source data are confirmed.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="results">
-      <div class="wrap">
-        <div class="section-head">
-          <div><div class="kicker">Selected Results</div><h2>Numbers with context.</h2></div>
-          <p class="section-desc">A quick scan of campaign outcomes. Each number will include its timeframe, business context, and your specific contribution.</p>
-        </div>
-        <div class="results-grid">
-          <article class="result-card"><div class="result-value">—</div><h3>Acquisition Efficiency</h3><p>CPA / CAC improvement with period and baseline.</p></article>
-          <article class="result-card"><div class="result-value">—</div><h3>Revenue & Orders</h3><p>Verified sales outcomes from a defined campaign.</p></article>
-          <article class="result-card"><div class="result-value">—</div><h3>Return on Ad Spend</h3><p>ROAS with spend, attribution window, and context.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="reviews">
-      <div class="wrap">
-        <div class="section-head">
-          <div><div class="kicker">Testimonials</div><h2>Trust, in their words.</h2></div>
-          <p class="section-desc">Real client feedback, shown as approved screenshots or quoted testimonials. No fabricated reviews.</p>
-        </div>
-        <div class="reviews-grid">
-          <article class="review"><div class="quote">“</div><blockquote>Place the original client review here. Keep the wording authentic and publish only with permission.</blockquote><div class="reviewer"><strong>Client name</strong>Role / project · Screenshot to be added</div></article>
-          <article class="review"><div class="quote">“</div><blockquote>Place the original client review here. A short, specific review is more convincing than a generic compliment.</blockquote><div class="reviewer"><strong>Client name</strong>Role / project · Screenshot to be added</div></article>
-          <article class="review"><div class="quote">“</div><blockquote>Place the original client review here. We can use a cropped screenshot if the client approves it.</blockquote><div class="reviewer"><strong>Client name</strong>Role / project · Screenshot to be added</div></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="certifications">
-      <div class="wrap">
-        <div class="section-head">
-          <div><div class="kicker">Certifications</div><h2>Learning that compounds.</h2></div>
-          <p class="section-desc">Certificates will be displayed with their original images, issuing organizations, and years.</p>
-        </div>
-        <div class="cert-grid">
-          <article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
-          <article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
-          <article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact" id="contact">
-      <div class="wrap contact-inner">
-        <div><div class="kicker">Let's Work Together</div><h2>Have a growth challenge?<br>Let's talk numbers.</h2><p>For performance marketing, e-commerce growth, and digital product launches.</p></div>
-        <a class="btn btn-primary" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer">Get in Touch ↗</a>
-      </div>
-    </section>
-  </main>
-  <footer><div class="wrap footer-inner"><div>© <span id="year"></span> Mostafa Ehab. All rights reserved.</div><div class="footer-socials"><a href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.facebook.com/share/181NWyfRXu/" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.linkedin.com/in/mostafa-ehab-2357a7293?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://www.behance.net/mostafaehab123" target="_blank" rel="noopener noreferrer">Behance</a></div><span>Performance Media Buyer · Built around measurable growth.</span></div></footer>
-  <script>
+<header class="wrap topbar">
+<a class="brand" href="#home">ME<span>.</span> / PORTFOLIO</a>
+<nav aria-label="Main navigation">
+<a href="#work">Work</a><a href="#results">Results</a><a href="#reviews">Reviews</a><a href="#certifications">Certifications</a>
+<a class="nav-cta" href="https://wa.me/qr/ECQ5HJTSQEAYA1" rel="noopener noreferrer" target="_blank">Let's Talk ↗</a>
+</nav>
+</header>
+<main>
+<section class="wrap hero" id="home">
+<div class="portrait-wrap">
+<img alt="Portrait of Mostafa Ehab with arms crossed" class="portrait" src="mostafa-portrait.png"/>
+<div class="portrait-label">Performance Marketing · Egypt</div>
+</div>
+<div class="hero-copy">
+<div class="eyebrow">Performance Marketing</div>
+<h1>Mostafa<br/><span class="surname">Ehab.</span></h1>
+<p class="role">Performance Media Buyer</p>
+<p class="intro">Turning ad spend into measurable business growth — through performance marketing, e-commerce scaling, and digital product launches.</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="https://wa.me/qr/ECQ5HJTSQEAYA1" rel="noopener noreferrer" target="_blank">Explore My Work <span>↘</span></a>
+<a class="btn btn-ghost" href="https://wa.me/qr/ECQ5HJTSQEAYA1" rel="noopener noreferrer" target="_blank">Contact Me <span>↗</span></a>
+</div>
+<div aria-label="Social profiles" class="social-links">
+<a aria-label="WhatsApp" class="social-link whatsapp" href="https://wa.me/qr/ECQ5HJTSQEAYA1" rel="noopener noreferrer" target="_blank" title="WhatsApp">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.1 1.6 5.9L0 24l6.5-1.7a11.8 11.8 0 0 0 5.6 1.4h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.5-8.4ZM12.1 21.7c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.9 1 1-3.8-.3-.4a9.8 9.8 0 1 1 8.5 4.7Zm5.4-7.3c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.6-1-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.9 4.3.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.4Z"></path></svg>
+</a>
+<a aria-label="Facebook" class="social-link facebook" href="https://www.facebook.com/share/181NWyfRXu/" rel="noopener noreferrer" target="_blank" title="Facebook">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.4c0-3.03 1.79-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.95.93-1.95 1.88v2.29h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07Z"></path></svg>
+</a>
+<a aria-label="LinkedIn" class="social-link linkedin" href="https://www.linkedin.com/in/mostafa-ehab-2357a7293?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" rel="noopener noreferrer" target="_blank" title="LinkedIn">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V8.98h3.42v1.57h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.46v6.29ZM5.34 7.42a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12Zm1.78 13.03H3.56V8.98h3.56v11.47ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"></path></svg>
+</a>
+<a aria-label="Behance" class="social-link behance" href="https://www.behance.net/mostafaehab123" rel="noopener noreferrer" target="_blank" title="Behance">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M9.4 11.1c1.3-.6 2-1.6 2-3.1C11.4 5.2 9.3 4 6.6 4H0v16h7c3 0 5.7-1.4 5.7-4.7 0-2-1.1-3.5-3.3-4.2ZM3.5 6.8h2.8c1.1 0 2.1.3 2.1 1.6 0 1.2-.8 1.7-1.9 1.7H3.5V6.8Zm3.6 10.4H3.5v-4.5h3.4c1.4 0 2.4.6 2.4 2.1 0 1.6-1.1 2.4-2.2 2.4ZM18.3 7.2h-5.1V5.1h5.1v2.1Zm5.6 7.7c0-3.8-2.2-6.7-6.1-6.7-3.8 0-6.3 2.8-6.3 6.5 0 3.8 2.4 6.5 6.3 6.5 3 0 5.1-1.4 5.9-4.2h-3.1c-.3 1-1.5 1.6-2.6 1.6-1.8 0-2.8-1-2.9-2.8h8.8v-.9Zm-8.8-1.2c.1-1.4 1.1-2.4 2.7-2.4 1.5 0 2.3 1.1 2.5 2.4h-5.2Z"></path></svg>
+</a>
+</div>
+<div class="scroll-note"><span></span> Strategy. Performance. Growth.</div>
+</div>
+<div aria-label="Performance overview" class="hero-stats">
+<div class="hero-stat"><strong><span class="counter-number" data-target="21">0</span><em>+</em></strong><span>Brands worked with</span></div>
+<div class="hero-stat"><strong><em>EGP </em><span class="counter-number" data-target="51">0</span><em>M+</em></strong><span>Total ad spend</span></div>
+<div class="hero-stat"><strong><span class="counter-number" data-target="401">0</span><em>K+</em></strong><span>Orders generated</span></div>
+</div>
+</section>
+<section class="section" id="work">
+<div class="wrap">
+<div class="section-head collab-section-head">
+<div><div class="kicker">Selected Collaborations</div><h2>Creators &amp; brands I've worked with.</h2></div>
+<p class="section-desc">A circle of selected collaborations across creator-led courses, digital products, and e-commerce growth.</p>
+</div>
+<div aria-label="Selected creators and brands; swipe horizontally to browse" class="collabs-window">
+<div class="collabs">
+<a aria-label="Wahag" class="collab" data-creator-name="Wahag" data-creator-url="https://www.facebook.com/share/1a62nXiiGA/" href="https://www.facebook.com/share/1a62nXiiGA/" rel="" target="_self">
+<img alt="Wahag" class="symbol brand-logo" loading="lazy" src="assets/wahag.jpg"/>
+<span class="collab-name"><strong>Wahag</strong></span><small>Lighting &amp; More</small>
+</a>
+<a aria-label="Bahaa Henish" class="collab" data-creator-name="Bahaa Henish" data-creator-url="https://www.facebook.com/share/19NLkULn2j/" href="https://www.facebook.com/share/19NLkULn2j/" rel="" target="_self">
+<img alt="Bahaa Henish" class="symbol" loading="lazy" src="assets/bahaa-henish.jpg"/>
+<span class="collab-name"><strong>Bahaa Henish</strong><svg aria-label="Decorative verification-style icon" class="verified-mark" viewbox="0 0 24 24"><path d="M12 1.5 14.8 3l3.2-.1 1.4 2.9 2.6 1.9-.6 3.1.6 3.1-2.6 1.9-1.4 2.9-3.2-.1-2.8 1.5-2.8-1.5-3.2.1-1.4-2.9-2.6-1.9.6-3.1-.6-3.1 2.6-1.9 1.4-2.9 3.2.1z" fill="#3988FF"></path><path d="m7.4 11.9 3 3 6.3-6.3" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg></span><small>VIRAL MATES</small>
+</a>
+<a aria-label="أحمد أبو زيد" class="collab" data-creator-name="أحمد أبو زيد" data-creator-url="https://www.facebook.com/share/1FRrRzUhjN/" href="https://www.facebook.com/share/1FRrRzUhjN/" rel="" target="_self">
+<img alt="أحمد أبو زيد" class="symbol" loading="lazy" src="assets/ahmed-abu-zaid.jpg"/>
+<span class="collab-name"><strong>أحمد أبو زيد</strong><svg aria-label="Decorative verification-style icon" class="verified-mark" viewbox="0 0 24 24"><path d="M12 1.5 14.8 3l3.2-.1 1.4 2.9 2.6 1.9-.6 3.1.6 3.1-2.6 1.9-1.4 2.9-3.2-.1-2.8 1.5-2.8-1.5-3.2.1-1.4-2.9-2.6-1.9.6-3.1-.6-3.1 2.6-1.9 1.4-2.9 3.2.1z" fill="#3988FF"></path><path d="m7.4 11.9 3 3 6.3-6.3" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg></span><small>دروس أونلاين</small>
+</a>
+<a aria-label="Dr. Saif Al Garrah" class="collab" data-creator-name="Dr. Saif Al Garrah" data-creator-url="https://www.facebook.com/share/1WFTrKFkBa/" href="https://www.facebook.com/share/1WFTrKFkBa/" rel="" target="_self">
+<img alt="Dr. Saif Al Garrah" class="symbol" loading="lazy" src="assets/dr-saif-al-garrah.jpg"/>
+<span class="collab-name"><strong>Dr. Saif Al Garrah</strong><svg aria-label="Decorative verification-style icon" class="verified-mark" viewbox="0 0 24 24"><path d="M12 1.5 14.8 3l3.2-.1 1.4 2.9 2.6 1.9-.6 3.1.6 3.1-2.6 1.9-1.4 2.9-3.2-.1-2.8 1.5-2.8-1.5-3.2.1-1.4-2.9-2.6-1.9.6-3.1-.6-3.1 2.6-1.9 1.4-2.9 3.2.1z" fill="#3988FF"></path><path d="m7.4 11.9 3 3 6.3-6.3" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg></span><small>طبيبك في سويسرا</small>
+</a>
+<a aria-label="أحمد الغندور" class="collab" data-creator-name="أحمد الغندور" data-creator-url="https://www.facebook.com/share/1BS9fuN4RB/" href="https://www.facebook.com/share/1BS9fuN4RB/" rel="" target="_self">
+<img alt="أحمد الغندور" class="symbol" loading="lazy" src="assets/dahih-ahmed-elghandour.jpg"/>
+<span class="collab-name"><strong>أحمد الغندور</strong><svg aria-label="Decorative verification-style icon" class="verified-mark" viewbox="0 0 24 24"><path d="M12 1.5 14.8 3l3.2-.1 1.4 2.9 2.6 1.9-.6 3.1.6 3.1-2.6 1.9-1.4 2.9-3.2-.1-2.8 1.5-2.8-1.5-3.2.1-1.4-2.9-2.6-1.9.6-3.1-.6-3.1 2.6-1.9 1.4-2.9 3.2.1z" fill="#3988FF"></path><path d="m7.4 11.9 3 3 6.3-6.3" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg></span><small>الدحيح</small>
+</a>
+<a aria-label="سولافا سليم" class="collab" data-creator-name="سولافا سليم" data-creator-url="https://www.facebook.com/share/1LBk7dzFBj/" href="https://www.facebook.com/share/1LBk7dzFBj/" rel="" target="_self">
+<img alt="سولافا سليم" class="symbol" loading="lazy" src="assets/solafa-selim.jpg"/>
+<span class="collab-name"><strong>سولافا سليم</strong><svg aria-label="Decorative verification-style icon" class="verified-mark" viewbox="0 0 24 24"><path d="M12 1.5 14.8 3l3.2-.1 1.4 2.9 2.6 1.9-.6 3.1.6 3.1-2.6 1.9-1.4 2.9-3.2-.1-2.8 1.5-2.8-1.5-3.2.1-1.4-2.9-2.6-1.9.6-3.1-.6-3.1 2.6-1.9 1.4-2.9 3.2.1z" fill="#3988FF"></path><path d="m7.4 11.9 3 3 6.3-6.3" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg></span><small>Creator collaboration</small>
+</a>
+<a aria-label="غريب الشيخ" class="collab" data-creator-name="غريب الشيخ" data-creator-url="https://www.facebook.com/share/1JcCF7gcV5/" href="https://www.facebook.com/share/1JcCF7gcV5/" rel="" target="_self">
+<img alt="غريب الشيخ" class="symbol" loading="lazy" src="assets/gharib-elshaikh.jpg"/>
+<span class="collab-name"><strong>غريب الشيخ</strong><svg aria-label="Decorative verification-style icon" class="verified-mark" viewbox="0 0 24 24"><path d="M12 1.5 14.8 3l3.2-.1 1.4 2.9 2.6 1.9-.6 3.1.6 3.1-2.6 1.9-1.4 2.9-3.2-.1-2.8 1.5-2.8-1.5-3.2.1-1.4-2.9-2.6-1.9.6-3.1-.6-3.1 2.6-1.9 1.4-2.9 3.2.1z" fill="#3988FF"></path><path d="m7.4 11.9 3 3 6.3-6.3" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg></span><small>Creator collaboration</small>
+</a>
+<a aria-label="Mostafa Salah" class="collab" data-creator-name="Mostafa Salah" data-creator-url="https://www.facebook.com/share/17zrQZzZRh/" href="https://www.facebook.com/share/17zrQZzZRh/"><img alt="Mostafa Salah" class="symbol" loading="lazy" src="assets/mostafa-salah.jpg"/><span class="collab-name"><strong>Mostafa Salah</strong><svg aria-label="Decorative verification-style icon" class="verified-mark" viewBox="0 0 24 24"><path d="M12 1.5 14.8 3l3.2-.1 1.4 2.9 2.6 1.9-.6 3.1.6 3.1-2.6 1.9-1.4 2.9-3.2-.1-2.8 1.5-2.8-1.5-3.2.1-1.4-2.9-2.6-1.9.6-3.1-.6-3.1 2.6-1.9 1.4-2.9 3.2.1z" fill="#3988FF"></path><path d="m7.4 11.9 3 3 6.3-6.3" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg></span><small>Creator collaboration</small></a><a aria-label="Yousef Ashraf" class="collab" data-creator-name="Yousef Ashraf" data-creator-url="https://www.facebook.com/share/1DZkmq1F4U/" href="https://www.facebook.com/share/1DZkmq1F4U/"><img alt="Yousef Ashraf" class="symbol" loading="lazy" src="assets/yousef-ashraf.jpg"/><span class="collab-name"><strong>Yousef Ashraf</strong><svg aria-label="Decorative verification-style icon" class="verified-mark" viewBox="0 0 24 24"><path d="M12 1.5 14.8 3l3.2-.1 1.4 2.9 2.6 1.9-.6 3.1.6 3.1-2.6 1.9-1.4 2.9-3.2-.1-2.8 1.5-2.8-1.5-3.2.1-1.4-2.9-2.6-1.9.6-3.1-.6-3.1 2.6-1.9 1.4-2.9 3.2.1z" fill="#3988FF"></path><path d="m7.4 11.9 3 3 6.3-6.3" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg></span><small>Gymmawy</small></a><a aria-label="باسم التركاوي" class="collab" data-creator-name="باسم التركاوي" data-creator-url="https://www.facebook.com/share/1GWzVSCsfU/" href="https://www.facebook.com/share/1GWzVSCsfU/"><img alt="باسم التركاوي" class="symbol" loading="lazy" src="assets/bassem-eltarkawy.jpg"/><span class="collab-name"><strong>باسم التركاوي</strong><svg aria-label="Decorative verification-style icon" class="verified-mark" viewBox="0 0 24 24"><path d="M12 1.5 14.8 3l3.2-.1 1.4 2.9 2.6 1.9-.6 3.1.6 3.1-2.6 1.9-1.4 2.9-3.2-.1-2.8 1.5-2.8-1.5-3.2.1-1.4-2.9-2.6-1.9.6-3.1-.6-3.1 2.6-1.9 1.4-2.9 3.2.1z" fill="#3988FF"></path><path d="m7.4 11.9 3 3 6.3-6.3" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg></span><small>Creator collaboration</small></a><a aria-label="Hagar Raslan" class="collab" data-creator-name="Hagar Raslan" data-creator-url="https://www.facebook.com/share/19CiZjFxMh/" href="https://www.facebook.com/share/19CiZjFxMh/"><img alt="Hagar Raslan" class="symbol" loading="lazy" src="assets/hagar-raslan.jpg"/><span class="collab-name"><strong>Hagar Raslan</strong><svg aria-label="Decorative verification-style icon" class="verified-mark" viewBox="0 0 24 24"><path d="M12 1.5 14.8 3l3.2-.1 1.4 2.9 2.6 1.9-.6 3.1.6 3.1-2.6 1.9-1.4 2.9-3.2-.1-2.8 1.5-2.8-1.5-3.2.1-1.4-2.9-2.6-1.9.6-3.1-.6-3.1 2.6-1.9 1.4-2.9 3.2.1z" fill="#3988FF"></path><path d="m7.4 11.9 3 3 6.3-6.3" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg></span><small>Creator collaboration</small></a>
+<a aria-label="إبراهيم هنداوي" class="collab" data-creator-name="إبراهيم هنداوي" data-creator-url="https://www.facebook.com/share/1C4TZqa7RM/" href="https://www.facebook.com/share/1C4TZqa7RM/"><img alt="إبراهيم هنداوي" class="symbol" loading="lazy" src="assets/ibrahim-handawy.jpg"/><span class="collab-name"><strong>إبراهيم هنداوي</strong><svg aria-label="Decorative verification-style icon" class="verified-mark" viewBox="0 0 24 24"><path d="M12 1.5 14.8 3l3.2-.1 1.4 2.9 2.6 1.9-.6 3.1.6 3.1-2.6 1.9-1.4 2.9-3.2-.1-2.8 1.5-2.8-1.5-3.2.1-1.4-2.9-2.6-1.9.6-3.1-.6-3.1 2.6-1.9 1.4-2.9 3.2.1z" fill="#3988FF"></path><path d="m7.4 11.9 3 3 6.3-6.3" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg></span><small>Creator collaboration</small></a>
+<a aria-label="Hossam El Zoka" class="collab" data-creator-name="Hossam El Zoka" data-creator-url="https://www.facebook.com/share/1FH6P8ArMF/" href="https://www.facebook.com/share/1FH6P8ArMF/"><img alt="Hossam El Zoka" class="symbol" loading="lazy" src="assets/hossam-el-zoka.jpg"/><span class="collab-name"><strong>HOSSAM EL ZOKA</strong><svg aria-label="Decorative verification-style icon" class="verified-mark" viewBox="0 0 24 24"><path d="M12 1.5 14.8 3l3.2-.1 1.4 2.9 2.6 1.9-.6 3.1.6 3.1-2.6 1.9-1.4 2.9-3.2-.1-2.8 1.5-2.8-1.5-3.2.1-1.4-2.9-2.6-1.9.6-3.1-.6-3.1 2.6-1.9 1.4-2.9 3.2.1z" fill="#3988FF"></path><path d="m7.4 11.9 3 3 6.3-6.3" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg></span><small>Creator collaboration</small></a></div>
+</div>
+<p class="collabs-note">Swipe left or right to explore selected creator and brand collaborations.</p>
+<div style="margin-top:16px">
+<span class="tag">Meta Ads</span><span class="tag">Performance Strategy</span><span class="tag">Course Marketing</span><span class="tag">CRO</span><span class="tag">E-commerce</span>
+</div>
+</div>
+</section>
+<section class="section" id="featured">
+<div class="wrap">
+<div class="section-head">
+<div><div class="kicker">Featured Case Study</div><h2>Proof over promises.</h2></div>
+<p class="section-desc">One deep-dive story: the business challenge, the strategy, what changed, and the measurable outcome.</p>
+</div>
+<article class="feature-case">
+<div class="case-visual">
+<span class="case-chip">Featured Project · Details to verify</span>
+<div aria-label="Decorative performance chart" class="case-graphic"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+<div class="case-visual-note">REAL CAMPAIGN DATA WILL REPLACE THIS VISUAL</div>
+</div>
+<div class="case-content">
+<div class="kicker">E-commerce / Performance Marketing</div>
+<h3>Scaling performance with smarter acquisition.</h3>
+<p>This case study will document the starting point, campaign structure, creative testing, optimization decisions, and business impact — using verified data from one selected project.</p>
+<div class="metrics">
+<div class="metric"><b>—</b><span>Ad Spend</span></div>
+<div class="metric"><b>—</b><span>Revenue / Sales</span></div>
+<div class="metric"><b>—</b><span>CPA / CAC</span></div>
+<div class="metric"><b>—</b><span>ROAS</span></div>
+</div>
+<a class="btn btn-primary" href="https://wa.me/qr/ECQ5HJTSQEAYA1" rel="noopener noreferrer" target="_blank">Discuss a Similar Challenge ↗</a>
+<p class="notice">Metrics intentionally left blank until the project, timeframe, and source data are confirmed.</p>
+</div>
+</article>
+</div>
+</section>
+<section class="section" id="results">
+<div class="wrap">
+<div class="section-head">
+<div><div class="kicker">Selected Results</div><h2>Numbers with context.</h2></div>
+<p class="section-desc">A quick scan of campaign outcomes. Each number will include its timeframe, business context, and your specific contribution.</p>
+</div>
+<div class="results-grid">
+<article class="result-card"><div class="result-value">—</div><h3>Acquisition Efficiency</h3><p>CPA / CAC improvement with period and baseline.</p></article>
+<article class="result-card"><div class="result-value">—</div><h3>Revenue &amp; Orders</h3><p>Verified sales outcomes from a defined campaign.</p></article>
+<article class="result-card"><div class="result-value">—</div><h3>Return on Ad Spend</h3><p>ROAS with spend, attribution window, and context.</p></article>
+</div>
+</div>
+</section>
+<section class="section" id="reviews">
+<div class="wrap">
+<div class="section-head">
+<div><div class="kicker">Testimonials</div><h2>Trust, in their words.</h2></div>
+<p class="section-desc">Real client feedback, shown as approved screenshots or quoted testimonials. No fabricated reviews.</p>
+</div>
+<div class="reviews-grid">
+<article class="review"><div class="quote">“</div><blockquote>Place the original client review here. Keep the wording authentic and publish only with permission.</blockquote><div class="reviewer"><strong>Client name</strong>Role / project · Screenshot to be added</div></article>
+<article class="review"><div class="quote">“</div><blockquote>Place the original client review here. A short, specific review is more convincing than a generic compliment.</blockquote><div class="reviewer"><strong>Client name</strong>Role / project · Screenshot to be added</div></article>
+<article class="review"><div class="quote">“</div><blockquote>Place the original client review here. We can use a cropped screenshot if the client approves it.</blockquote><div class="reviewer"><strong>Client name</strong>Role / project · Screenshot to be added</div></article>
+</div>
+</div>
+</section>
+<section class="section" id="certifications">
+<div class="wrap">
+<div class="section-head">
+<div><div class="kicker">Certifications</div><h2>Learning that compounds.</h2></div>
+<p class="section-desc">Certificates will be displayed with their original images, issuing organizations, and years.</p>
+</div>
+<div class="cert-grid">
+<article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
+<article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
+<article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
+</div>
+</div>
+</section>
+<section class="contact" id="contact">
+<div class="wrap contact-inner">
+<div><div class="kicker">Let's Work Together</div><h2>Have a growth challenge?<br/>Let's talk numbers.</h2><p>For performance marketing, e-commerce growth, and digital product launches.</p></div>
+<a class="btn btn-primary" href="https://wa.me/qr/ECQ5HJTSQEAYA1" rel="noopener noreferrer" target="_blank">Get in Touch ↗</a>
+</div>
+</section>
+</main>
+<footer><div class="wrap footer-inner"><div>© <span id="year"></span> Mostafa Ehab. All rights reserved.</div><div class="footer-socials"><a href="https://wa.me/qr/ECQ5HJTSQEAYA1" rel="noopener noreferrer" target="_blank">WhatsApp</a><a href="https://www.facebook.com/share/181NWyfRXu/" rel="noopener noreferrer" target="_blank">Facebook</a><a href="https://www.linkedin.com/in/mostafa-ehab-2357a7293?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" rel="noopener noreferrer" target="_blank">LinkedIn</a><a href="https://www.behance.net/mostafaehab123" rel="noopener noreferrer" target="_blank">Behance</a></div><span>Performance Media Buyer · Built around measurable growth.</span></div></footer>
+<script>
     document.getElementById("year").textContent = new Date().getFullYear();
     // Animate each counter when it first enters the viewport.
     (() => {
@@ -404,5 +429,21 @@
       }, { passive: true });
     })();
   </script>
-</body>
+<div aria-hidden="true" class="creator-modal" id="creator-link-modal"><div aria-labelledby="creator-modal-title" aria-modal="true" class="creator-modal-card" role="dialog"><button aria-label="Close" class="creator-modal-close" type="button">×</button><h3 id="creator-modal-title">Visit creator profile?</h3><p id="creator-modal-copy">Would you like to open this Facebook page or stay on the portfolio?</p><div class="creator-modal-actions"><a class="creator-modal-visit" href="#" id="creator-modal-visit" rel="noopener noreferrer" target="_blank">Visit Facebook page</a><button class="creator-modal-stay" id="creator-modal-stay" type="button">Stay here</button></div></div></div><script>
+(() => {
+ const modal=document.getElementById('creator-link-modal');
+ if(!modal) return;
+ const title=document.getElementById('creator-modal-title');
+ const copy=document.getElementById('creator-modal-copy');
+ const visit=document.getElementById('creator-modal-visit');
+ const close=()=>{modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';};
+ document.querySelectorAll('#work a.collab[data-creator-url]').forEach(card=>{
+   card.addEventListener('click',e=>{e.preventDefault();const name=card.dataset.creatorName||'this creator';const url=card.dataset.creatorUrl||card.href;title.textContent='Visit '+name+'?';copy.textContent='Would you like to open '+name+'’s Facebook page or stay on the portfolio?';visit.href=url;modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';});
+ });
+ modal.querySelector('.creator-modal-close').addEventListener('click',close);
+ document.getElementById('creator-modal-stay').addEventListener('click',close);
+ modal.addEventListener('click',e=>{if(e.target===modal)close();});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+})();
+</script></body>
 </html>

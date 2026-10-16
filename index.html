@@ -35,20 +35,21 @@
     .nav-cta { border:1px solid rgba(199,71,53,.7); padding:10px 15px; border-radius:3px; color:var(--warm-white); }
     .hero { min-height: 620px; display:grid; grid-template-columns: .93fr 1.07fr; align-items:center; gap:30px; padding:26px 0 44px; position:relative; }
     .hero:before { content:""; position:absolute; width:520px; height:520px; left:0; top:22%; background:radial-gradient(circle, rgba(199,71,53,.28) 0%, rgba(199,71,53,.10) 35%, rgba(199,71,53,0) 72%); pointer-events:none; filter:blur(10px); }
-    .hero-stats { grid-column:1 / -1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); max-width:850px; width:100%; gap:0; position:relative; z-index:2; padding:8px 0 18px; margin-bottom:4px; border-bottom:1px solid rgba(243,237,227,.16); }
-    .hero-stat { min-width:0; padding:4px 22px 2px; position:relative; }
-    .hero-stat:first-child { padding-left:0; }
-    .hero-stat + .hero-stat:before { content:""; position:absolute; left:0; top:9px; bottom:8px; width:1px; background:linear-gradient(180deg,transparent,rgba(243,237,227,.22),transparent); }
-    .hero-stat strong { display:flex; align-items:baseline; gap:3px; color:var(--warm-white); font:800 clamp(29px,4vw,43px)/1 Manrope,sans-serif; letter-spacing:-.075em; white-space:nowrap; font-variant-numeric:tabular-nums; }
-    .hero-stat .counter-suffix { color:var(--flame-bright); font-size:.48em; font-weight:800; letter-spacing:-.02em; }
-    .hero-stat span.label { display:block; color:#938B84; font-size:9px; letter-spacing:.15em; text-transform:uppercase; margin-top:9px; }
-    .hero-stat strong.counting { animation:countPop .45s cubic-bezier(.2,.8,.2,1) both; }
-    @keyframes countPop { from { opacity:.45; transform:translateY(7px); filter:blur(2px); } to { opacity:1; transform:translateY(0); filter:blur(0); } }
-    .hero-stat:after { content:""; position:absolute; left:22px; bottom:-19px; width:0; height:2px; background:var(--flame-bright); transition:width .55s ease; }
-    .hero-stat:first-child:after { left:0; }
-    .hero-stats.is-counted .hero-stat:after { width:26px; }
-    .hero-stats.is-counted .hero-stat:nth-child(2):after { transition-delay:.12s; }
-    .hero-stats.is-counted .hero-stat:nth-child(3):after { transition-delay:.24s; }
+    .hero-stats { grid-column:1 / -1; justify-self:center; width:min(100%, 860px); display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; position:relative; z-index:2; margin:4px auto 0; padding:19px 0 8px; border-top:1px solid var(--line); }
+    .hero-stat { padding:8px 22px 9px; text-align:center; border-right:1px solid var(--line); }
+    .hero-stat:last-child { border-right:0; }
+    .hero-stat strong { display:block; color:var(--warm-white); font:800 clamp(26px,3.4vw,39px)/1.1 Manrope,sans-serif; letter-spacing:-.06em; white-space:nowrap; }
+    .hero-stat strong em { color:var(--flame-bright); font-style:normal; font-size:.48em; letter-spacing:0; vertical-align:middle; }
+    .hero-stat span:not(.counter-number) { display:block; color:#938B84; font-size:9px; letter-spacing:.13em; text-transform:uppercase; margin-top:7px; }
+    .counter-number { display:inline-block; min-width:.8em; animation:countIn .3s ease-out both; }
+    .social-links { display:flex; align-items:center; gap:10px; margin-top:21px; }
+    .social-link { width:37px; height:37px; display:grid; place-items:center; border:1px solid var(--line); border-radius:50%; background:rgba(243,237,227,.035); color:var(--warm-white); transition:transform .2s ease,border-color .2s ease,background .2s ease; }
+    .social-link svg { width:16px; height:16px; fill:currentColor; }
+    .social-link:hover { transform:translateY(-3px); border-color:var(--flame-bright); background:rgba(199,71,53,.13); }
+    .social-link.whatsapp { color:#42D879; }
+    .social-link.facebook { color:#78A7FF; }
+    .social-link.linkedin { color:#68B8E8; }
+    .social-link.behance { color:#8E9BFF; }
     .portrait-wrap { align-self:stretch; min-height:510px; position:relative; display:flex; align-items:flex-end; justify-content:center; overflow:visible; isolation:isolate; }
     .portrait-wrap:before { content:""; position:absolute; z-index:-1; width:88%; aspect-ratio:1; bottom:12%; left:6%; border-radius:50%; background:radial-gradient(circle,rgba(199,71,53,.30) 0%,rgba(199,71,53,.13) 40%,rgba(199,71,53,0) 72%); filter:blur(24px); animation:portraitGlow 5s ease-in-out infinite alternate; }
     .portrait-wrap:after { content:""; position:absolute; z-index:2; inset:auto 0 0; height:22%; background:linear-gradient(0deg,var(--black),transparent); pointer-events:none; }
@@ -72,13 +73,7 @@
     .btn-ghost { border:1px solid var(--line); color:var(--warm-white); }
     .scroll-note { margin-top:48px; display:flex; gap:12px; align-items:center; color:#77716B; text-transform:uppercase; font-size:9px; letter-spacing:.18em; }
     .scroll-note span { width:32px; height:1px; background:var(--flame); }
-    .section { padding:82px 0; border-top:1px solid var(--line); scroll-margin-top:18px; }
-    .reveal { opacity:0; transform:translateY(24px); filter:blur(3px); transition:opacity .75s ease, transform .75s cubic-bezier(.2,.8,.2,1), filter .75s ease; }
-    .reveal.is-visible { opacity:1; transform:translateY(0); filter:blur(0); }
-    .reveal-delay-1 { transition-delay:.08s; }
-    .reveal-delay-2 { transition-delay:.16s; }
-    .reveal-delay-3 { transition-delay:.24s; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *, *:before, *:after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; } .reveal { opacity:1; transform:none; filter:none; } }
+    .section { padding:82px 0; border-top:1px solid var(--line); }
     .section-head { display:flex; justify-content:space-between; gap:28px; align-items:end; margin-bottom:32px; }
     .kicker { color:var(--flame-bright); font-size:10px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; }
     h2 { font:700 clamp(30px,4vw,48px)/1.08 Manrope,sans-serif; letter-spacing:-.05em; margin:10px 0 0; }
@@ -133,14 +128,17 @@
     .contact h2 { max-width:650px; }
     .contact p { color:var(--muted); font-size:13px; }
     footer { border-top:1px solid var(--line); padding:20px 0; color:#77716B; font-size:10px; }
-    .footer-inner { display:flex; justify-content:space-between; gap:20px; }
+    .footer-inner { display:flex; justify-content:space-between; align-items:center; gap:20px; }
+    .footer-socials { display:flex; gap:12px; flex-wrap:wrap; }
+    .footer-socials a { color:#B6AEA6; }
+    .footer-socials a:hover { color:var(--flame-bright); }
     .tag { display:inline-block; color:#CFC7BE; border:1px solid var(--line); padding:6px 9px; font-size:9px; margin:5px 4px 0 0; }
     @media (max-width:800px) {
       .wrap { width:min(100% - 32px,var(--max)); }
       nav { gap:14px; } nav a:not(.nav-cta) { display:none; }
       .hero { grid-template-columns:.85fr 1.15fr; gap:8px; min-height:530px; padding:22px 0 35px; }
-      .hero-stats { max-width:100%; padding-bottom:15px; }
-      .hero-stat { padding:4px 12px 2px; }
+      .hero-stats { max-width:100%; }
+      .hero-stat { padding:12px 14px; }
       .portrait-wrap { min-height:420px; }
       .portrait { width:125%; max-width:none; }
       h1 { font-size:clamp(40px,8vw,64px); }
@@ -157,15 +155,13 @@
       .brand { font-size:12px; }
       .nav-cta { padding:8px 10px; font-size:10px; }
       .hero { grid-template-columns:1fr; padding-top:14px; gap:0; }
-      .hero-stats { grid-column:1; grid-row:1; margin-bottom:18px; padding:8px 0 15px; }
-      .hero-stat { padding:4px 8px 2px; text-align:center; }
-      .hero-stat:first-child { padding-left:0; }
-      .hero-stat strong { justify-content:center; font-size:clamp(20px,6.3vw,27px); letter-spacing:-.07em; }
-      .hero-stat span.label { font-size:7px; letter-spacing:.045em; margin-top:7px; }
-      .hero-stat:after { left:8px; bottom:-16px; }
-      .hero-stat:first-child:after { left:0; }
+      .portrait-wrap { grid-row:1; min-height:340px; max-height:390px; margin-top:-8px; }
       .hero-copy { grid-row:2; padding:22px 0 8px; }
-      .portrait-wrap { grid-row:3; min-height:340px; max-height:390px; margin-top:-8px; }
+      .hero-stats { grid-column:1; grid-row:3; margin:18px auto 0; padding:15px 0 0; }
+      .hero-stat { padding:10px 5px; text-align:center; }
+      .hero-stat strong { font-size:clamp(19px,5.5vw,25px); }
+      .hero-stat span:not(.counter-number) { font-size:7px; letter-spacing:.04em; line-height:1.4; }
+      .social-links { margin-top:18px; }
       .portrait { width:min(100%,390px); max-height:390px; }
       .portrait-label { left:12px; bottom:12px; }
       .hero:before { width:280px; height:280px; left:10%; top:36%; }
@@ -197,17 +193,12 @@
     <a class="brand" href="#home">ME<span>.</span> / PORTFOLIO</a>
     <nav aria-label="Main navigation">
       <a href="#work">Work</a><a href="#results">Results</a><a href="#reviews">Reviews</a><a href="#certifications">Certifications</a>
-      <a class="nav-cta" href="#contact">Let's Talk ↗</a>
+      <a class="nav-cta" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer">Let's Talk ↗</a>
     </nav>
   </header>
 
   <main>
     <section class="wrap hero" id="home">
-      <div class="hero-stats" aria-label="Performance overview">
-        <div class="hero-stat"><strong><span class="counter-number" data-target="21">0</span><span class="counter-suffix">+</span></strong><span class="label">Brands worked with</span></div>
-        <div class="hero-stat"><strong><span class="counter-number" data-target="51000000" data-format="compact">0</span><span class="counter-suffix"> EGP</span></strong><span class="label">Total ad spend</span></div>
-        <div class="hero-stat"><strong><span class="counter-number" data-target="401000" data-format="compact">0</span><span class="counter-suffix">+</span></strong><span class="label">Orders generated</span></div>
-      </div>
       <div class="portrait-wrap">
         <img class="portrait" src="mostafa-portrait.png" alt="Portrait of Mostafa Ehab with arms crossed">
         <div class="portrait-label">Performance Marketing · Egypt</div>
@@ -218,27 +209,46 @@
         <p class="role">Performance Media Buyer</p>
         <p class="intro">Turning ad spend into measurable business growth — through performance marketing, e-commerce scaling, and digital product launches.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#work">Explore My Work <span>↘</span></a>
-          <a class="btn btn-ghost" href="#contact">Contact Me <span>↗</span></a>
+          <a class="btn btn-primary" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer">Explore My Work <span>↘</span></a>
+          <a class="btn btn-ghost" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer">Contact Me <span>↗</span></a>
+        </div>
+        <div class="social-links" aria-label="Social profiles">
+          <a class="social-link whatsapp" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.1 1.6 5.9L0 24l6.5-1.7a11.8 11.8 0 0 0 5.6 1.4h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.5-8.4ZM12.1 21.7c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.9 1 1-3.8-.3-.4a9.8 9.8 0 1 1 8.5 4.7Zm5.4-7.3c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.6-1-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.9 4.3.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.6-.4Z"/></svg>
+          </a>
+          <a class="social-link facebook" href="https://www.facebook.com/share/181NWyfRXu/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.4c0-3.03 1.79-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.95.93-1.95 1.88v2.29h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07Z"/></svg>
+          </a>
+          <a class="social-link linkedin" href="https://www.linkedin.com/in/mostafa-ehab-2357a7293?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V8.98h3.42v1.57h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.46v6.29ZM5.34 7.42a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12Zm1.78 13.03H3.56V8.98h3.56v11.47ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></svg>
+          </a>
+          <a class="social-link behance" href="https://www.behance.net/mostafaehab123" target="_blank" rel="noopener noreferrer" aria-label="Behance" title="Behance">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.4 11.1c1.3-.6 2-1.6 2-3.1C11.4 5.2 9.3 4 6.6 4H0v16h7c3 0 5.7-1.4 5.7-4.7 0-2-1.1-3.5-3.3-4.2ZM3.5 6.8h2.8c1.1 0 2.1.3 2.1 1.6 0 1.2-.8 1.7-1.9 1.7H3.5V6.8Zm3.6 10.4H3.5v-4.5h3.4c1.4 0 2.4.6 2.4 2.1 0 1.6-1.1 2.4-2.2 2.4ZM18.3 7.2h-5.1V5.1h5.1v2.1Zm5.6 7.7c0-3.8-2.2-6.7-6.1-6.7-3.8 0-6.3 2.8-6.3 6.5 0 3.8 2.4 6.5 6.3 6.5 3 0 5.1-1.4 5.9-4.2h-3.1c-.3 1-1.5 1.6-2.6 1.6-1.8 0-2.8-1-2.9-2.8h8.8v-.9Zm-8.8-1.2c.1-1.4 1.1-2.4 2.7-2.4 1.5 0 2.3 1.1 2.5 2.4h-5.2Z"/></svg>
+          </a>
         </div>
         <div class="scroll-note"><span></span> Strategy. Performance. Growth.</div>
+      </div>
+      <div class="hero-stats" aria-label="Performance overview">
+        <div class="hero-stat"><strong><span class="counter-number" data-target="21">0</span><em>+</em></strong><span>Brands worked with</span></div>
+        <div class="hero-stat"><strong><em>EGP </em><span class="counter-number" data-target="51">0</span><em>M+</em></strong><span>Total ad spend</span></div>
+        <div class="hero-stat"><strong><span class="counter-number" data-target="401">0</span><em>K+</em></strong><span>Orders generated</span></div>
       </div>
     </section>
 
     <section class="section" id="work">
       <div class="wrap">
-        <div class="section-head collab-section-head reveal">
+        <div class="section-head collab-section-head">
           <div><div class="kicker">Selected Collaborations</div><h2>Creators & brands I've worked with.</h2></div>
           <p class="section-desc">A circle of selected collaborations across creator-led courses, digital products, and e-commerce growth.</p>
         </div>
-        <div class="collabs-window reveal reveal-delay-1">
+        <div class="collabs-window">
           <div class="collabs">
-            <a class="collab" href="#contact"><span class="symbol">C1</span><strong>Creator 01</strong><small>Digital products</small></a>
-            <a class="collab" href="#contact"><span class="symbol">C2</span><strong>Creator 02</strong><small>Course launch</small></a>
-            <a class="collab" href="#contact"><span class="symbol">C3</span><strong>Creator 03</strong><small>Growth marketing</small></a>
-            <a class="collab" href="#contact"><span class="symbol">C4</span><strong>Creator 04</strong><small>Education</small></a>
-            <a class="collab" href="#contact"><span class="symbol">EC</span><strong>E-commerce</strong><small>Paid acquisition</small></a>
-            <a class="collab" href="#contact"><span class="symbol">DP</span><strong>Digital products</strong><small>Performance</small></a>
+            <a class="collab" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer"><span class="symbol">C1</span><strong>Creator 01</strong><small>Digital products</small></a>
+            <a class="collab" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer"><span class="symbol">C2</span><strong>Creator 02</strong><small>Course launch</small></a>
+            <a class="collab" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer"><span class="symbol">C3</span><strong>Creator 03</strong><small>Growth marketing</small></a>
+            <a class="collab" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer"><span class="symbol">C4</span><strong>Creator 04</strong><small>Education</small></a>
+            <a class="collab" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer"><span class="symbol">EC</span><strong>E-commerce</strong><small>Paid acquisition</small></a>
+            <a class="collab" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer"><span class="symbol">DP</span><strong>Digital products</strong><small>Performance</small></a>
           </div>
         </div>
         <p class="collabs-note">Temporary visual placeholders — replace with approved creator photos and names before sharing publicly.</p>
@@ -254,7 +264,7 @@
           <div><div class="kicker">Featured Case Study</div><h2>Proof over promises.</h2></div>
           <p class="section-desc">One deep-dive story: the business challenge, the strategy, what changed, and the measurable outcome.</p>
         </div>
-        <article class="feature-case reveal">
+        <article class="feature-case">
           <div class="case-visual">
             <span class="case-chip">Featured Project · Details to verify</span>
             <div class="case-graphic" aria-label="Decorative performance chart"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
@@ -270,7 +280,7 @@
               <div class="metric"><b>—</b><span>CPA / CAC</span></div>
               <div class="metric"><b>—</b><span>ROAS</span></div>
             </div>
-            <a class="btn btn-primary" href="#contact">Discuss a Similar Challenge ↗</a>
+            <a class="btn btn-primary" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer">Discuss a Similar Challenge ↗</a>
             <p class="notice">Metrics intentionally left blank until the project, timeframe, and source data are confirmed.</p>
           </div>
         </article>
@@ -283,7 +293,7 @@
           <div><div class="kicker">Selected Results</div><h2>Numbers with context.</h2></div>
           <p class="section-desc">A quick scan of campaign outcomes. Each number will include its timeframe, business context, and your specific contribution.</p>
         </div>
-        <div class="results-grid reveal">
+        <div class="results-grid">
           <article class="result-card"><div class="result-value">—</div><h3>Acquisition Efficiency</h3><p>CPA / CAC improvement with period and baseline.</p></article>
           <article class="result-card"><div class="result-value">—</div><h3>Revenue & Orders</h3><p>Verified sales outcomes from a defined campaign.</p></article>
           <article class="result-card"><div class="result-value">—</div><h3>Return on Ad Spend</h3><p>ROAS with spend, attribution window, and context.</p></article>
@@ -297,7 +307,7 @@
           <div><div class="kicker">Testimonials</div><h2>Trust, in their words.</h2></div>
           <p class="section-desc">Real client feedback, shown as approved screenshots or quoted testimonials. No fabricated reviews.</p>
         </div>
-        <div class="reviews-grid reveal">
+        <div class="reviews-grid">
           <article class="review"><div class="quote">“</div><blockquote>Place the original client review here. Keep the wording authentic and publish only with permission.</blockquote><div class="reviewer"><strong>Client name</strong>Role / project · Screenshot to be added</div></article>
           <article class="review"><div class="quote">“</div><blockquote>Place the original client review here. A short, specific review is more convincing than a generic compliment.</blockquote><div class="reviewer"><strong>Client name</strong>Role / project · Screenshot to be added</div></article>
           <article class="review"><div class="quote">“</div><blockquote>Place the original client review here. We can use a cropped screenshot if the client approves it.</blockquote><div class="reviewer"><strong>Client name</strong>Role / project · Screenshot to be added</div></article>
@@ -311,7 +321,7 @@
           <div><div class="kicker">Certifications</div><h2>Learning that compounds.</h2></div>
           <p class="section-desc">Certificates will be displayed with their original images, issuing organizations, and years.</p>
         </div>
-        <div class="cert-grid reveal">
+        <div class="cert-grid">
           <article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
           <article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
           <article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
@@ -320,73 +330,31 @@
     </section>
 
     <section class="contact" id="contact">
-      <div class="wrap contact-inner reveal">
+      <div class="wrap contact-inner">
         <div><div class="kicker">Let's Work Together</div><h2>Have a growth challenge?<br>Let's talk numbers.</h2><p>For performance marketing, e-commerce growth, and digital product launches.</p></div>
-        <a class="btn btn-primary" href="mailto:hello@example.com">Get in Touch ↗</a>
+        <a class="btn btn-primary" href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer">Get in Touch ↗</a>
       </div>
     </section>
   </main>
-  <footer><div class="wrap footer-inner"><div>© <span id="year"></span> Mostafa Ehab. All rights reserved.</div><span>Performance Media Buyer · Built around measurable growth.</span></div></footer>
+  <footer><div class="wrap footer-inner"><div>© <span id="year"></span> Mostafa Ehab. All rights reserved.</div><div class="footer-socials"><a href="https://wa.me/qr/ECQ5HJTSQEAYA1" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.facebook.com/share/181NWyfRXu/" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.linkedin.com/in/mostafa-ehab-2357a7293?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://www.behance.net/mostafaehab123" target="_blank" rel="noopener noreferrer">Behance</a></div><span>Performance Media Buyer · Built around measurable growth.</span></div></footer>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Count-up animation: add confirmed numeric targets to data-target after metrics are approved.
-    const stats = document.querySelector('.hero-stats');
-    const counters = document.querySelectorAll('.counter-number[data-target]');
-    const formatNumber = (value, format) => {
-      if (format === 'compact') {
-        if (value >= 1000000) return (value / 1000000).toLocaleString('en-US', { maximumFractionDigits: 1 }) + 'M';
-        if (value >= 1000) return (value / 1000).toLocaleString('en-US', { maximumFractionDigits: 1 }) + 'K';
-      }
-      return Math.round(value).toLocaleString('en-US');
-    };
-    const animateCounter = (el, target, duration = 850) => {
+    // Fast count-up: starts immediately on entry and settles in about 650ms.
+    const counterEls = document.querySelectorAll('.counter-number[data-target]');
+    const animateCounter = (el) => {
+      const target = Number(el.dataset.target || 0);
+      const duration = 650;
       const start = performance.now();
-      const format = el.dataset.format || 'full';
-      el.closest('strong')?.classList.add('counting');
-      const tick = now => {
+      const tick = (now) => {
         const progress = Math.min((now - start) / duration, 1);
-        // Smooth ease-out with a gentle acceleration at the start.
-        const eased = 1 - Math.pow(1 - progress, 4);
-        el.textContent = formatNumber(target * eased, format);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(target * eased).toLocaleString('en-US');
         if (progress < 1) requestAnimationFrame(tick);
-        else el.textContent = formatNumber(target, format);
       };
       requestAnimationFrame(tick);
     };
-    let countersStarted = false;
-    const startCounters = () => {
-      if (countersStarted) return;
-      countersStarted = true;
-      stats?.classList.add('is-counted');
-      counters.forEach((el, index) => {
-        const target = Number(el.dataset.target);
-        if (el.dataset.target.trim() !== '' && Number.isFinite(target) && target >= 0) {
-          window.setTimeout(() => animateCounter(el, target), index * 90);
-        }
-      });
-    };
-    // Start as soon as the visitor lands on the page.
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', startCounters, { once: true });
-    } else {
-      startCounters();
-    }
+    window.addEventListener('DOMContentLoaded', () => counterEls.forEach(animateCounter), { once: true });
 
-    // Smooth, understated reveal as each section enters the viewport.
-    const revealItems = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window) {
-      const revealObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-visible');
-          revealObserver.unobserve(entry.target);
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -35px 0px' });
-      revealItems.forEach(item => revealObserver.observe(item));
-    } else {
-      revealItems.forEach(item => item.classList.add('is-visible'));
-    }
   </script>
 </body>
 </html>

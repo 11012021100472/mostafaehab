@@ -190,6 +190,58 @@
       .footer-inner { display:block; }
       .footer-inner span { display:block; margin-top:7px; }
     }
+
+    /* Cinematic but lightweight scroll transitions */
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    section[id], .contact[id] { scroll-margin-top: 84px; }
+    .motion-ready .section-head,
+    .motion-ready .feature-case,
+    .motion-ready .results-grid,
+    .motion-ready .reviews-grid,
+    .motion-ready .cert-grid,
+    .motion-ready .contact-inner,
+    .motion-ready .collabs-window,
+    .motion-ready .skill-tags {
+      opacity: 0;
+      transform: translate3d(0, 26px, 0) scale(.992);
+      filter: blur(3px);
+      transition: opacity .65s ease, transform .75s cubic-bezier(.2,.75,.25,1), filter .65s ease;
+      will-change: opacity, transform;
+    }
+    .motion-ready .is-visible {
+      opacity: 1;
+      transform: translate3d(0,0,0) scale(1);
+      filter: blur(0);
+    }
+    .motion-ready .collab { opacity: 0; transform: translateY(18px) scale(.96); }
+    .motion-ready .collabs-window.is-visible .collab {
+      animation: creatorPop .55s cubic-bezier(.2,.75,.25,1) forwards;
+      animation-delay: calc(var(--i, 0) * 45ms);
+    }
+    @keyframes creatorPop { to { opacity: 1; transform: translateY(0) scale(1); } }
+    .section { scroll-margin-top: 84px; }
+    .btn, .nav-cta, .social-link, .collab { transition-timing-function: cubic-bezier(.2,.75,.25,1); }
+    @media (max-width: 520px) {
+      html { scroll-padding-top: 70px; }
+      section[id], .contact[id], .section { scroll-margin-top: 70px; }
+      .motion-ready .section-head,
+      .motion-ready .feature-case,
+      .motion-ready .results-grid,
+      .motion-ready .reviews-grid,
+      .motion-ready .cert-grid,
+      .motion-ready .contact-inner,
+      .motion-ready .collabs-window,
+      .motion-ready .skill-tags { transform: translate3d(0,16px,0); filter:none; transition-duration:.45s; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+      .motion-ready .section-head, .motion-ready .feature-case, .motion-ready .results-grid,
+      .motion-ready .reviews-grid, .motion-ready .cert-grid, .motion-ready .contact-inner,
+      .motion-ready .collabs-window, .motion-ready .skill-tags, .motion-ready .collab {
+        opacity: 1 !important; transform: none !important; filter: none !important;
+      }
+    }
   </style>
 <style>
 .creator-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
@@ -402,6 +454,30 @@
         counterEls.forEach((el) => observer.observe(el));
       } else {
         counterEls.forEach((el, index) => animateCounter(el, index));
+      }
+    })();
+
+    // Reveal each portfolio section smoothly as it enters the viewport.
+    (() => {
+      const selectors = '.section-head, .feature-case, .results-grid, .reviews-grid, .cert-grid, .contact-inner, .collabs-window, .skill-tags';
+      const items = [...document.querySelectorAll(selectors)];
+      const creatorCards = document.querySelectorAll('.collab');
+      creatorCards.forEach((card, index) => card.style.setProperty('--i', index % 14));
+      if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      document.body.classList.add('motion-ready');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
+      items.forEach(item => revealObserver.observe(item));
+      // Make the hero copy arrive in a coordinated sequence on initial load.
+      const heroCopy = document.querySelector('.hero-copy');
+      if (heroCopy) {
+        heroCopy.animate([{opacity:0, transform:'translateY(18px)'},{opacity:1, transform:'translateY(0)'}], {duration:700, easing:'cubic-bezier(.2,.75,.25,1)', fill:'both', delay:100});
       }
     })();
 

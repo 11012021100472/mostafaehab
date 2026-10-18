@@ -290,7 +290,38 @@
 .full-case ul{padding-left:22px}
 .case-content .btn-secondary{margin-top:12px}
 @keyframes caseReveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:700px){.case-gallery{aspect-ratio:4/3;min-height:250px}.case-gallery img{object-fit:contain}.gallery-arrow{width:40px;height:40px}.gallery-count{font-size:13px}.full-case{margin-top:18px}}
+@media(max-width:700px){
+  .feature-case{display:grid;grid-template-columns:minmax(0,1fr);width:100%;max-width:100%;min-width:0;overflow:hidden;border-radius:12px}
+  .case-visual,.case-content{width:100%;min-width:0;max-width:100%}
+  .case-visual{padding:16px;min-height:0;gap:16px}
+  .case-chip{max-width:100%;font-size:9px;letter-spacing:.06em;line-height:1.5;white-space:normal}
+  .case-gallery{width:100%;max-width:100%;aspect-ratio:4/3;min-height:0;height:auto;border-radius:10px}
+  .case-gallery img{width:100%;height:100%;object-fit:contain}
+  .gallery-arrow{width:34px;height:34px;font-size:24px}
+  .gallery-arrow.prev{left:7px}.gallery-arrow.next{right:7px}
+  .gallery-count{font-size:11px;right:8px;bottom:8px}
+  .case-visual-note{font-size:9px;line-height:1.6;overflow-wrap:anywhere}
+  .case-content{padding:22px 18px 24px;overflow-wrap:anywhere;word-break:normal}
+  .case-content .kicker{font-size:9px;letter-spacing:.1em;line-height:1.6}
+  .case-content h3{font-size:clamp(24px,7vw,32px);line-height:1.22;letter-spacing:-.035em;margin:12px 0 14px;overflow-wrap:anywhere}
+  .case-content p{font-size:13px;line-height:1.9;overflow-wrap:anywhere}
+  .metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 12px;margin:22px 0}
+  .metric{min-width:0;padding-top:12px}
+  .metric b{font-size:clamp(22px,6.8vw,30px);line-height:1.2;letter-spacing:-.04em;overflow-wrap:anywhere}
+  .metric span{display:block;font-size:10px;line-height:1.7;margin-top:5px;overflow-wrap:anywhere}
+  .case-content .btn{max-width:100%;white-space:normal;text-align:center;line-height:1.5;padding:13px 14px}
+  .case-content .case-toggle{width:100%}
+  .case-content .btn-secondary{width:100%;justify-content:center}
+  .full-case{margin-top:18px;padding-top:14px;min-width:0}
+  .full-case h4{font-size:13px;line-height:1.6}
+  .full-case ul{padding-inline-start:22px}
+}
+html[dir="rtl"] .case-content{text-align:right;direction:rtl}
+html[dir="rtl"] .case-content .kicker{letter-spacing:0}
+html[dir="rtl"] .case-content .btn{direction:rtl}
+html[dir="rtl"] .case-gallery,html[dir="rtl"] .case-image-zoom{direction:ltr}
+@media(max-width:700px){html,body{max-width:100%;overflow-x:hidden}main,.wrap,.section,.feature-case{min-width:0;max-width:100%}.wrap{width:calc(100% - 28px)}.case-content *{max-width:100%}}
+@media(prefers-reduced-motion:reduce){.full-case{animation:none!important;scroll-behavior:auto!important}}
 </style>
 <style>
 .creator-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
@@ -408,11 +439,11 @@ html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direct
 <span class="case-chip">E-commerce · Kids Books</span>
 <div class="case-gallery" aria-label="Campaign performance screenshots">
   <button class="gallery-arrow prev" type="button" aria-label="Previous screenshot">‹</button>
-  <img id="caseSlide" src="books-case-01.jpg" alt="Meta and TikTok campaign performance dashboard, campaign names blurred" loading="lazy">
+  <img id="caseSlide" src="books-case-02.jpg" alt="Meta and TikTok campaign performance dashboard, campaign names blurred" loading="lazy">
   <button class="gallery-arrow next" type="button" aria-label="Next screenshot">›</button>
   <div class="gallery-count"><span id="slideNumber">01</span> / 10</div>
 </div>
-<div class="case-image-zoom" id="caseImageZoom" role="dialog" aria-modal="true" aria-label="Expanded campaign screenshot"><button type="button" aria-label="Close expanded screenshot">×</button><img src="books-case-01.jpg" alt="Expanded campaign dashboard screenshot"></div>
+<div class="case-image-zoom" id="caseImageZoom" role="dialog" aria-modal="true" aria-label="Expanded campaign screenshot"><button type="button" aria-label="Close expanded screenshot">×</button><img src="books-case-02.jpg" alt="Expanded campaign dashboard screenshot"></div>
 <div class="case-visual-note">Tap the screenshot to zoom in · CAMPAIGN DASHBOARDS · ACCOUNT NAMES BLURRED</div>
 </div>
 <div class="case-content">
@@ -663,7 +694,7 @@ html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direct
 </script>
 <script>
 (() => {
-  const slides = Array.from({length:10}, (_,i) => `books-case-${String(i+1).padStart(2,'0')}.jpg`);
+  const slides = ['books-case-02.jpg','books-case-01.jpg', ...Array.from({length:8}, (_,i) => `books-case-${String(i+3).padStart(2,'0')}.jpg`)];
   const image = document.getElementById('caseSlide');
   const number = document.getElementById('slideNumber');
   const gallery = document.querySelector('.case-gallery');
@@ -701,7 +732,44 @@ html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direct
   });
 })();
 </script>
-\n<script id="automatic-language-switch">\n(() => {\n  const isArabic = /^ar(?:-|$)/i.test(navigator.language || (navigator.languages && navigator.languages[0]) || '');\n  const root = document.documentElement;\n  root.lang = isArabic ? 'ar' : 'en';\n  root.dir = isArabic ? 'rtl' : 'ltr';\n  const pairs = [\n    ["Selected Collaborations", "التعاونات المختارة"],\n    ["Creators & brands I've worked with.", "صناع المحتوى والعلامات التجارية التي تعاونت معها."],\n    ["A circle of selected collaborations across creator-led courses, digital products, and e-commerce growth.", "مجموعة من التعاونات في تسويق الدورات التدريبية والمنتجات الرقمية ونمو التجارة الإلكترونية."],\n    ["Swipe left or right to explore selected creator and brand collaborations.", "اسحب لليمين أو اليسار لاستكشاف التعاونات المختارة مع صناع المحتوى والعلامات التجارية."],\n    ["Lighting & More", "الإضاءة والمزيد"],\n    ["Creator collaboration", "تعاون مع صانع محتوى"],\n    ["Featured Case Study", "دراسة حالة مميزة"],\n    ["Proof over promises.", "النتائج أقوى من الوعود."],\n    ["One deep-dive story: the business challenge, the strategy, what changed, and the measurable outcome.", "تجربة تفصيلية توضح التحدي التجاري والاستراتيجية والتغييرات والنتائج القابلة للقياس."],\n    ["E-commerce · Kids Books", "التجارة الإلكترونية · كتب الأطفال"],\n    ["E-commerce / Performance Marketing", "التجارة الإلكترونية / التسويق بالأداء"],\n    ["Tap the screenshot to zoom in · CAMPAIGN DASHBOARDS · ACCOUNT NAMES BLURRED", "اضغط على الصورة لتكبيرها · لوحات الحملات · أسماء الحسابات مطموسة"],\n    ["Orders", "الطلبات"], ["Delivered Orders", "الطلبات التي تم تسليمها"], ["Average CPA", "متوسط تكلفة الطلب"], ["Delivery Rate", "معدل التسليم"],\n    ["Read Full Case Study ↗", "اقرأ دراسة الحالة كاملة ↗"], ["Show Less ↑", "عرض أقل ↑"],\n    ["The challenge", "التحدي"], ["Creative testing before scaling", "اختبار المحتوى قبل التوسع"],\n    ["When the market got saturated", "عندما أصبح السوق مشبعًا"], ["Optimization through the right metrics", "التحسين باستخدام المؤشرات الصحيحة"], ["The outcome", "النتائج"],\n    ["Discuss a Similar Challenge ↗", "ناقش تحديًا مشابهًا ↗"],\n    ["Selected Results", "نتائج مختارة"], ["Numbers with context.", "أرقام بسياق واضح."],\n    ["A quick scan of campaign outcomes. Each number will include its timeframe, business context, and your specific contribution.", "نظرة سريعة على نتائج الحملات، مع توضيح الفترة والسياق التجاري ودورك في تحقيق كل نتيجة."],\n    ["Acquisition Efficiency", "كفاءة اكتساب العملاء"], ["CPA / CAC improvement with period and baseline.", "تحسن تكلفة الطلب أو اكتساب العميل مقارنة بالفترة السابقة."],\n    ["Revenue & Orders", "المبيعات والطلبات"], ["Verified sales outcomes from a defined campaign.", "نتائج مبيعات موثقة من حملة محددة."],\n    ["Return on Ad Spend", "العائد على الإنفاق الإعلاني"], ["ROAS with spend, attribution window, and context.", "العائد على الإنفاق مع توضيح الميزانية وفترة الإسناد."],\n    ["Testimonials", "آراء العملاء"], ["Trust, in their words.", "الثقة بكلامهم."],\n    ["Real client feedback, shown as approved screenshots or quoted testimonials. No fabricated reviews.", "آراء حقيقية من العملاء، بصور معتمدة أو اقتباسات أصلية، دون اختلاق تقييمات."],\n    ["Certifications", "الشهادات"], ["Learning that compounds.", "تعلم مستمر يصنع فرقًا."],\n    ["Explore the certifications behind my performance marketing toolkit. Open any certificate to inspect the original document.", "استكشف الشهادات التي تدعم خبرتي في التسويق بالأداء. اضغط على أي شهادة لعرض المستند الأصلي بحجم أكبر."],\n    ["Digital Marketing Certified", "معتمد في التسويق الرقمي"], ["HubSpot Academy", "أكاديمية HubSpot"],
+
+<script id="automatic-language-switch">
+(() => {
+  const browserLanguages = [...(navigator.languages || []), navigator.language || '', document.documentElement.lang || ''];
+  const isArabic = browserLanguages.some(lang => /^ar(?:-|$)/i.test(String(lang).trim()));
+  const root = document.documentElement;
+  root.lang = isArabic ? 'ar' : 'en';
+  root.dir = isArabic ? 'rtl' : 'ltr';
+  const pairs = [
+    ["Selected Collaborations", "التعاونات المختارة"],
+    ["Creators & brands I've worked with.", "صناع المحتوى والعلامات التجارية التي تعاونت معها."],
+    ["A circle of selected collaborations across creator-led courses, digital products, and e-commerce growth.", "مجموعة من التعاونات في تسويق الدورات التدريبية والمنتجات الرقمية ونمو التجارة الإلكترونية."],
+    ["Swipe left or right to explore selected creator and brand collaborations.", "اسحب لليمين أو اليسار لاستكشاف التعاونات المختارة مع صناع المحتوى والعلامات التجارية."],
+    ["Lighting & More", "الإضاءة والمزيد"],
+    ["Creator collaboration", "تعاون مع صانع محتوى"],
+    ["Featured Case Study", "دراسة حالة مميزة"],
+    ["Scaling performance with smarter acquisition.", "توسيع المبيعات باستحواذ إعلاني أذكى."],
+    ["CAMPAIGN DASHBOARDS · ACCOUNT NAMES BLURRED", "لوحات الحملات · أسماء الحسابات مطموسة"],
+    ["Proof over promises.", "النتائج أقوى من الوعود."],
+    ["One deep-dive story: the business challenge, the strategy, what changed, and the measurable outcome.", "تجربة تفصيلية توضح التحدي التجاري والاستراتيجية والتغييرات والنتائج القابلة للقياس."],
+    ["E-commerce · Kids Books", "التجارة الإلكترونية · كتب الأطفال"],
+    ["E-commerce / Performance Marketing", "التجارة الإلكترونية / التسويق بالأداء"],
+    ["Tap the screenshot to zoom in · CAMPAIGN DASHBOARDS · ACCOUNT NAMES BLURRED", "اضغط على الصورة لتكبيرها · لوحات الحملات · أسماء الحسابات مطموسة"],
+    ["Orders", "الطلبات"], ["Delivered Orders", "الطلبات التي تم تسليمها"], ["Average CPA", "متوسط تكلفة الطلب"], ["Delivery Rate", "معدل التسليم"],
+    ["Read Full Case Study ↗", "اقرأ دراسة الحالة كاملة ↗"], ["Show Less ↑", "عرض أقل ↑"],
+    ["The challenge", "التحدي"], ["Creative testing before scaling", "اختبار المحتوى قبل التوسع"],
+    ["When the market got saturated", "عندما أصبح السوق مشبعًا"], ["Optimization through the right metrics", "التحسين باستخدام المؤشرات الصحيحة"], ["The outcome", "النتائج"],
+    ["Discuss a Similar Challenge ↗", "ناقش تحديًا مشابهًا ↗"],
+    ["Selected Results", "نتائج مختارة"], ["Numbers with context.", "أرقام بسياق واضح."],
+    ["A quick scan of campaign outcomes. Each number will include its timeframe, business context, and your specific contribution.", "نظرة سريعة على نتائج الحملات، مع توضيح الفترة والسياق التجاري ودورك في تحقيق كل نتيجة."],
+    ["Acquisition Efficiency", "كفاءة اكتساب العملاء"], ["CPA / CAC improvement with period and baseline.", "تحسن تكلفة الطلب أو اكتساب العميل مقارنة بالفترة السابقة."],
+    ["Revenue & Orders", "المبيعات والطلبات"], ["Verified sales outcomes from a defined campaign.", "نتائج مبيعات موثقة من حملة محددة."],
+    ["Return on Ad Spend", "العائد على الإنفاق الإعلاني"], ["ROAS with spend, attribution window, and context.", "العائد على الإنفاق مع توضيح الميزانية وفترة الإسناد."],
+    ["Testimonials", "آراء العملاء"], ["Trust, in their words.", "الثقة بكلامهم."],
+    ["Real client feedback, shown as approved screenshots or quoted testimonials. No fabricated reviews.", "آراء حقيقية من العملاء، بصور معتمدة أو اقتباسات أصلية، دون اختلاق تقييمات."],
+    ["Certifications", "الشهادات"], ["Learning that compounds.", "تعلم مستمر يصنع فرقًا."],
+    ["Explore the certifications behind my performance marketing toolkit. Open any certificate to inspect the original document.", "استكشف الشهادات التي تدعم خبرتي في التسويق بالأداء. اضغط على أي شهادة لعرض المستند الأصلي بحجم أكبر."],
+    ["Digital Marketing Certified", "معتمد في التسويق الرقمي"], ["HubSpot Academy", "أكاديمية HubSpot"],
     ["Advertising with Meta", "الإعلان باستخدام Meta"], ["Google Ads for Beginners", "أساسيات إعلانات Google"],
     ["Create a Google Ads Search Campaign", "إنشاء حملة بحث على Google Ads"],
     ["How to Set Up a Facebook Ads Campaign", "كيفية إعداد حملة إعلانية على Facebook"],
@@ -709,7 +777,31 @@ html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direct
     ["Google Ads Course", "دورة إعلانات Google"], ["LinkedIn Advertising", "الإعلان على LinkedIn"],
     ["Snapchat Ads Course", "دورة إعلانات Snapchat"], ["Digital Marketing Strategies & Techniques", "استراتيجيات وتقنيات التسويق الرقمي"],
     ["View certificate", "عرض الشهادة"],
-    ["Let's Work Together", "لنعمل معًا"], ["Have a growth challenge?", "عندك تحدي في النمو؟"], ["Let's talk numbers.", "خلينا نتكلم بالأرقام."],\n    ["For performance marketing, e-commerce growth, and digital product launches.", "لإعلانات الأداء ونمو التجارة الإلكترونية وإطلاق المنتجات الرقمية."],\n    ["Get in Touch ↗", "تواصل معي ↗"], ["All rights reserved.", "جميع الحقوق محفوظة."],\n    ["Brands worked with", "علامة تجارية تعاونت معها"], ["Total ad spend", "إجمالي الإنفاق الإعلاني"], ["Orders generated", "طلب تم تحقيقه"],\n    ["Strategy. Performance. Growth.", "استراتيجية. أداء. نمو."], ["Performance Media Buyer · Built around measurable growth.", "متخصص إعلانات الأداء · تركيز على النمو القابل للقياس."],\n    ["Meta Ads", "إعلانات ميتا"], ["Performance Strategy", "استراتيجية الأداء"], ["Course Marketing", "تسويق الدورات التدريبية"], ["E-commerce", "التجارة الإلكترونية"],\n    ["بدأت التجربة بـ 5,000 قطعة من كتب الأطفال كان لازم نبيعهم بسرعة. بعد نجاح الاختبارات الأولى وطلب 20,000 قطعة إضافية، دخل المنتج سوقًا أكثر تنافسية — فكان التحدي الحقيقي هو الحفاظ على الأداء أثناء الـ Scaling.", "The project started with 5,000 units of children's books that needed to sell quickly. After the first tests performed well, the company ordered another 20,000 units. By the time the new shipment arrived, competition had intensified — making the real challenge maintaining performance while scaling."],\n    ["كان عندنا حوالي 5,000 قطعة في المخزن، والمطلوب بيعهم بأسرع وقت. الموضوع ماكانش Ads بس؛ كان فيه Operation كاملة من تجهيز الـ Creatives وتصوير UGC والـ Testing، لتأكيد الأوردرات وتجهيزها والشحن ومتابعة نسب التسليم يوم بيوم.", "We had around 5,000 units in stock and needed to sell them as quickly as possible. This was more than running ads: it required a full operation covering creative production, UGC shoots, testing, order confirmation and preparation, shipping, and daily delivery-rate tracking."],\n    ["لأن المنتج مستورد من الصين وكان ممكن المنافسين يستخدموا نفس الفيديوهات، صنعنا محتوى خاص بينا. اختبرنا Hooks وAngles مختلفة لحد ما وصلنا للـ Winners، وبعدها بدأنا الـ Scaling. نجاح المرحلة الأولى شجع الشركة تطلب 20,000 قطعة إضافية.", "Because the product came from China and competitors could use the same supplier videos, we produced original content. We tested different hooks and angles until we found winning creatives, then began scaling. The results of the first phase encouraged the company to order another 20,000 units."],\n    ["خلال وصول الشحنة الجديدة، المنافسة زادت والفيديوهات الصينية انتشرت في السوق. بدل ما نعتبر المنتج انتهى، جهزنا بنية تسمح بالتوسع، واشتغلنا بأكثر من 10 Ad Accounts وبـ Structures مختلفة على Meta وTikTok.", "While the new shipment was in transit, competition increased and the supplier videos spread across the market. Instead of writing the product off, we built a setup that could support scale, using more than 10 ad accounts and different campaign structures across Meta and TikTok."],\n    ["مع زيادة المنافسة، ارتفعت تكلفة الأوردر من حوالي 60 إلى 90 جنيه. ركزنا على الـ CPM والـ CTR لتشخيص المشكلة، ورجعنا نطوّر الكريتيف بدل زيادة الميزانية بشكل أعمى. اختبرنا UGC وUgly Ads وProfessional Ads وCompare Ads وInfo Ads، برسائل مختلفة لجمهور مختلف.", "As competition increased, cost per order rose from around EGP 60 to EGP 90. We focused on CPM and CTR to diagnose the issue and refreshed the creative instead of blindly increasing budgets. We tested UGC, ugly ads, professional ads, comparison ads, and informational ads — using different messages for different audiences."],\n    ["حوالي 30,000 Order.", "Around 30,000 orders."], ["حوالي 25,000 Delivered Orders، بنسبة تسليم تخطت 80% حسب الأرقام المقدمة.", "Around 25,000 delivered orders, with a delivery rate above 80% based on the supplied figures."], ["Average CPA حوالي 75 جنيه.", "Average CPA of around EGP 75."], ["حملات على Meta وTikTok مع إنفاق يومي وصل لمئات الآلاف من الجنيهات خلال مرحلة التوسع.", "Campaigns ran across Meta and TikTok, with daily spend reaching hundreds of thousands of Egyptian pounds during scaling."],\n    ["أهم درس:", "The key lesson:"], ["الـ Scaling الحقيقي مش مجرد زيادة Budget؛ هو Operation تستحمل، وكريتيف بيتجدد باستمرار، وقدرة على قراءة الـ Metrics الصح. في المرحلة دي، الـ CPM والـ CTR كانوا مؤشرات أساسية لاتخاذ القرار.", "Real scaling is not just increasing budget. It requires operations that can keep up, continuously refreshed creative, and the ability to read the right metrics. At this stage, CPM and CTR were essential decision-making indicators."],\n    ["الأرقام معروضة وفق البيانات التي قدمها صاحب البورتفوليو، وقد تختلف حسب الفترة وإعدادات الإسناد بين المنصات.", "Figures are based on data supplied by the portfolio owner and may vary by reporting period and platform attribution settings."]\n  ];\n  const map = new Map(pairs.map(([en, ar]) => [isArabic ? en : ar, isArabic ? ar : en]));\n  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);\n  const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);\n  for (const node of nodes) { const key = node.nodeValue.trim(); if (map.has(key)) { const leading = node.nodeValue.match(/^\\s*/)[0]; const trailing = node.nodeValue.match(/\\s*$/)[0]; node.nodeValue = leading + map.get(key) + trailing; } }\n  if (isArabic) {\n    document.title = 'مصطفى إيهاب — متخصص إعلانات الأداء';\n    const desc = document.querySelector('meta[name="description"]'); if (desc) desc.content = 'مصطفى إيهاب — متخصص إعلانات الأداء ونمو التجارة الإلكترونية والمنتجات الرقمية.';\n  }\n})();\n
+    ["Let's Work Together", "لنعمل معًا"], ["Have a growth challenge?", "عندك تحدي في النمو؟"], ["Let's talk numbers.", "خلينا نتكلم بالأرقام."],
+    ["For performance marketing, e-commerce growth, and digital product launches.", "لإعلانات الأداء ونمو التجارة الإلكترونية وإطلاق المنتجات الرقمية."],
+    ["Get in Touch ↗", "تواصل معي ↗"], ["All rights reserved.", "جميع الحقوق محفوظة."],
+    ["Brands worked with", "علامة تجارية تعاونت معها"], ["Total ad spend", "إجمالي الإنفاق الإعلاني"], ["Orders generated", "طلب تم تحقيقه"],
+    ["Strategy. Performance. Growth.", "استراتيجية. أداء. نمو."], ["Performance Media Buyer · Built around measurable growth.", "متخصص إعلانات الأداء · تركيز على النمو القابل للقياس."],
+    ["Meta Ads", "إعلانات ميتا"], ["Performance Strategy", "استراتيجية الأداء"], ["Course Marketing", "تسويق الدورات التدريبية"], ["E-commerce", "التجارة الإلكترونية"],
+    ["بدأت التجربة بـ 5,000 قطعة من كتب الأطفال كان لازم نبيعهم بسرعة. بعد نجاح الاختبارات الأولى وطلب 20,000 قطعة إضافية، دخل المنتج سوقًا أكثر تنافسية — فكان التحدي الحقيقي هو الحفاظ على الأداء أثناء الـ Scaling.", "The project started with 5,000 units of children's books that needed to sell quickly. After the first tests performed well, the company ordered another 20,000 units. By the time the new shipment arrived, competition had intensified — making the real challenge maintaining performance while scaling."],
+    ["كان عندنا حوالي 5,000 قطعة في المخزن، والمطلوب بيعهم بأسرع وقت. الموضوع ماكانش Ads بس؛ كان فيه Operation كاملة من تجهيز الـ Creatives وتصوير UGC والـ Testing، لتأكيد الأوردرات وتجهيزها والشحن ومتابعة نسب التسليم يوم بيوم.", "We had around 5,000 units in stock and needed to sell them as quickly as possible. This was more than running ads: it required a full operation covering creative production, UGC shoots, testing, order confirmation and preparation, shipping, and daily delivery-rate tracking."],
+    ["لأن المنتج مستورد من الصين وكان ممكن المنافسين يستخدموا نفس الفيديوهات، صنعنا محتوى خاص بينا. اختبرنا Hooks وAngles مختلفة لحد ما وصلنا للـ Winners، وبعدها بدأنا الـ Scaling. نجاح المرحلة الأولى شجع الشركة تطلب 20,000 قطعة إضافية.", "Because the product came from China and competitors could use the same supplier videos, we produced original content. We tested different hooks and angles until we found winning creatives, then began scaling. The results of the first phase encouraged the company to order another 20,000 units."],
+    ["خلال وصول الشحنة الجديدة، المنافسة زادت والفيديوهات الصينية انتشرت في السوق. بدل ما نعتبر المنتج انتهى، جهزنا بنية تسمح بالتوسع، واشتغلنا بأكثر من 10 Ad Accounts وبـ Structures مختلفة على Meta وTikTok.", "While the new shipment was in transit, competition increased and the supplier videos spread across the market. Instead of writing the product off, we built a setup that could support scale, using more than 10 ad accounts and different campaign structures across Meta and TikTok."],
+    ["مع زيادة المنافسة، ارتفعت تكلفة الأوردر من حوالي 60 إلى 90 جنيه. ركزنا على الـ CPM والـ CTR لتشخيص المشكلة، ورجعنا نطوّر الكريتيف بدل زيادة الميزانية بشكل أعمى. اختبرنا UGC وUgly Ads وProfessional Ads وCompare Ads وInfo Ads، برسائل مختلفة لجمهور مختلف.", "As competition increased, cost per order rose from around EGP 60 to EGP 90. We focused on CPM and CTR to diagnose the issue and refreshed the creative instead of blindly increasing budgets. We tested UGC, ugly ads, professional ads, comparison ads, and informational ads — using different messages for different audiences."],
+    ["حوالي 30,000 Order.", "Around 30,000 orders."], ["حوالي 25,000 Delivered Orders، بنسبة تسليم تخطت 80% حسب الأرقام المقدمة.", "Around 25,000 delivered orders, with a delivery rate above 80% based on the supplied figures."], ["Average CPA حوالي 75 جنيه.", "Average CPA of around EGP 75."], ["حملات على Meta وTikTok مع إنفاق يومي وصل لمئات الآلاف من الجنيهات خلال مرحلة التوسع.", "Campaigns ran across Meta and TikTok, with daily spend reaching hundreds of thousands of Egyptian pounds during scaling."],
+    ["أهم درس:", "The key lesson:"], ["الـ Scaling الحقيقي مش مجرد زيادة Budget؛ هو Operation تستحمل، وكريتيف بيتجدد باستمرار، وقدرة على قراءة الـ Metrics الصح. في المرحلة دي، الـ CPM والـ CTR كانوا مؤشرات أساسية لاتخاذ القرار.", "Real scaling is not just increasing budget. It requires operations that can keep up, continuously refreshed creative, and the ability to read the right metrics. At this stage, CPM and CTR were essential decision-making indicators."],
+    ["الأرقام معروضة وفق البيانات التي قدمها صاحب البورتفوليو، وقد تختلف حسب الفترة وإعدادات الإسناد بين المنصات.", "Figures are based on data supplied by the portfolio owner and may vary by reporting period and platform attribution settings."]
+  ];
+  const map = new Map(pairs.map(([en, ar]) => [isArabic ? en : ar, isArabic ? ar : en]));
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+  for (const node of nodes) { const key = node.nodeValue.trim(); if (map.has(key)) { const leading = node.nodeValue.match(/^\\s*/)[0]; const trailing = node.nodeValue.match(/\\s*$/)[0]; node.nodeValue = leading + map.get(key) + trailing; } }
+  if (isArabic) {
+    document.title = 'مصطفى إيهاب — متخصص إعلانات الأداء';
+    const desc = document.querySelector('meta[name="description"]'); if (desc) desc.content = 'مصطفى إيهاب — متخصص إعلانات الأداء ونمو التجارة الإلكترونية والمنتجات الرقمية.';
+  }
+})();
+
 // Certificate carousel + accessible full-screen preview.
 (() => {
   const slider = document.getElementById('certSlider');
@@ -771,5 +863,6 @@ html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direct
   layer.addEventListener('click', event => { if (event.target === layer) close(); });
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && layer.classList.contains('is-open')) close(); });
 })();
-</script>\n</body>
+</script>
+</body>
 </html>

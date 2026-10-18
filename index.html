@@ -159,6 +159,26 @@
     .footer-socials a { color:#B6AEA6; }
     .footer-socials a:hover { color:var(--flame-bright); }
     .tag { display:inline-block; color:#CFC7BE; border:1px solid var(--line); padding:6px 9px; font-size:9px; margin:5px 4px 0 0; }
+
+/* Minimal animated market flag rail */
+.market-strip{position:relative;width:100%;overflow:hidden;padding:12px 0 15px;border-bottom:1px solid rgba(243,237,227,.08);isolation:isolate}
+.market-strip:before,.market-strip:after{content:"";position:absolute;z-index:2;top:0;bottom:0;width:clamp(22px,7vw,90px);pointer-events:none}
+.market-strip:before{left:0;background:linear-gradient(90deg,var(--black),transparent)}
+.market-strip:after{right:0;background:linear-gradient(270deg,var(--black),transparent)}
+.market-flags{display:flex;width:max-content;align-items:center;gap:clamp(17px,3.2vw,42px);animation:flagRail 34s linear infinite;padding:3px clamp(24px,5vw,64px)}
+.market-strip:hover .market-flags{animation-play-state:paused}
+.market-flag-item{display:flex;align-items:center;gap:9px;flex:0 0 auto;color:#C8C1B9;font-size:10px;letter-spacing:.035em;white-space:nowrap;transition:color .2s ease,transform .2s ease}
+.market-flag-item:hover{color:var(--warm-white);transform:translateY(-2px)}
+.market-flag{display:grid;place-items:center;flex:0 0 auto;width:36px;height:36px;border-radius:50%;overflow:hidden;border:1px solid rgba(243,237,227,.16);background:linear-gradient(145deg,#222225,#111113);font-family:system-ui,sans-serif;font-size:20px;line-height:1;box-shadow:0 4px 14px rgba(0,0,0,.22);transition:border-color .2s ease,box-shadow .2s ease}
+.market-flag-item:hover .market-flag{border-color:rgba(224,90,69,.75);box-shadow:0 0 0 3px rgba(199,71,53,.09),0 4px 18px rgba(0,0,0,.25)}
+.market-flag-item.market-global .market-flag{border-color:rgba(199,71,53,.45);background:linear-gradient(145deg,rgba(199,71,53,.18),#151517)}
+.market-rail-divider{height:22px;width:1px;flex:0 0 1px;background:rgba(243,237,227,.13)}
+@keyframes flagRail{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+html[dir="rtl"] .market-flags{animation-name:flagRailRtl}
+@keyframes flagRailRtl{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@media(max-width:600px){.market-strip{padding:10px 0 12px}.market-flags{gap:20px;animation-duration:27s}.market-flag-item{gap:7px;font-size:9px}.market-flag{width:32px;height:32px;font-size:18px}}
+@media(prefers-reduced-motion:reduce){.market-flags{animation:none;justify-content:center;width:100%;flex-wrap:wrap;padding:4px 18px;gap:12px}.market-strip:before,.market-strip:after{display:none}}
+
     @media (max-width:900px) {
       .wrap { width:min(100% - 32px,var(--max)); }
       nav { gap:14px; } nav a:not(.nav-cta) { display:none; }
@@ -345,6 +365,9 @@ html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direct
 <a class="nav-cta" href="https://wa.me/qr/ECQ5HJTSQEAYA1" rel="noopener noreferrer" target="_blank">Let's Talk ↗</a>
 </nav>
 </header>
+<div class="market-strip" aria-label="Markets served">
+  <div class="market-flags" aria-hidden="false"><span class="market-flag-item" aria-label="Egypt"><span class="market-flag" aria-hidden="true">🇪🇬</span><span>Egypt</span></span><span class="market-rail-divider" aria-hidden="true"></span><span class="market-flag-item" aria-label="Saudi Arabia"><span class="market-flag" aria-hidden="true">🇸🇦</span><span>Saudi Arabia</span></span><span class="market-flag-item" aria-label="UAE"><span class="market-flag" aria-hidden="true">🇦🇪</span><span>UAE</span></span><span class="market-flag-item" aria-label="Kuwait"><span class="market-flag" aria-hidden="true">🇰🇼</span><span>Kuwait</span></span><span class="market-flag-item" aria-label="Qatar"><span class="market-flag" aria-hidden="true">🇶🇦</span><span>Qatar</span></span><span class="market-flag-item" aria-label="Bahrain"><span class="market-flag" aria-hidden="true">🇧🇭</span><span>Bahrain</span></span><span class="market-flag-item" aria-label="Oman"><span class="market-flag" aria-hidden="true">🇴🇲</span><span>Oman</span></span><span class="market-rail-divider" aria-hidden="true"></span><span class="market-flag-item market-global" aria-label="Worldwide"><span class="market-flag" aria-hidden="true">🌍</span><span>Worldwide</span></span><span class="market-flag-item" aria-label="Egypt"><span class="market-flag" aria-hidden="true">🇪🇬</span><span>Egypt</span></span><span class="market-rail-divider" aria-hidden="true"></span><span class="market-flag-item" aria-label="Saudi Arabia"><span class="market-flag" aria-hidden="true">🇸🇦</span><span>Saudi Arabia</span></span><span class="market-flag-item" aria-label="UAE"><span class="market-flag" aria-hidden="true">🇦🇪</span><span>UAE</span></span><span class="market-flag-item" aria-label="Kuwait"><span class="market-flag" aria-hidden="true">🇰🇼</span><span>Kuwait</span></span><span class="market-flag-item" aria-label="Qatar"><span class="market-flag" aria-hidden="true">🇶🇦</span><span>Qatar</span></span><span class="market-flag-item" aria-label="Bahrain"><span class="market-flag" aria-hidden="true">🇧🇭</span><span>Bahrain</span></span><span class="market-flag-item" aria-label="Oman"><span class="market-flag" aria-hidden="true">🇴🇲</span><span>Oman</span></span><span class="market-rail-divider" aria-hidden="true"></span><span class="market-flag-item market-global" aria-label="Worldwide"><span class="market-flag" aria-hidden="true">🌍</span><span>Worldwide</span></span></div>
+</div>
 <main>
 <section class="wrap hero" id="home">
 <div class="portrait-wrap">
@@ -741,6 +764,8 @@ html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direct
   root.lang = isArabic ? 'ar' : 'en';
   root.dir = isArabic ? 'rtl' : 'ltr';
   const pairs = [
+    ["Markets served", "الأسواق التي أعمل معها"], ["Core market", "السوق الرئيسي"], ["Gulf markets", "أسواق الخليج"], ["Global reach", "انتشار عالمي"], ["Beyond borders", "عبر الحدود"], ["Saudi", "السعودية"],
+    ["Egypt", "مصر"], ["Saudi Arabia", "السعودية"], ["UAE", "الإمارات"], ["Kuwait", "الكويت"], ["Qatar", "قطر"], ["Bahrain", "البحرين"], ["Oman", "عُمان"], ["Worldwide", "عالميًا"],
     ["Selected Collaborations", "التعاونات المختارة"],
     ["Creators & brands I've worked with.", "صناع المحتوى والعلامات التجارية التي تعاونت معها."],
     ["A circle of selected collaborations across creator-led courses, digital products, and e-commerce growth.", "مجموعة من التعاونات في تسويق الدورات التدريبية والمنتجات الرقمية ونمو التجارة الإلكترونية."],

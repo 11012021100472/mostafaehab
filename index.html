@@ -242,7 +242,23 @@
         opacity: 1 !important; transform: none !important; filter: none !important;
       }
     }
-  </style>
+  
+/* Featured case study gallery + expandable story */
+.case-gallery{position:relative;width:100%;overflow:hidden;background:#111;aspect-ratio:16/9;border:1px solid rgba(255,255,255,.12);border-radius:12px}
+.case-gallery img{width:100%;height:100%;object-fit:contain;display:block}
+.gallery-arrow{position:absolute;z-index:2;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(13,13,15,.78);color:#fff;font-size:27px;cursor:pointer;display:grid;place-items:center}
+.gallery-arrow.prev{left:10px}.gallery-arrow.next{right:10px}
+.gallery-count{position:absolute;right:12px;bottom:10px;padding:5px 9px;border-radius:30px;background:rgba(13,13,15,.82);color:#f3ede3;font-size:12px;letter-spacing:.08em}
+.case-visual-note{margin-top:12px}
+.case-toggle{cursor:pointer;font:inherit}
+.full-case{margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14);animation:caseReveal .45s ease both}
+.full-case h4{margin:22px 0 8px;color:#d66b5b;font-size:14px;letter-spacing:.04em}
+.full-case p,.full-case li{line-height:1.85;color:#c7c3c0}
+.full-case ul{padding-left:22px}
+.case-content .btn-secondary{margin-top:12px}
+@keyframes caseReveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){.case-gallery{aspect-ratio:4/3}.gallery-arrow{width:34px;height:34px}.full-case{margin-top:18px}}
+</style>
 <style>
 .creator-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
 .creator-modal.is-open{display:flex}.creator-modal-card{position:relative;width:min(100%,390px);padding:28px 24px 24px;background:#171719;border:1px solid rgba(243,237,227,.16);border-radius:20px;box-shadow:0 24px 80px rgba(0,0,0,.45);color:#f3ede3;text-align:center}
@@ -347,22 +363,46 @@
 </div>
 <article class="feature-case">
 <div class="case-visual">
-<span class="case-chip">Featured Project · Details to verify</span>
-<div aria-label="Decorative performance chart" class="case-graphic"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
-<div class="case-visual-note">REAL CAMPAIGN DATA WILL REPLACE THIS VISUAL</div>
+<span class="case-chip">E-commerce · Kids Books</span>
+<div class="case-gallery" aria-label="Campaign performance screenshots">
+  <button class="gallery-arrow prev" type="button" aria-label="Previous screenshot">‹</button>
+  <img id="caseSlide" src="books-case-01.jpg" alt="Meta and TikTok campaign performance dashboard, campaign names blurred" loading="lazy">
+  <button class="gallery-arrow next" type="button" aria-label="Next screenshot">›</button>
+  <div class="gallery-count"><span id="slideNumber">01</span> / 10</div>
+</div>
+<div class="case-visual-note">CAMPAIGN DASHBOARDS · ACCOUNT NAMES BLURRED</div>
 </div>
 <div class="case-content">
 <div class="kicker">E-commerce / Performance Marketing</div>
 <h3>Scaling performance with smarter acquisition.</h3>
-<p>This case study will document the starting point, campaign structure, creative testing, optimization decisions, and business impact — using verified data from one selected project.</p>
+<p>بدأت التجربة بـ 5,000 قطعة من كتب الأطفال كان لازم نبيعهم بسرعة. بعد نجاح الاختبارات الأولى وطلب 20,000 قطعة إضافية، دخل المنتج سوقًا أكثر تنافسية — فكان التحدي الحقيقي هو الحفاظ على الأداء أثناء الـ Scaling.</p>
 <div class="metrics">
-<div class="metric"><b>—</b><span>Ad Spend</span></div>
-<div class="metric"><b>—</b><span>Revenue / Sales</span></div>
-<div class="metric"><b>—</b><span>CPA / CAC</span></div>
-<div class="metric"><b>—</b><span>ROAS</span></div>
+<div class="metric"><b>30,000</b><span>Orders</span></div>
+<div class="metric"><b>25,000</b><span>Delivered Orders</span></div>
+<div class="metric"><b>~75 EGP</b><span>Average CPA</span></div>
+<div class="metric"><b>80%+</b><span>Delivery Rate</span></div>
 </div>
-<a class="btn btn-primary" href="https://wa.me/qr/ECQ5HJTSQEAYA1" rel="noopener noreferrer" target="_blank">Discuss a Similar Challenge ↗</a>
-<p class="notice">Metrics intentionally left blank until the project, timeframe, and source data are confirmed.</p>
+<button class="btn btn-primary case-toggle" id="caseToggle" type="button" aria-expanded="false" aria-controls="fullCase">Read Full Case Study ↗</button>
+<div class="full-case" id="fullCase" hidden>
+  <h4>The challenge</h4>
+  <p>كان عندنا حوالي 5,000 قطعة في المخزن، والمطلوب بيعهم بأسرع وقت. الموضوع ماكانش Ads بس؛ كان فيه Operation كاملة من تجهيز الـ Creatives وتصوير UGC والـ Testing، لتأكيد الأوردرات وتجهيزها والشحن ومتابعة نسب التسليم يوم بيوم.</p>
+  <h4>Creative testing before scaling</h4>
+  <p>لأن المنتج مستورد من الصين وكان ممكن المنافسين يستخدموا نفس الفيديوهات، صنعنا محتوى خاص بينا. اختبرنا Hooks وAngles مختلفة لحد ما وصلنا للـ Winners، وبعدها بدأنا الـ Scaling. نجاح المرحلة الأولى شجع الشركة تطلب 20,000 قطعة إضافية.</p>
+  <h4>When the market got saturated</h4>
+  <p>خلال وصول الشحنة الجديدة، المنافسة زادت والفيديوهات الصينية انتشرت في السوق. بدل ما نعتبر المنتج انتهى، جهزنا بنية تسمح بالتوسع، واشتغلنا بأكثر من 10 Ad Accounts وبـ Structures مختلفة على Meta وTikTok.</p>
+  <h4>Optimization through the right metrics</h4>
+  <p>مع زيادة المنافسة، ارتفعت تكلفة الأوردر من حوالي 60 إلى 90 جنيه. ركزنا على الـ CPM والـ CTR لتشخيص المشكلة، ورجعنا نطوّر الكريتيف بدل زيادة الميزانية بشكل أعمى. اختبرنا UGC وUgly Ads وProfessional Ads وCompare Ads وInfo Ads، برسائل مختلفة لجمهور مختلف.</p>
+  <h4>The outcome</h4>
+  <ul>
+    <li>حوالي 30,000 Order.</li>
+    <li>حوالي 25,000 Delivered Orders، بنسبة تسليم تخطت 80% حسب الأرقام المقدمة.</li>
+    <li>Average CPA حوالي 75 جنيه.</li>
+    <li>حملات على Meta وTikTok مع إنفاق يومي وصل لمئات الآلاف من الجنيهات خلال مرحلة التوسع.</li>
+  </ul>
+  <p><strong>أهم درس:</strong> الـ Scaling الحقيقي مش مجرد زيادة Budget؛ هو Operation تستحمل، وكريتيف بيتجدد باستمرار، وقدرة على قراءة الـ Metrics الصح. في المرحلة دي، الـ CPM والـ CTR كانوا مؤشرات أساسية لاتخاذ القرار.</p>
+  <p class="notice">الأرقام معروضة وفق البيانات التي قدمها صاحب البورتفوليو، وقد تختلف حسب الفترة وإعدادات الإسناد بين المنصات.</p>
+</div>
+<a class="btn btn-secondary" href="https://wa.me/qr/ECQ5HJTSQEAYA1" rel="noopener noreferrer" target="_blank">Discuss a Similar Challenge ↗</a>
 </div>
 </article>
 </div>
@@ -521,5 +561,38 @@
  modal.addEventListener('click',e=>{if(e.target===modal)close();});
  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
 })();
-</script></body>
+</script>
+<script>
+(() => {
+  const slides = Array.from({length:10}, (_,i) => `books-case-${String(i+1).padStart(2,'0')}.jpg`);
+  const image = document.getElementById('caseSlide');
+  const number = document.getElementById('slideNumber');
+  const gallery = document.querySelector('.case-gallery');
+  if (image && number && gallery) {
+    let current = 0;
+    const show = (index) => {
+      current = (index + slides.length) % slides.length;
+      image.src = slides[current];
+      number.textContent = String(current + 1).padStart(2,'0');
+    };
+    gallery.querySelector('.prev')?.addEventListener('click', () => show(current - 1));
+    gallery.querySelector('.next')?.addEventListener('click', () => show(current + 1));
+    let startX = 0;
+    gallery.addEventListener('touchstart', e => { startX = e.changedTouches[0].clientX; }, {passive:true});
+    gallery.addEventListener('touchend', e => {
+      const delta = e.changedTouches[0].clientX - startX;
+      if (Math.abs(delta) > 40) show(current + (delta < 0 ? 1 : -1));
+    }, {passive:true});
+  }
+  const toggle = document.getElementById('caseToggle');
+  const full = document.getElementById('fullCase');
+  if (toggle && full) toggle.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    full.hidden = expanded;
+    toggle.textContent = expanded ? 'Read Full Case Study ↗' : 'Show Less ↑';
+  });
+})();
+</script>
+</body>
 </html>

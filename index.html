@@ -244,11 +244,12 @@
     }
   
 /* Featured case study gallery + expandable story */
-/* Give the campaign screenshots the full card width so dashboard metrics are readable. */
-.feature-case{grid-template-columns:minmax(0,1fr);}
-.case-visual{min-height:0;padding:clamp(18px,3vw,34px);}
-.case-gallery{position:relative;width:100%;overflow:hidden;background:#111;aspect-ratio:16/9;max-height:760px;border:1px solid rgba(255,255,255,.12);border-radius:12px}
-.case-gallery img{width:100%;height:100%;object-fit:contain;display:block}
+.case-gallery{position:relative;width:100%;overflow:hidden;background:#111;aspect-ratio:16/9;border:1px solid rgba(255,255,255,.12);border-radius:12px}
+.case-gallery img{width:100%;height:100%;object-fit:contain;display:block;cursor:zoom-in}
+.case-image-zoom{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:12px;background:rgba(0,0,0,.94);cursor:zoom-out}
+.case-image-zoom.is-open{display:flex}
+.case-image-zoom img{display:block;max-width:100%;max-height:94vh;width:auto;height:auto;object-fit:contain}
+.case-image-zoom button{position:absolute;top:12px;right:14px;border:1px solid rgba(255,255,255,.35);border-radius:50%;width:42px;height:42px;background:#171719;color:#fff;font-size:28px;cursor:pointer}
 .gallery-arrow{position:absolute;z-index:2;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(13,13,15,.78);color:#fff;font-size:27px;cursor:pointer;display:grid;place-items:center}
 .gallery-arrow.prev{left:10px}.gallery-arrow.next{right:10px}
 .gallery-count{position:absolute;right:12px;bottom:10px;padding:5px 9px;border-radius:30px;background:rgba(13,13,15,.82);color:#f3ede3;font-size:12px;letter-spacing:.08em}
@@ -260,7 +261,7 @@
 .full-case ul{padding-left:22px}
 .case-content .btn-secondary{margin-top:12px}
 @keyframes caseReveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:700px){.case-gallery{aspect-ratio:4/3;max-height:none}.case-visual{padding:16px}.gallery-arrow{width:34px;height:34px}.full-case{margin-top:18px}}
+@media(max-width:700px){.case-gallery{aspect-ratio:4/3;min-height:250px}.case-gallery img{object-fit:contain}.gallery-arrow{width:40px;height:40px}.gallery-count{font-size:13px}.full-case{margin-top:18px}}
 </style>
 <style>
 .creator-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
@@ -373,7 +374,8 @@
   <button class="gallery-arrow next" type="button" aria-label="Next screenshot">›</button>
   <div class="gallery-count"><span id="slideNumber">01</span> / 10</div>
 </div>
-<div class="case-visual-note">CAMPAIGN DASHBOARDS · ACCOUNT NAMES BLURRED</div>
+<div class="case-image-zoom" id="caseImageZoom" role="dialog" aria-modal="true" aria-label="Expanded campaign screenshot"><button type="button" aria-label="Close expanded screenshot">×</button><img src="books-case-01.jpg" alt="Expanded campaign dashboard screenshot"></div>
+<div class="case-visual-note">Tap the screenshot to zoom in · CAMPAIGN DASHBOARDS · ACCOUNT NAMES BLURRED</div>
 </div>
 <div class="case-content">
 <div class="kicker">E-commerce / Performance Marketing</div>
@@ -571,6 +573,9 @@
   const image = document.getElementById('caseSlide');
   const number = document.getElementById('slideNumber');
   const gallery = document.querySelector('.case-gallery');
+  const zoomLayer = document.getElementById('caseImageZoom');
+  const zoomImage = zoomLayer ? zoomLayer.querySelector('img') : null;
+  const closeZoom = () => zoomLayer && zoomLayer.classList.remove('is-open');
   if (image && number && gallery) {
     let current = 0;
     const show = (index) => {
@@ -586,6 +591,11 @@
       const delta = e.changedTouches[0].clientX - startX;
       if (Math.abs(delta) > 40) show(current + (delta < 0 ? 1 : -1));
     }, {passive:true});
+    if (zoomLayer && zoomImage) {
+      image.addEventListener('click', () => { zoomImage.src = image.src; zoomImage.alt = image.alt; zoomLayer.classList.add('is-open'); });
+      zoomLayer.addEventListener('click', event => { if (event.target === zoomLayer || event.target.closest('button')) closeZoom(); });
+      document.addEventListener('keydown', event => { if (event.key === 'Escape') closeZoom(); });
+    }
   }
   const toggle = document.getElementById('caseToggle');
   const full = document.getElementById('fullCase');

@@ -283,7 +283,7 @@
 #case-home-living-view{display:none}
 #case-home-living-view.active{display:block}
 body.case-open>header,body.case-open>main>*:not(#case-home-living-view):not(#case-toys-view),body.case-open>footer{display:none!important}
-body.case-open>main>#case-home-living-view,body.case-open>main>#case-toys-view{display:block!important}
+body.case-open>main>#case-home-living-view:not(.active),body.case-open>main>#case-toys-view:not(.active){display:none!important}body.case-open>main>#case-home-living-view.active,body.case-open>main>#case-toys-view.active{display:block!important}
 @media(max-width:760px){.country-strip{margin-bottom:12px}.home-living-case-link .result-image{height:190px}}
 
 .home-living-case-link{display:block;grid-column:1/-1;max-width:none;margin:0 auto 18px;border:1px solid rgba(243,237,227,.16);background:linear-gradient(140deg,#1b1b1e,#111113);border-radius:7px;overflow:hidden;transition:transform .2s,border-color .2s;padding:0;min-height:0}

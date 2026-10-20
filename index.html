@@ -96,6 +96,13 @@
     .collab small { display:block; color:#8D8780; font-size:9px; line-height:1.35; margin-top:-6px; }
     .collab:focus-visible { outline:2px solid var(--flame-bright); outline-offset:5px; border-radius:8px; }
     .collabs-note { color:#716A65; text-align:center; font-size:10px; margin:0; }
+    /* Auto-moving creator rail: pauses on direct user interaction */
+    .collabs-window { cursor:grab; scrollbar-width:none; }
+    .collabs-window::-webkit-scrollbar { display:none; }
+    .collabs-window.is-user-dragging { cursor:grabbing; }
+    .collabs-window.is-auto-paused .collab { transition:transform .25s ease,filter .25s ease; }
+    .collab.is-duplicate { pointer-events:none; }
+    @media (prefers-reduced-motion:reduce) { .collabs-window { scroll-behavior:auto; } }
     .feature-case { display:grid; grid-template-columns:1.05fr .95fr; background:var(--panel); border:1px solid var(--line); overflow:hidden; }
     .case-visual { min-height:350px; background:radial-gradient(circle at 75% 25%,rgba(199,71,53,.32),transparent 34%),linear-gradient(135deg,#252326,#111113); padding:30px; display:flex; flex-direction:column; justify-content:space-between; }
     .case-chip { display:inline-flex; align-self:flex-start; border:1px solid rgba(243,237,227,.22); padding:7px 10px; color:#D4CCC3; font-size:9px; text-transform:uppercase; letter-spacing:.13em; }
@@ -825,6 +832,76 @@ html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direct
     document.title = 'مصطفى إيهاب — متخصص إعلانات الأداء';
     const desc = document.querySelector('meta[name="description"]'); if (desc) desc.content = 'مصطفى إيهاب — متخصص إعلانات الأداء ونمو التجارة الإلكترونية والمنتجات الرقمية.';
   }
+})();
+
+// Creator photos rail: seamless automatic movement, pauses for manual browsing, then resumes.
+(() => {
+  const viewport = document.querySelector('.collabs-window');
+  const track = viewport?.querySelector('.collabs');
+  if (!viewport || !track || viewport.dataset.autoRailReady === 'true') return;
+  viewport.dataset.autoRailReady = 'true';
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+
+  const originals = Array.from(track.children);
+  if (!originals.length) return;
+  const clone = document.createDocumentFragment();
+  originals.forEach(item => {
+    const copy = item.cloneNode(true);
+    copy.classList.add('is-duplicate');
+    copy.setAttribute('aria-hidden', 'true');
+    copy.setAttribute('tabindex', '-1');
+    copy.querySelectorAll('a,button,[tabindex]').forEach(el => el.setAttribute('tabindex', '-1'));
+    clone.appendChild(copy);
+  });
+  track.appendChild(clone);
+
+  let paused = false;
+  let resumeTimer = null;
+  let raf = 0;
+  let lastTime = 0;
+  const speed = 28; // pixels per second; slow enough to feel premium
+  const pause = (manual = false) => {
+    paused = true;
+    viewport.classList.add('is-auto-paused');
+    if (manual) viewport.classList.add('is-user-dragging');
+    if (resumeTimer) clearTimeout(resumeTimer);
+    if (manual) resumeTimer = setTimeout(() => {
+      paused = false;
+      viewport.classList.remove('is-auto-paused', 'is-user-dragging');
+    }, 2600);
+  };
+  const resume = () => {
+    if (resumeTimer) clearTimeout(resumeTimer);
+    paused = false;
+    viewport.classList.remove('is-auto-paused', 'is-user-dragging');
+  };
+  const tick = time => {
+    if (!lastTime) lastTime = time;
+    const dt = Math.min((time - lastTime) / 1000, 0.05);
+    lastTime = time;
+    if (!paused && !document.hidden) {
+      const loopWidth = track.scrollWidth / 2;
+      if (loopWidth > 0) {
+        viewport.scrollLeft += speed * dt;
+        if (viewport.scrollLeft >= loopWidth) viewport.scrollLeft -= loopWidth;
+      }
+    }
+    raf = requestAnimationFrame(tick);
+  };
+  viewport.addEventListener('pointerdown', () => pause(true), {passive:true});
+  viewport.addEventListener('touchstart', () => pause(true), {passive:true});
+  viewport.addEventListener('wheel', () => pause(true), {passive:true});
+  viewport.addEventListener('keydown', event => {
+    if (['ArrowLeft','ArrowRight','Home','End','PageUp','PageDown',' '].includes(event.key)) pause(true);
+  });
+  viewport.addEventListener('mouseenter', () => pause(false));
+  viewport.addEventListener('mouseleave', resume);
+  viewport.addEventListener('focusin', () => pause(false));
+  viewport.addEventListener('focusout', event => { if (!viewport.contains(event.relatedTarget)) resume(); });
+  document.addEventListener('visibilitychange', () => { lastTime = 0; });
+  window.addEventListener('pagehide', () => cancelAnimationFrame(raf), {once:true});
+  raf = requestAnimationFrame(tick);
 })();
 
 // Certificate carousel + accessible full-screen preview.

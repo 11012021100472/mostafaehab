@@ -363,6 +363,37 @@ body.case-open>main>#case-home-living-view{display:block!important}
  #case-home-living-view .stat-note{display:none}
  #case-home-living-view .proof-stats b{font-size:16px}
 }
+
+/* Restored certificate slider and preview styles */
+.cert-slider-shell { position:relative; }
+    .cert-grid { display:flex; gap:14px; overflow-x:auto; overflow-y:hidden; padding:8px 3px 22px; scroll-snap-type:x mandatory; scroll-behavior:smooth; scrollbar-width:none; overscroll-behavior-x:contain; }
+    .cert-grid::-webkit-scrollbar { display:none; }
+    .cert-card { appearance:none; flex:0 0 clamp(220px,25%,285px); min-width:0; padding:0; text-align:start; color:inherit; font:inherit; background:linear-gradient(155deg,#1d1d20,#111113); border:1px solid rgba(243,237,227,.13); border-radius:9px; overflow:hidden; cursor:pointer; display:flex; flex-direction:column; scroll-snap-align:start; transition:transform .35s cubic-bezier(.2,.75,.25,1),border-color .28s ease,box-shadow .28s ease; }
+    .cert-card:hover,.cert-card:focus-visible { transform:translateY(-4px); border-color:rgba(224,90,69,.72); box-shadow:0 18px 40px rgba(0,0,0,.28),0 0 0 1px rgba(199,71,53,.12); outline:none; }
+    .cert-image-wrap { display:block; position:relative; aspect-ratio:1.52/1; overflow:hidden; background:#e8e8e8; border-bottom:1px solid rgba(243,237,227,.12); }
+    .cert-image-wrap img { display:block; width:100%; height:100%; object-fit:contain; object-position:center; transition:transform .5s cubic-bezier(.2,.75,.25,1),filter .3s ease; }
+    .cert-card:hover .cert-image-wrap img { transform:scale(1.035); filter:brightness(.78); }
+    .cert-zoom { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; color:#fff; opacity:0; background:rgba(13,13,15,.22); font-size:18px; transition:opacity .25s ease; }
+    .cert-zoom span { font-size:9px; letter-spacing:.12em; text-transform:uppercase; }
+    .cert-card:hover .cert-zoom,.cert-card:focus-visible .cert-zoom { opacity:1; }
+    .cert-meta { display:flex; flex-direction:column; gap:6px; padding:14px 14px 16px; min-height:112px; }
+    .cert-org { color:var(--flame-bright); font-size:8px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; }
+    .cert-meta strong { font:700 12px/1.45 Manrope,sans-serif; letter-spacing:-.015em; }
+    .cert-meta small { color:#8D8780; font-size:9px; margin-top:auto; padding-top:4px; }
+    .cert-slider-controls { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:4px; }
+    .cert-slider-hint { color:#8D8780; font-size:10px; letter-spacing:.04em; }
+    .cert-slider-actions { display:flex; align-items:center; gap:8px; }
+    .cert-slider-count { color:#B8AFA6; font-size:10px; min-width:48px; text-align:center; font-variant-numeric:tabular-nums; }
+    .cert-slider-btn { display:grid; place-items:center; width:34px; height:34px; border:1px solid rgba(243,237,227,.18); border-radius:50%; background:#171719; color:var(--warm-white); font-size:17px; cursor:pointer; transition:background .2s ease,border-color .2s ease,transform .2s ease; }
+    .cert-slider-btn:hover { background:var(--flame); border-color:var(--flame); transform:scale(1.05); }
+    .cert-slider-btn:disabled { opacity:.32; cursor:default; transform:none; }
+    .cert-lightbox { position:fixed; inset:0; z-index:200; display:none; align-items:center; justify-content:center; padding:24px; background:rgba(5,5,6,.94); backdrop-filter:blur(12px); }
+    .cert-lightbox.is-open { display:flex; }
+    .cert-lightbox img { display:block; max-width:min(1100px,94vw); max-height:84vh; width:auto; height:auto; object-fit:contain; box-shadow:0 24px 90px rgba(0,0,0,.5); }
+    .cert-lightbox-close { position:absolute; top:18px; inset-inline-end:22px; width:44px; height:44px; border:1px solid rgba(243,237,227,.3); border-radius:50%; color:var(--warm-white); background:#171719; font-size:28px; cursor:pointer; }
+    .cert-lightbox-caption { position:absolute; bottom:15px; inset-inline:15px; color:#D6CEC5; text-align:center; font-size:11px; }
+    
+.cert-missing{display:grid;place-items:center;height:100%;padding:20px;text-align:center;color:#514b45;font-size:12px;line-height:1.5}
 </style>
 <style>
 .creator-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
@@ -542,15 +573,71 @@ body.case-open>main>#case-home-living-view{display:block!important}
 <div class="wrap">
 <div class="section-head">
 <div><div class="kicker">Certifications</div><h2>Learning that compounds.</h2></div>
-<p class="section-desc">Certificates will be displayed with their original images, issuing organizations, and years.</p>
+<p class="section-desc">Explore the certifications behind my performance marketing toolkit. Open any certificate to inspect the original document.</p>
 </div>
-<div class="cert-grid">
-<article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
-<article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
-<article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
+<div class="cert-slider-shell">
+<div class="cert-grid" id="certSlider" aria-label="Certificate carousel">
+<button class="cert-card" type="button" data-cert-image="cert-hubspot-digital-marketing.webp" data-cert-title="Digital Marketing Certified" aria-label="View certificate: Digital Marketing Certified">
+  <span class="cert-image-wrap"><img src="cert-hubspot-digital-marketing.webp" alt="Digital Marketing Certified certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
+  <span class="cert-meta"><span class="cert-org">HubSpot Academy</span><strong>Digital Marketing Certified</strong><small>2025–2026</small></span>
+</button>
+<button class="cert-card" type="button" data-cert-image="cert-meta-advertising.webp" data-cert-title="Advertising with Meta" aria-label="View certificate: Advertising with Meta">
+  <span class="cert-image-wrap"><img src="cert-meta-advertising.webp" alt="Advertising with Meta certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
+  <span class="cert-meta"><span class="cert-org">Meta · Coursera</span><strong>Advertising with Meta</strong><small>2024</small></span>
+</button>
+<button class="cert-card" type="button" data-cert-image="cert-google-ads-beginners.webp" data-cert-title="Google Ads for Beginners" aria-label="View certificate: Google Ads for Beginners">
+  <span class="cert-image-wrap"><img src="cert-google-ads-beginners.webp" alt="Google Ads for Beginners certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
+  <span class="cert-meta"><span class="cert-org">Coursera Project Network</span><strong>Google Ads for Beginners</strong><small>2024</small></span>
+</button>
+<button class="cert-card" type="button" data-cert-image="cert-google-search-campaign.webp" data-cert-title="Create a Google Ads Search Campaign" aria-label="View certificate: Create a Google Ads Search Campaign">
+  <span class="cert-image-wrap"><img src="cert-google-search-campaign.webp" alt="Create a Google Ads Search Campaign certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
+  <span class="cert-meta"><span class="cert-org">Coursera Project Network</span><strong>Create a Google Ads Search Campaign</strong><small>2024</small></span>
+</button>
+<button class="cert-card" type="button" data-cert-image="cert-facebook-ads-campaign.webp" data-cert-title="How to Set Up a Facebook Ads Campaign" aria-label="View certificate: How to Set Up a Facebook Ads Campaign">
+  <span class="cert-image-wrap"><img src="cert-facebook-ads-campaign.webp" alt="How to Set Up a Facebook Ads Campaign certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
+  <span class="cert-meta"><span class="cert-org">Harvard University · Coursera</span><strong>How to Set Up a Facebook Ads Campaign</strong><small>2024</small></span>
+</button>
+<button class="cert-card" type="button" data-cert-image="cert-digital-ad-expert-aleph.webp" data-cert-title="Digital Ad Expert" aria-label="View certificate: Digital Ad Expert">
+  <span class="cert-image-wrap"><img src="cert-digital-ad-expert-aleph.webp" alt="Digital Ad Expert certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
+  <span class="cert-meta"><span class="cert-org">Aleph</span><strong>Digital Ad Expert</strong><small>2024</small></span>
+</button>
+<button class="cert-card" type="button" data-cert-image="cert-facebook-instagram-ads-almentor.webp" data-cert-title="Facebook & Instagram Ads" aria-label="View certificate: Facebook & Instagram Ads">
+  <span class="cert-image-wrap"><img src="cert-facebook-instagram-ads-almentor.webp" alt="Facebook & Instagram Ads certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
+  <span class="cert-meta"><span class="cert-org">Almentor</span><strong>Facebook & Instagram Ads</strong><small>2024</small></span>
+</button>
+<button class="cert-card" type="button" data-cert-image="cert-google-ads-almentor.webp" data-cert-title="Google Ads Course" aria-label="View certificate: Google Ads Course">
+  <span class="cert-image-wrap"><img src="cert-google-ads-almentor.webp" alt="Google Ads Course certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
+  <span class="cert-meta"><span class="cert-org">Almentor</span><strong>Google Ads Course</strong><small>2024</small></span>
+</button>
+<button class="cert-card" type="button" data-cert-image="cert-linkedin-advertising.webp" data-cert-title="LinkedIn Advertising" aria-label="View certificate: LinkedIn Advertising">
+  <span class="cert-image-wrap"><img src="cert-linkedin-advertising.webp" alt="LinkedIn Advertising certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
+  <span class="cert-meta"><span class="cert-org">Almentor</span><strong>LinkedIn Advertising</strong><small>2024</small></span>
+</button>
+<button class="cert-card" type="button" data-cert-image="cert-snapchat-ads.webp" data-cert-title="Snapchat Ads Course" aria-label="View certificate: Snapchat Ads Course">
+  <span class="cert-image-wrap"><img src="cert-snapchat-ads.webp" alt="Snapchat Ads Course certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
+  <span class="cert-meta"><span class="cert-org">Almentor</span><strong>Snapchat Ads Course</strong><small>2024</small></span>
+</button>
+<button class="cert-card" type="button" data-cert-image="cert-digital-marketing-strategies.webp" data-cert-title="Digital Marketing Strategies & Techniques" aria-label="View certificate: Digital Marketing Strategies & Techniques">
+  <span class="cert-image-wrap"><img src="cert-digital-marketing-strategies.webp" alt="Digital Marketing Strategies & Techniques certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
+  <span class="cert-meta"><span class="cert-org">Almentor</span><strong>Digital Marketing Strategies & Techniques</strong><small>2024</small></span>
+</button>
+</div>
+<div class="cert-slider-controls">
+  <span class="cert-slider-hint">Swipe to explore · Tap a certificate to zoom</span>
+  <div class="cert-slider-actions">
+    <button class="cert-slider-btn" type="button" id="certPrev" aria-label="Previous certificates">‹</button>
+    <span class="cert-slider-count" id="certCount">01 / 11</span>
+    <button class="cert-slider-btn" type="button" id="certNext" aria-label="Next certificates">›</button>
+  </div>
+</div>
 </div>
 </div>
 </section>
+<div class="cert-lightbox" id="certLightbox" role="dialog" aria-modal="true" aria-label="Certificate preview">
+  <button class="cert-lightbox-close" type="button" aria-label="Close certificate preview">×</button>
+  <img id="certLightboxImage" src="" alt="Certificate preview">
+  <div class="cert-lightbox-caption" id="certLightboxCaption"></div>
+</div>
 <section class="contact" id="contact">
 <div class="wrap contact-inner">
 <div><div class="kicker">Let's Work Together</div><h2>Have a growth challenge?<br/>Let's talk numbers.</h2><p>For performance marketing, e-commerce growth, and digital product launches.</p></div>
@@ -731,6 +818,70 @@ function closeCaseLightbox(){caseLightbox.classList.remove('open');caseLightboxI
 caseLightbox.querySelector('.close').addEventListener('click',closeCaseLightbox);
 caseLightbox.addEventListener('click',e=>{if(e.target===caseLightbox)closeCaseLightbox()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCaseLightbox()});
+</script>
+<script>
+// Certificate carousel + accessible full-screen preview.
+(() => {
+  const slider = document.getElementById('certSlider');
+  const cards = Array.from(document.querySelectorAll('.cert-card'));
+  const prev = document.getElementById('certPrev');
+  const next = document.getElementById('certNext');
+  const count = document.getElementById('certCount');
+  if (slider && cards.length && prev && next && count) {
+    const updateSlider = () => {
+      const maxScroll = Math.max(1, slider.scrollWidth - slider.clientWidth);
+      const ratio = slider.scrollLeft / maxScroll;
+      const active = Math.min(cards.length, Math.max(1, Math.round(ratio * (cards.length - 1)) + 1));
+      count.textContent = `${String(active).padStart(2,'0')} / ${String(cards.length).padStart(2,'0')}`;
+      prev.disabled = slider.scrollLeft <= 3;
+      next.disabled = slider.scrollLeft >= maxScroll - 3;
+    };
+    const step = () => {
+      const card = cards[0];
+      return card ? card.getBoundingClientRect().width + 14 : 250;
+    };
+    prev.addEventListener('click', () => slider.scrollBy({left: -step(), behavior:'smooth'}));
+    next.addEventListener('click', () => slider.scrollBy({left: step(), behavior:'smooth'}));
+    slider.addEventListener('scroll', updateSlider, {passive:true});
+    window.addEventListener('resize', updateSlider);
+    updateSlider();
+  }
+  // Keep a visible fallback if an image was not copied to the GitHub repository.
+  document.querySelectorAll('.cert-card img').forEach(img => {
+    img.addEventListener('error', () => {
+      img.alt = 'Certificate image missing — upload ' + img.getAttribute('src') + ' beside index.html';
+      img.style.display = 'none';
+      const wrap = img.closest('.cert-image-wrap');
+      if (wrap && !wrap.querySelector('.cert-missing')) {
+        const fallback = document.createElement('span');
+        fallback.className = 'cert-missing';
+        fallback.textContent = 'Certificate image missing';
+        fallback.style.cssText = 'display:grid;place-items:center;height:100%;padding:20px;text-align:center;color:#514b45;font-size:12px;line-height:1.5';
+        wrap.prepend(fallback);
+      }
+    });
+  });
+  const layer = document.getElementById('certLightbox');
+  const preview = document.getElementById('certLightboxImage');
+  const caption = document.getElementById('certLightboxCaption');
+  if (!layer || !preview || !caption) return;
+  const closeButton = layer.querySelector('.cert-lightbox-close');
+  let lastFocused = null;
+  const close = () => { layer.classList.remove('is-open'); document.body.style.overflow = ''; preview.src = ''; if (lastFocused) lastFocused.focus(); };
+  cards.forEach(card => card.addEventListener('click', () => {
+    lastFocused = card;
+    preview.src = card.dataset.certImage;
+    preview.alt = `${card.dataset.certTitle} certificate`;
+    caption.textContent = card.querySelector('.cert-meta strong')?.textContent || card.dataset.certTitle;
+    layer.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    closeButton.focus();
+  }));
+  closeButton.addEventListener('click', close);
+  layer.addEventListener('click', event => { if (event.target === layer) close(); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && layer.classList.contains('is-open')) close(); });
+})();
+
 </script>
 </body>
 </html>

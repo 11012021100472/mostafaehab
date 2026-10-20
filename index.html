@@ -923,6 +923,7 @@ body.case-open>main>#case-home-living-view,body.case-open>main>#case-toys-view{d
 
 <script>
 function openHomeLivingCase(event){
+  if(event && event.target && event.target.closest('.toys-case-link')) return;
   event.preventDefault();
   document.body.classList.add('case-open');
   document.getElementById('case-home-living-view').classList.add('active');
@@ -939,8 +940,13 @@ function closeHomeLivingCase(event){
 document.querySelectorAll('.home-living-case-link:not(.toys-case-link)').forEach(el=>el.addEventListener('click',openHomeLivingCase));
 if(location.hash==='#case-home-living'){document.body.classList.add('case-open');document.getElementById('case-home-living-view').classList.add('active')}
 if(location.hash==='#case-toys'){document.body.classList.add('case-open');document.getElementById('case-home-living-view').classList.remove('active');document.getElementById('case-toys-view').classList.add('active')}
-window.addEventListener('popstate',()=>{if(location.hash==='#case-home-living'){document.body.classList.add('case-open');document.getElementById('case-home-living-view').classList.add('active')}
-if(location.hash==='#case-toys'){document.body.classList.add('case-open');document.getElementById('case-home-living-view').classList.remove('active');document.getElementById('case-toys-view').classList.add('active')}else{document.body.classList.remove('case-open');document.getElementById('case-home-living-view').classList.remove('active')}});
+window.addEventListener('popstate',()=>{
+ const toy=location.hash==='#case-toys';
+ const home=location.hash==='#case-home-living';
+ document.body.classList.toggle('case-open',toy||home);
+ document.getElementById('case-toys-view').classList.toggle('active',toy);
+ document.getElementById('case-home-living-view').classList.toggle('active',home);
+});
 </script>
 
 <script>
@@ -1022,21 +1028,17 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCaseLightbox()}
 
 <script>
 function openToysCase(event){
- if(event) event.preventDefault();
+ if(event){event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();}
  document.body.classList.add('case-open');
  document.getElementById('case-home-living-view').classList.remove('active');
  document.getElementById('case-toys-view').classList.add('active');
  history.pushState({caseView:'toys'},'', '#case-toys');
  window.scrollTo(0,0);
 }
-function closeToysCase(event){
- if(event) event.preventDefault();
- document.body.classList.remove('case-open');
- document.getElementById('case-toys-view').classList.remove('active');
- history.pushState({},'', '#results');
- window.scrollTo(0,0);
-}
-document.querySelectorAll('.toys-case-link').forEach(el=>el.addEventListener('click',openToysCase));
+document.querySelectorAll('.toys-case-link').forEach(el=>{
+ el.removeEventListener('click',openHomeLivingCase);
+ el.addEventListener('click',openToysCase,true);
+});
 if(location.hash==='#case-toys'){document.body.classList.add('case-open');document.getElementById('case-toys-view').classList.add('active')}
 const toysLb=document.createElement('div');
 toysLb.className='lightbox';

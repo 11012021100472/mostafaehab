@@ -96,13 +96,6 @@
     .collab small { display:block; color:#8D8780; font-size:9px; line-height:1.35; margin-top:-6px; }
     .collab:focus-visible { outline:2px solid var(--flame-bright); outline-offset:5px; border-radius:8px; }
     .collabs-note { color:#716A65; text-align:center; font-size:10px; margin:0; }
-    /* Auto-moving creator rail: pauses on direct user interaction */
-    .collabs-window { cursor:grab; scrollbar-width:none; }
-    .collabs-window::-webkit-scrollbar { display:none; }
-    .collabs-window.is-user-dragging { cursor:grabbing; }
-    .collabs-window.is-auto-paused .collab { transition:transform .25s ease,filter .25s ease; }
-    .collab.is-duplicate { pointer-events:none; }
-    @media (prefers-reduced-motion:reduce) { .collabs-window { scroll-behavior:auto; } }
     .feature-case { display:grid; grid-template-columns:1.05fr .95fr; background:var(--panel); border:1px solid var(--line); overflow:hidden; }
     .case-visual { min-height:350px; background:radial-gradient(circle at 75% 25%,rgba(199,71,53,.32),transparent 34%),linear-gradient(135deg,#252326,#111113); padding:30px; display:flex; flex-direction:column; justify-content:space-between; }
     .case-chip { display:inline-flex; align-self:flex-start; border:1px solid rgba(243,237,227,.22); padding:7px 10px; color:#D4CCC3; font-size:9px; text-transform:uppercase; letter-spacing:.13em; }
@@ -129,33 +122,11 @@
     .review blockquote { margin:10px 0 22px; color:#D3CCC4; font-size:13px; line-height:1.8; }
     .reviewer { border-top:1px solid var(--line); padding-top:15px; color:#8D8780; font-size:10px; }
     .reviewer strong { display:block; color:var(--warm-white); font-size:12px; margin-bottom:3px; }
-    .cert-slider-shell { position:relative; }
-    .cert-grid { display:flex; gap:14px; overflow-x:auto; overflow-y:hidden; padding:8px 3px 22px; scroll-snap-type:x mandatory; scroll-behavior:smooth; scrollbar-width:none; overscroll-behavior-x:contain; }
-    .cert-grid::-webkit-scrollbar { display:none; }
-    .cert-card { appearance:none; flex:0 0 clamp(220px,25%,285px); min-width:0; padding:0; text-align:start; color:inherit; font:inherit; background:linear-gradient(155deg,#1d1d20,#111113); border:1px solid rgba(243,237,227,.13); border-radius:9px; overflow:hidden; cursor:pointer; display:flex; flex-direction:column; scroll-snap-align:start; transition:transform .35s cubic-bezier(.2,.75,.25,1),border-color .28s ease,box-shadow .28s ease; }
-    .cert-card:hover,.cert-card:focus-visible { transform:translateY(-4px); border-color:rgba(224,90,69,.72); box-shadow:0 18px 40px rgba(0,0,0,.28),0 0 0 1px rgba(199,71,53,.12); outline:none; }
-    .cert-image-wrap { display:block; position:relative; aspect-ratio:1.52/1; overflow:hidden; background:#e8e8e8; border-bottom:1px solid rgba(243,237,227,.12); }
-    .cert-image-wrap img { display:block; width:100%; height:100%; object-fit:contain; object-position:center; transition:transform .5s cubic-bezier(.2,.75,.25,1),filter .3s ease; }
-    .cert-card:hover .cert-image-wrap img { transform:scale(1.035); filter:brightness(.78); }
-    .cert-zoom { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; color:#fff; opacity:0; background:rgba(13,13,15,.22); font-size:18px; transition:opacity .25s ease; }
-    .cert-zoom span { font-size:9px; letter-spacing:.12em; text-transform:uppercase; }
-    .cert-card:hover .cert-zoom,.cert-card:focus-visible .cert-zoom { opacity:1; }
-    .cert-meta { display:flex; flex-direction:column; gap:6px; padding:14px 14px 16px; min-height:112px; }
-    .cert-org { color:var(--flame-bright); font-size:8px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; }
-    .cert-meta strong { font:700 12px/1.45 Manrope,sans-serif; letter-spacing:-.015em; }
-    .cert-meta small { color:#8D8780; font-size:9px; margin-top:auto; padding-top:4px; }
-    .cert-slider-controls { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:4px; }
-    .cert-slider-hint { color:#8D8780; font-size:10px; letter-spacing:.04em; }
-    .cert-slider-actions { display:flex; align-items:center; gap:8px; }
-    .cert-slider-count { color:#B8AFA6; font-size:10px; min-width:48px; text-align:center; font-variant-numeric:tabular-nums; }
-    .cert-slider-btn { display:grid; place-items:center; width:34px; height:34px; border:1px solid rgba(243,237,227,.18); border-radius:50%; background:#171719; color:var(--warm-white); font-size:17px; cursor:pointer; transition:background .2s ease,border-color .2s ease,transform .2s ease; }
-    .cert-slider-btn:hover { background:var(--flame); border-color:var(--flame); transform:scale(1.05); }
-    .cert-slider-btn:disabled { opacity:.32; cursor:default; transform:none; }
-    .cert-lightbox { position:fixed; inset:0; z-index:200; display:none; align-items:center; justify-content:center; padding:24px; background:rgba(5,5,6,.94); backdrop-filter:blur(12px); }
-    .cert-lightbox.is-open { display:flex; }
-    .cert-lightbox img { display:block; max-width:min(1100px,94vw); max-height:84vh; width:auto; height:auto; object-fit:contain; box-shadow:0 24px 90px rgba(0,0,0,.5); }
-    .cert-lightbox-close { position:absolute; top:18px; inset-inline-end:22px; width:44px; height:44px; border:1px solid rgba(243,237,227,.3); border-radius:50%; color:var(--warm-white); background:#171719; font-size:28px; cursor:pointer; }
-    .cert-lightbox-caption { position:absolute; bottom:15px; inset-inline:15px; color:#D6CEC5; text-align:center; font-size:11px; }
+    .cert-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .cert { min-height:150px; background:var(--panel); border:1px dashed rgba(243,237,227,.2); padding:22px; display:flex; flex-direction:column; justify-content:space-between; }
+    .cert-icon { color:var(--flame-bright); }
+    .cert strong { font:600 14px Manrope,sans-serif; }
+    .cert small { color:#8D8780; font-size:10px; margin-top:5px; }
     .contact { padding:64px 0 74px; background:linear-gradient(110deg,rgba(199,71,53,.14),transparent 60%); border-top:1px solid var(--line); }
     .contact-inner { display:flex; justify-content:space-between; align-items:center; gap:30px; }
     .contact h2 { max-width:650px; }
@@ -166,26 +137,6 @@
     .footer-socials a { color:#B6AEA6; }
     .footer-socials a:hover { color:var(--flame-bright); }
     .tag { display:inline-block; color:#CFC7BE; border:1px solid var(--line); padding:6px 9px; font-size:9px; margin:5px 4px 0 0; }
-
-/* Minimal animated market flag rail */
-.market-strip{position:relative;width:100%;overflow:hidden;padding:12px 0 15px;border-bottom:1px solid rgba(243,237,227,.08);isolation:isolate}
-.market-strip:before,.market-strip:after{content:"";position:absolute;z-index:2;top:0;bottom:0;width:clamp(22px,7vw,90px);pointer-events:none}
-.market-strip:before{left:0;background:linear-gradient(90deg,var(--black),transparent)}
-.market-strip:after{right:0;background:linear-gradient(270deg,var(--black),transparent)}
-.market-flags{display:flex;width:max-content;align-items:center;gap:clamp(17px,3.2vw,42px);animation:flagRail 34s linear infinite;padding:3px clamp(24px,5vw,64px)}
-.market-strip:hover .market-flags{animation-play-state:paused}
-.market-flag-item{display:flex;align-items:center;gap:9px;flex:0 0 auto;color:#C8C1B9;font-size:10px;letter-spacing:.035em;white-space:nowrap;transition:color .2s ease,transform .2s ease}
-.market-flag-item:hover{color:var(--warm-white);transform:translateY(-2px)}
-.market-flag{display:grid;place-items:center;flex:0 0 auto;width:36px;height:36px;border-radius:50%;overflow:hidden;border:1px solid rgba(243,237,227,.16);background:linear-gradient(145deg,#222225,#111113);font-family:system-ui,sans-serif;font-size:20px;line-height:1;box-shadow:0 4px 14px rgba(0,0,0,.22);transition:border-color .2s ease,box-shadow .2s ease}
-.market-flag-item:hover .market-flag{border-color:rgba(224,90,69,.75);box-shadow:0 0 0 3px rgba(199,71,53,.09),0 4px 18px rgba(0,0,0,.25)}
-.market-flag-item.market-global .market-flag{border-color:rgba(199,71,53,.45);background:linear-gradient(145deg,rgba(199,71,53,.18),#151517)}
-.market-rail-divider{height:22px;width:1px;flex:0 0 1px;background:rgba(243,237,227,.13)}
-@keyframes flagRail{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-html[dir="rtl"] .market-flags{animation-name:flagRailRtl}
-@keyframes flagRailRtl{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-@media(max-width:600px){.market-strip{padding:10px 0 12px}.market-flags{gap:20px;animation-duration:27s}.market-flag-item{gap:7px;font-size:9px}.market-flag{width:32px;height:32px;font-size:18px}}
-@media(prefers-reduced-motion:reduce){.market-flags{animation:none;justify-content:center;width:100%;flex-wrap:wrap;padding:4px 18px;gap:12px}.market-strip:before,.market-strip:after{display:none}}
-
     @media (max-width:900px) {
       .wrap { width:min(100% - 32px,var(--max)); }
       nav { gap:14px; } nav a:not(.nav-cta) { display:none; }
@@ -202,16 +153,13 @@ html[dir="rtl"] .market-flags{animation-name:flagRailRtl}
       .feature-case { grid-template-columns:1fr; }
       .case-visual { min-height:260px; }
       .results-grid,.reviews-grid { grid-template-columns:repeat(2,1fr); }
-      .cert-card { flex-basis:clamp(220px,42vw,270px); }
+      .cert-grid { grid-template-columns:repeat(2,1fr); }
       .section { padding:62px 0; }
     }
     @media (max-width:520px) {
       .topbar { height:64px; }
       .brand { font-size:12px; }
       .nav-cta { padding:8px 10px; font-size:10px; }
-      .cert-card { flex-basis:78vw; max-width:290px; }
-      .cert-image-wrap { aspect-ratio:1.48/1; }
-      .cert-slider-hint { max-width:170px; line-height:1.5; }
       .hero { grid-template-columns:1fr; padding-top:14px; gap:0; }
       .portrait-wrap { grid-row:1; min-height:300px; max-height:360px; margin:0 auto; width:100%; }
       .hero-copy { grid-row:2; padding:22px 0 8px; }
@@ -235,11 +183,7 @@ html[dir="rtl"] .market-flags{animation-name:flagRailRtl}
       .collab { width:92px; flex-basis:92px; }
       .collab .symbol { width:70px; height:70px; }
       .collab strong { font-size:11px; }
-      .results-grid,.reviews-grid { grid-template-columns:1fr; }
-      .cert-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
-      .cert-meta { padding:12px; min-height:120px; }
-      .cert-meta strong { font-size:12px; }
-      .cert-image-wrap { aspect-ratio:1.15/1; }
+      .results-grid,.reviews-grid,.cert-grid { grid-template-columns:1fr; }
       .result-card { min-height:140px; }
       .contact-inner { display:block; }
       .contact-inner .btn { margin-top:10px; }
@@ -300,12 +244,11 @@ html[dir="rtl"] .market-flags{animation-name:flagRailRtl}
     }
   
 /* Featured case study gallery + expandable story */
-.case-gallery{position:relative;width:100%;overflow:hidden;background:#111;aspect-ratio:16/9;border:1px solid rgba(255,255,255,.12);border-radius:12px}
-.case-gallery img{width:100%;height:100%;object-fit:contain;display:block;cursor:zoom-in}
-.case-image-zoom{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:12px;background:rgba(0,0,0,.94);cursor:zoom-out}
-.case-image-zoom.is-open{display:flex}
-.case-image-zoom img{display:block;max-width:100%;max-height:94vh;width:auto;height:auto;object-fit:contain}
-.case-image-zoom button{position:absolute;top:12px;right:14px;border:1px solid rgba(255,255,255,.35);border-radius:50%;width:42px;height:42px;background:#171719;color:#fff;font-size:28px;cursor:pointer}
+/* Give the campaign screenshots the full card width so dashboard metrics are readable. */
+.feature-case{grid-template-columns:minmax(0,1fr);}
+.case-visual{min-height:0;padding:clamp(18px,3vw,34px);}
+.case-gallery{position:relative;width:100%;overflow:hidden;background:#111;aspect-ratio:16/9;max-height:760px;border:1px solid rgba(255,255,255,.12);border-radius:12px}
+.case-gallery img{width:100%;height:100%;object-fit:contain;display:block}
 .gallery-arrow{position:absolute;z-index:2;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(13,13,15,.78);color:#fff;font-size:27px;cursor:pointer;display:grid;place-items:center}
 .gallery-arrow.prev{left:10px}.gallery-arrow.next{right:10px}
 .gallery-count{position:absolute;right:12px;bottom:10px;padding:5px 9px;border-radius:30px;background:rgba(13,13,15,.82);color:#f3ede3;font-size:12px;letter-spacing:.08em}
@@ -317,53 +260,13 @@ html[dir="rtl"] .market-flags{animation-name:flagRailRtl}
 .full-case ul{padding-left:22px}
 .case-content .btn-secondary{margin-top:12px}
 @keyframes caseReveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:700px){
-  .feature-case{display:grid;grid-template-columns:minmax(0,1fr);width:100%;max-width:100%;min-width:0;overflow:hidden;border-radius:12px}
-  .case-visual,.case-content{width:100%;min-width:0;max-width:100%}
-  .case-visual{padding:16px;min-height:0;gap:16px}
-  .case-chip{max-width:100%;font-size:9px;letter-spacing:.06em;line-height:1.5;white-space:normal}
-  .case-gallery{width:100%;max-width:100%;aspect-ratio:4/3;min-height:0;height:auto;border-radius:10px}
-  .case-gallery img{width:100%;height:100%;object-fit:contain}
-  .gallery-arrow{width:34px;height:34px;font-size:24px}
-  .gallery-arrow.prev{left:7px}.gallery-arrow.next{right:7px}
-  .gallery-count{font-size:11px;right:8px;bottom:8px}
-  .case-visual-note{font-size:9px;line-height:1.6;overflow-wrap:anywhere}
-  .case-content{padding:22px 18px 24px;overflow-wrap:anywhere;word-break:normal}
-  .case-content .kicker{font-size:9px;letter-spacing:.1em;line-height:1.6}
-  .case-content h3{font-size:clamp(24px,7vw,32px);line-height:1.22;letter-spacing:-.035em;margin:12px 0 14px;overflow-wrap:anywhere}
-  .case-content p{font-size:13px;line-height:1.9;overflow-wrap:anywhere}
-  .metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 12px;margin:22px 0}
-  .metric{min-width:0;padding-top:12px}
-  .metric b{font-size:clamp(22px,6.8vw,30px);line-height:1.2;letter-spacing:-.04em;overflow-wrap:anywhere}
-  .metric span{display:block;font-size:10px;line-height:1.7;margin-top:5px;overflow-wrap:anywhere}
-  .case-content .btn{max-width:100%;white-space:normal;text-align:center;line-height:1.5;padding:13px 14px}
-  .case-content .case-toggle{width:100%}
-  .case-content .btn-secondary{width:100%;justify-content:center}
-  .full-case{margin-top:18px;padding-top:14px;min-width:0}
-  .full-case h4{font-size:13px;line-height:1.6}
-  .full-case ul{padding-inline-start:22px}
-}
-html[dir="rtl"] .case-content{text-align:right;direction:rtl}
-html[dir="rtl"] .case-content .kicker{letter-spacing:0}
-html[dir="rtl"] .case-content .btn{direction:rtl}
-html[dir="rtl"] .case-gallery,html[dir="rtl"] .case-image-zoom{direction:ltr}
-@media(max-width:700px){html,body{max-width:100%;overflow-x:hidden}main,.wrap,.section,.feature-case{min-width:0;max-width:100%}.wrap{width:calc(100% - 28px)}.case-content *{max-width:100%}}
-@media(prefers-reduced-motion:reduce){.full-case{animation:none!important;scroll-behavior:auto!important}}
-</style>
+@media(max-width:700px){.case-gallery{aspect-ratio:4/3;max-height:none}.case-visual{padding:16px}.gallery-arrow{width:34px;height:34px}.full-case{margin-top:18px}}
+.home-living-case-link{display:block;grid-column:1/-1;max-width:760px;margin:0 auto 18px;border:1px solid rgba(243,237,227,.14);background:linear-gradient(140deg,#1b1b1e,#111113);border-radius:7px;overflow:hidden;transition:transform .2s,border-color .2s}.home-living-case-link:hover{transform:translateY(-3px);border-color:rgba(199,71,53,.75)}.home-living-case-link .case-cover{height:220px;overflow:hidden;background:#111}.home-living-case-link .case-cover img{width:100%;height:100%;object-fit:cover}.home-living-case-link .case-card-copy{padding:20px}.home-living-case-link h3{font:700 22px/1.2 Manrope,sans-serif;margin:8px 0}.home-living-case-link p{color:#AAA49D;font-size:13px;margin:0 0 12px}.home-living-case-link span{font-size:11px;font-weight:700;color:#E05A45}@media(min-width:761px){.home-living-case-link{display:grid;grid-template-columns:1.1fr 1fr;max-width:none}.home-living-case-link .case-cover{height:100%;min-height:230px}}</style>
 <style>
 .creator-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
 .creator-modal.is-open{display:flex}.creator-modal-card{position:relative;width:min(100%,390px);padding:28px 24px 24px;background:#171719;border:1px solid rgba(243,237,227,.16);border-radius:20px;box-shadow:0 24px 80px rgba(0,0,0,.45);color:#f3ede3;text-align:center}
 .creator-modal-card h3{font-size:22px;margin:4px 0 10px}.creator-modal-card p{color:#bdb5ad;line-height:1.6;margin:0 0 22px}.creator-modal-close{position:absolute;right:12px;top:8px;border:0;background:transparent;color:#f3ede3;font-size:28px;cursor:pointer}.creator-modal-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.creator-modal-actions a,.creator-modal-actions button{font:inherit;font-weight:700;border-radius:10px;padding:12px 15px;text-decoration:none;cursor:pointer}.creator-modal-visit{background:#c74735;color:#fff;border:1px solid #c74735}.creator-modal-stay{background:transparent;color:#f3ede3;border:1px solid rgba(243,237,227,.25)}
-</style>
-<style id="auto-language-styles">
-html[dir="rtl"] body{direction:rtl;text-align:right}
-html[dir="rtl"] .collabs-window,html[dir="rtl"] .case-gallery,html[dir="rtl"] .case-image-zoom,html[dir="rtl"] .footer-socials{direction:ltr}
-html[dir="rtl"] .hero-stat{border-left:1px solid var(--line);border-right:0}
-html[dir="rtl"] .hero-stat:last-child{border-left:0}
-html[dir="rtl"] .full-case ul{padding-left:0;padding-right:22px}
-html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direction:rtl}
-</style>
-</head>
+</style></head>
 <body>
 <header class="wrap topbar">
 <a class="brand" href="#home">ME<span>.</span> / PORTFOLIO</a>
@@ -372,9 +275,6 @@ html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direct
 <a class="nav-cta" href="https://wa.me/qr/ECQ5HJTSQEAYA1" rel="noopener noreferrer" target="_blank">Let's Talk ↗</a>
 </nav>
 </header>
-<div class="market-strip" aria-label="Markets served">
-  <div class="market-flags" aria-hidden="false"><span class="market-flag-item" aria-label="Egypt"><span class="market-flag" aria-hidden="true">🇪🇬</span><span>Egypt</span></span><span class="market-rail-divider" aria-hidden="true"></span><span class="market-flag-item" aria-label="Saudi Arabia"><span class="market-flag" aria-hidden="true">🇸🇦</span><span>Saudi Arabia</span></span><span class="market-flag-item" aria-label="UAE"><span class="market-flag" aria-hidden="true">🇦🇪</span><span>UAE</span></span><span class="market-flag-item" aria-label="Kuwait"><span class="market-flag" aria-hidden="true">🇰🇼</span><span>Kuwait</span></span><span class="market-flag-item" aria-label="Qatar"><span class="market-flag" aria-hidden="true">🇶🇦</span><span>Qatar</span></span><span class="market-flag-item" aria-label="Bahrain"><span class="market-flag" aria-hidden="true">🇧🇭</span><span>Bahrain</span></span><span class="market-flag-item" aria-label="Oman"><span class="market-flag" aria-hidden="true">🇴🇲</span><span>Oman</span></span><span class="market-rail-divider" aria-hidden="true"></span><span class="market-flag-item market-global" aria-label="Worldwide"><span class="market-flag" aria-hidden="true">🌍</span><span>Worldwide</span></span><span class="market-flag-item" aria-label="Egypt"><span class="market-flag" aria-hidden="true">🇪🇬</span><span>Egypt</span></span><span class="market-rail-divider" aria-hidden="true"></span><span class="market-flag-item" aria-label="Saudi Arabia"><span class="market-flag" aria-hidden="true">🇸🇦</span><span>Saudi Arabia</span></span><span class="market-flag-item" aria-label="UAE"><span class="market-flag" aria-hidden="true">🇦🇪</span><span>UAE</span></span><span class="market-flag-item" aria-label="Kuwait"><span class="market-flag" aria-hidden="true">🇰🇼</span><span>Kuwait</span></span><span class="market-flag-item" aria-label="Qatar"><span class="market-flag" aria-hidden="true">🇶🇦</span><span>Qatar</span></span><span class="market-flag-item" aria-label="Bahrain"><span class="market-flag" aria-hidden="true">🇧🇭</span><span>Bahrain</span></span><span class="market-flag-item" aria-label="Oman"><span class="market-flag" aria-hidden="true">🇴🇲</span><span>Oman</span></span><span class="market-rail-divider" aria-hidden="true"></span><span class="market-flag-item market-global" aria-label="Worldwide"><span class="market-flag" aria-hidden="true">🌍</span><span>Worldwide</span></span></div>
-</div>
 <main>
 <section class="wrap hero" id="home">
 <div class="portrait-wrap">
@@ -469,12 +369,11 @@ html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direct
 <span class="case-chip">E-commerce · Kids Books</span>
 <div class="case-gallery" aria-label="Campaign performance screenshots">
   <button class="gallery-arrow prev" type="button" aria-label="Previous screenshot">‹</button>
-  <img id="caseSlide" src="books-case-02.jpg" alt="Meta and TikTok campaign performance dashboard, campaign names blurred" loading="lazy">
+  <img id="caseSlide" src="books-case-01.jpg" alt="Meta and TikTok campaign performance dashboard, campaign names blurred" loading="lazy">
   <button class="gallery-arrow next" type="button" aria-label="Next screenshot">›</button>
   <div class="gallery-count"><span id="slideNumber">01</span> / 10</div>
 </div>
-<div class="case-image-zoom" id="caseImageZoom" role="dialog" aria-modal="true" aria-label="Expanded campaign screenshot"><button type="button" aria-label="Close expanded screenshot">×</button><img src="books-case-02.jpg" alt="Expanded campaign dashboard screenshot"></div>
-<div class="case-visual-note">Tap the screenshot to zoom in · CAMPAIGN DASHBOARDS · ACCOUNT NAMES BLURRED</div>
+<div class="case-visual-note">CAMPAIGN DASHBOARDS · ACCOUNT NAMES BLURRED</div>
 </div>
 <div class="case-content">
 <div class="kicker">E-commerce / Performance Marketing</div>
@@ -517,7 +416,7 @@ html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direct
 <div><div class="kicker">Selected Results</div><h2>Numbers with context.</h2></div>
 <p class="section-desc">A quick scan of campaign outcomes. Each number will include its timeframe, business context, and your specific contribution.</p>
 </div>
-<div class="results-grid">
+<a class="home-living-case-link" href="meta-home-living-case.html" aria-label="Open confidential home and living Meta Ads case study"><div class="case-cover"><img src="home-living-case-cover.png" alt="Meta Ads performance dashboard preview" loading="lazy"></div><div class="case-card-copy"><div class="kicker">Meta Ads · 6 Months</div><h3>From Product Testing to Profitable Scaling</h3><p>EGP 11.3M purchase conversion value · 6.6x ROAS</p><span>Explore Case Study ↗</span></div></a><div class="results-grid">
 <article class="result-card"><div class="result-value">—</div><h3>Acquisition Efficiency</h3><p>CPA / CAC improvement with period and baseline.</p></article>
 <article class="result-card"><div class="result-value">—</div><h3>Revenue &amp; Orders</h3><p>Verified sales outcomes from a defined campaign.</p></article>
 <article class="result-card"><div class="result-value">—</div><h3>Return on Ad Spend</h3><p>ROAS with spend, attribution window, and context.</p></article>
@@ -541,71 +440,15 @@ html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direct
 <div class="wrap">
 <div class="section-head">
 <div><div class="kicker">Certifications</div><h2>Learning that compounds.</h2></div>
-<p class="section-desc">Explore the certifications behind my performance marketing toolkit. Open any certificate to inspect the original document.</p>
+<p class="section-desc">Certificates will be displayed with their original images, issuing organizations, and years.</p>
 </div>
-<div class="cert-slider-shell">
-<div class="cert-grid" id="certSlider" aria-label="Certificate carousel">
-<button class="cert-card" type="button" data-cert-image="cert-hubspot-digital-marketing.webp" data-cert-title="Digital Marketing Certified" aria-label="View certificate: Digital Marketing Certified">
-  <span class="cert-image-wrap"><img src="cert-hubspot-digital-marketing.webp" alt="Digital Marketing Certified certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
-  <span class="cert-meta"><span class="cert-org">HubSpot Academy</span><strong>Digital Marketing Certified</strong><small>2025–2026</small></span>
-</button>
-<button class="cert-card" type="button" data-cert-image="cert-meta-advertising.webp" data-cert-title="Advertising with Meta" aria-label="View certificate: Advertising with Meta">
-  <span class="cert-image-wrap"><img src="cert-meta-advertising.webp" alt="Advertising with Meta certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
-  <span class="cert-meta"><span class="cert-org">Meta · Coursera</span><strong>Advertising with Meta</strong><small>2024</small></span>
-</button>
-<button class="cert-card" type="button" data-cert-image="cert-google-ads-beginners.webp" data-cert-title="Google Ads for Beginners" aria-label="View certificate: Google Ads for Beginners">
-  <span class="cert-image-wrap"><img src="cert-google-ads-beginners.webp" alt="Google Ads for Beginners certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
-  <span class="cert-meta"><span class="cert-org">Coursera Project Network</span><strong>Google Ads for Beginners</strong><small>2024</small></span>
-</button>
-<button class="cert-card" type="button" data-cert-image="cert-google-search-campaign.webp" data-cert-title="Create a Google Ads Search Campaign" aria-label="View certificate: Create a Google Ads Search Campaign">
-  <span class="cert-image-wrap"><img src="cert-google-search-campaign.webp" alt="Create a Google Ads Search Campaign certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
-  <span class="cert-meta"><span class="cert-org">Coursera Project Network</span><strong>Create a Google Ads Search Campaign</strong><small>2024</small></span>
-</button>
-<button class="cert-card" type="button" data-cert-image="cert-facebook-ads-campaign.webp" data-cert-title="How to Set Up a Facebook Ads Campaign" aria-label="View certificate: How to Set Up a Facebook Ads Campaign">
-  <span class="cert-image-wrap"><img src="cert-facebook-ads-campaign.webp" alt="How to Set Up a Facebook Ads Campaign certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
-  <span class="cert-meta"><span class="cert-org">Harvard University · Coursera</span><strong>How to Set Up a Facebook Ads Campaign</strong><small>2024</small></span>
-</button>
-<button class="cert-card" type="button" data-cert-image="cert-digital-ad-expert-aleph.webp" data-cert-title="Digital Ad Expert" aria-label="View certificate: Digital Ad Expert">
-  <span class="cert-image-wrap"><img src="cert-digital-ad-expert-aleph.webp" alt="Digital Ad Expert certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
-  <span class="cert-meta"><span class="cert-org">Aleph</span><strong>Digital Ad Expert</strong><small>2024</small></span>
-</button>
-<button class="cert-card" type="button" data-cert-image="cert-facebook-instagram-ads-almentor.webp" data-cert-title="Facebook & Instagram Ads" aria-label="View certificate: Facebook & Instagram Ads">
-  <span class="cert-image-wrap"><img src="cert-facebook-instagram-ads-almentor.webp" alt="Facebook & Instagram Ads certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
-  <span class="cert-meta"><span class="cert-org">Almentor</span><strong>Facebook & Instagram Ads</strong><small>2024</small></span>
-</button>
-<button class="cert-card" type="button" data-cert-image="cert-google-ads-almentor.webp" data-cert-title="Google Ads Course" aria-label="View certificate: Google Ads Course">
-  <span class="cert-image-wrap"><img src="cert-google-ads-almentor.webp" alt="Google Ads Course certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
-  <span class="cert-meta"><span class="cert-org">Almentor</span><strong>Google Ads Course</strong><small>2024</small></span>
-</button>
-<button class="cert-card" type="button" data-cert-image="cert-linkedin-advertising.webp" data-cert-title="LinkedIn Advertising" aria-label="View certificate: LinkedIn Advertising">
-  <span class="cert-image-wrap"><img src="cert-linkedin-advertising.webp" alt="LinkedIn Advertising certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
-  <span class="cert-meta"><span class="cert-org">Almentor</span><strong>LinkedIn Advertising</strong><small>2024</small></span>
-</button>
-<button class="cert-card" type="button" data-cert-image="cert-snapchat-ads.webp" data-cert-title="Snapchat Ads Course" aria-label="View certificate: Snapchat Ads Course">
-  <span class="cert-image-wrap"><img src="cert-snapchat-ads.webp" alt="Snapchat Ads Course certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
-  <span class="cert-meta"><span class="cert-org">Almentor</span><strong>Snapchat Ads Course</strong><small>2024</small></span>
-</button>
-<button class="cert-card" type="button" data-cert-image="cert-digital-marketing-strategies.webp" data-cert-title="Digital Marketing Strategies & Techniques" aria-label="View certificate: Digital Marketing Strategies & Techniques">
-  <span class="cert-image-wrap"><img src="cert-digital-marketing-strategies.webp" alt="Digital Marketing Strategies & Techniques certificate" loading="lazy"><span class="cert-zoom">↗ <span>View certificate</span></span></span>
-  <span class="cert-meta"><span class="cert-org">Almentor</span><strong>Digital Marketing Strategies & Techniques</strong><small>2024</small></span>
-</button>
-</div>
-<div class="cert-slider-controls">
-  <span class="cert-slider-hint">Swipe to explore · Tap a certificate to zoom</span>
-  <div class="cert-slider-actions">
-    <button class="cert-slider-btn" type="button" id="certPrev" aria-label="Previous certificates">‹</button>
-    <span class="cert-slider-count" id="certCount">01 / 11</span>
-    <button class="cert-slider-btn" type="button" id="certNext" aria-label="Next certificates">›</button>
-  </div>
-</div>
+<div class="cert-grid">
+<article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
+<article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
+<article class="cert"><span class="cert-icon">✳</span><div><strong>Certificate title</strong><small>Issuing organization · Year</small></div></article>
 </div>
 </div>
 </section>
-<div class="cert-lightbox" id="certLightbox" role="dialog" aria-modal="true" aria-label="Certificate preview">
-  <button class="cert-lightbox-close" type="button" aria-label="Close certificate preview">×</button>
-  <img id="certLightboxImage" src="" alt="Certificate preview">
-  <div class="cert-lightbox-caption" id="certLightboxCaption"></div>
-</div>
 <section class="contact" id="contact">
 <div class="wrap contact-inner">
 <div><div class="kicker">Let's Work Together</div><h2>Have a growth challenge?<br/>Let's talk numbers.</h2><p>For performance marketing, e-commerce growth, and digital product launches.</p></div>
@@ -724,13 +567,10 @@ html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direct
 </script>
 <script>
 (() => {
-  const slides = ['books-case-02.jpg','books-case-01.jpg', ...Array.from({length:8}, (_,i) => `books-case-${String(i+3).padStart(2,'0')}.jpg`)];
+  const slides = Array.from({length:10}, (_,i) => `books-case-${String(i+1).padStart(2,'0')}.jpg`);
   const image = document.getElementById('caseSlide');
   const number = document.getElementById('slideNumber');
   const gallery = document.querySelector('.case-gallery');
-  const zoomLayer = document.getElementById('caseImageZoom');
-  const zoomImage = zoomLayer ? zoomLayer.querySelector('img') : null;
-  const closeZoom = () => zoomLayer && zoomLayer.classList.remove('is-open');
   if (image && number && gallery) {
     let current = 0;
     const show = (index) => {
@@ -746,11 +586,6 @@ html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direct
       const delta = e.changedTouches[0].clientX - startX;
       if (Math.abs(delta) > 40) show(current + (delta < 0 ? 1 : -1));
     }, {passive:true});
-    if (zoomLayer && zoomImage) {
-      image.addEventListener('click', () => { zoomImage.src = image.src; zoomImage.alt = image.alt; zoomLayer.classList.add('is-open'); });
-      zoomLayer.addEventListener('click', event => { if (event.target === zoomLayer || event.target.closest('button')) closeZoom(); });
-      document.addEventListener('keydown', event => { if (event.key === 'Escape') closeZoom(); });
-    }
   }
   const toggle = document.getElementById('caseToggle');
   const full = document.getElementById('fullCase');
@@ -760,210 +595,6 @@ html[dir="rtl"] .topbar,html[dir="rtl"] nav,html[dir="rtl"] .hero-actions{direct
     full.hidden = expanded;
     toggle.textContent = expanded ? 'Read Full Case Study ↗' : 'Show Less ↑';
   });
-})();
-</script>
-
-<script id="automatic-language-switch">
-(() => {
-  const browserLanguages = [...(navigator.languages || []), navigator.language || '', document.documentElement.lang || ''];
-  const isArabic = browserLanguages.some(lang => /^ar(?:-|$)/i.test(String(lang).trim()));
-  const root = document.documentElement;
-  root.lang = isArabic ? 'ar' : 'en';
-  root.dir = isArabic ? 'rtl' : 'ltr';
-  const pairs = [
-    ["Markets served", "الأسواق التي أعمل معها"], ["Core market", "السوق الرئيسي"], ["Gulf markets", "أسواق الخليج"], ["Global reach", "انتشار عالمي"], ["Beyond borders", "عبر الحدود"], ["Saudi", "السعودية"],
-    ["Egypt", "مصر"], ["Saudi Arabia", "السعودية"], ["UAE", "الإمارات"], ["Kuwait", "الكويت"], ["Qatar", "قطر"], ["Bahrain", "البحرين"], ["Oman", "عُمان"], ["Worldwide", "عالميًا"],
-    ["Selected Collaborations", "التعاونات المختارة"],
-    ["Creators & brands I've worked with.", "صناع المحتوى والعلامات التجارية التي تعاونت معها."],
-    ["A circle of selected collaborations across creator-led courses, digital products, and e-commerce growth.", "مجموعة من التعاونات في تسويق الدورات التدريبية والمنتجات الرقمية ونمو التجارة الإلكترونية."],
-    ["Swipe left or right to explore selected creator and brand collaborations.", "اسحب لليمين أو اليسار لاستكشاف التعاونات المختارة مع صناع المحتوى والعلامات التجارية."],
-    ["Lighting & More", "الإضاءة والمزيد"],
-    ["Creator collaboration", "تعاون مع صانع محتوى"],
-    ["Featured Case Study", "دراسة حالة مميزة"],
-    ["Scaling performance with smarter acquisition.", "توسيع المبيعات باستحواذ إعلاني أذكى."],
-    ["CAMPAIGN DASHBOARDS · ACCOUNT NAMES BLURRED", "لوحات الحملات · أسماء الحسابات مطموسة"],
-    ["Proof over promises.", "النتائج أقوى من الوعود."],
-    ["One deep-dive story: the business challenge, the strategy, what changed, and the measurable outcome.", "تجربة تفصيلية توضح التحدي التجاري والاستراتيجية والتغييرات والنتائج القابلة للقياس."],
-    ["E-commerce · Kids Books", "التجارة الإلكترونية · كتب الأطفال"],
-    ["E-commerce / Performance Marketing", "التجارة الإلكترونية / التسويق بالأداء"],
-    ["Tap the screenshot to zoom in · CAMPAIGN DASHBOARDS · ACCOUNT NAMES BLURRED", "اضغط على الصورة لتكبيرها · لوحات الحملات · أسماء الحسابات مطموسة"],
-    ["Orders", "الطلبات"], ["Delivered Orders", "الطلبات التي تم تسليمها"], ["Average CPA", "متوسط تكلفة الطلب"], ["Delivery Rate", "معدل التسليم"],
-    ["Read Full Case Study ↗", "اقرأ دراسة الحالة كاملة ↗"], ["Show Less ↑", "عرض أقل ↑"],
-    ["The challenge", "التحدي"], ["Creative testing before scaling", "اختبار المحتوى قبل التوسع"],
-    ["When the market got saturated", "عندما أصبح السوق مشبعًا"], ["Optimization through the right metrics", "التحسين باستخدام المؤشرات الصحيحة"], ["The outcome", "النتائج"],
-    ["Discuss a Similar Challenge ↗", "ناقش تحديًا مشابهًا ↗"],
-    ["Selected Results", "نتائج مختارة"], ["Numbers with context.", "أرقام بسياق واضح."],
-    ["A quick scan of campaign outcomes. Each number will include its timeframe, business context, and your specific contribution.", "نظرة سريعة على نتائج الحملات، مع توضيح الفترة والسياق التجاري ودورك في تحقيق كل نتيجة."],
-    ["Acquisition Efficiency", "كفاءة اكتساب العملاء"], ["CPA / CAC improvement with period and baseline.", "تحسن تكلفة الطلب أو اكتساب العميل مقارنة بالفترة السابقة."],
-    ["Revenue & Orders", "المبيعات والطلبات"], ["Verified sales outcomes from a defined campaign.", "نتائج مبيعات موثقة من حملة محددة."],
-    ["Return on Ad Spend", "العائد على الإنفاق الإعلاني"], ["ROAS with spend, attribution window, and context.", "العائد على الإنفاق مع توضيح الميزانية وفترة الإسناد."],
-    ["Testimonials", "آراء العملاء"], ["Trust, in their words.", "الثقة بكلامهم."],
-    ["Real client feedback, shown as approved screenshots or quoted testimonials. No fabricated reviews.", "آراء حقيقية من العملاء، بصور معتمدة أو اقتباسات أصلية، دون اختلاق تقييمات."],
-    ["Certifications", "الشهادات"], ["Learning that compounds.", "تعلم مستمر يصنع فرقًا."],
-    ["Explore the certifications behind my performance marketing toolkit. Open any certificate to inspect the original document.", "استكشف الشهادات التي تدعم خبرتي في التسويق بالأداء. اضغط على أي شهادة لعرض المستند الأصلي بحجم أكبر."],
-    ["Digital Marketing Certified", "معتمد في التسويق الرقمي"], ["HubSpot Academy", "أكاديمية HubSpot"],
-    ["Advertising with Meta", "الإعلان باستخدام Meta"], ["Google Ads for Beginners", "أساسيات إعلانات Google"],
-    ["Create a Google Ads Search Campaign", "إنشاء حملة بحث على Google Ads"],
-    ["How to Set Up a Facebook Ads Campaign", "كيفية إعداد حملة إعلانية على Facebook"],
-    ["Digital Ad Expert", "خبير الإعلانات الرقمية"], ["Facebook & Instagram Ads", "إعلانات Facebook وInstagram"],
-    ["Google Ads Course", "دورة إعلانات Google"], ["LinkedIn Advertising", "الإعلان على LinkedIn"],
-    ["Snapchat Ads Course", "دورة إعلانات Snapchat"], ["Digital Marketing Strategies & Techniques", "استراتيجيات وتقنيات التسويق الرقمي"],
-    ["View certificate", "عرض الشهادة"],
-    ["Let's Work Together", "لنعمل معًا"], ["Have a growth challenge?", "عندك تحدي في النمو؟"], ["Let's talk numbers.", "خلينا نتكلم بالأرقام."],
-    ["For performance marketing, e-commerce growth, and digital product launches.", "لإعلانات الأداء ونمو التجارة الإلكترونية وإطلاق المنتجات الرقمية."],
-    ["Get in Touch ↗", "تواصل معي ↗"], ["All rights reserved.", "جميع الحقوق محفوظة."],
-    ["Brands worked with", "علامة تجارية تعاونت معها"], ["Total ad spend", "إجمالي الإنفاق الإعلاني"], ["Orders generated", "طلب تم تحقيقه"],
-    ["Strategy. Performance. Growth.", "استراتيجية. أداء. نمو."], ["Performance Media Buyer · Built around measurable growth.", "متخصص إعلانات الأداء · تركيز على النمو القابل للقياس."],
-    ["Meta Ads", "إعلانات ميتا"], ["Performance Strategy", "استراتيجية الأداء"], ["Course Marketing", "تسويق الدورات التدريبية"], ["E-commerce", "التجارة الإلكترونية"],
-    ["بدأت التجربة بـ 5,000 قطعة من كتب الأطفال كان لازم نبيعهم بسرعة. بعد نجاح الاختبارات الأولى وطلب 20,000 قطعة إضافية، دخل المنتج سوقًا أكثر تنافسية — فكان التحدي الحقيقي هو الحفاظ على الأداء أثناء الـ Scaling.", "The project started with 5,000 units of children's books that needed to sell quickly. After the first tests performed well, the company ordered another 20,000 units. By the time the new shipment arrived, competition had intensified — making the real challenge maintaining performance while scaling."],
-    ["كان عندنا حوالي 5,000 قطعة في المخزن، والمطلوب بيعهم بأسرع وقت. الموضوع ماكانش Ads بس؛ كان فيه Operation كاملة من تجهيز الـ Creatives وتصوير UGC والـ Testing، لتأكيد الأوردرات وتجهيزها والشحن ومتابعة نسب التسليم يوم بيوم.", "We had around 5,000 units in stock and needed to sell them as quickly as possible. This was more than running ads: it required a full operation covering creative production, UGC shoots, testing, order confirmation and preparation, shipping, and daily delivery-rate tracking."],
-    ["لأن المنتج مستورد من الصين وكان ممكن المنافسين يستخدموا نفس الفيديوهات، صنعنا محتوى خاص بينا. اختبرنا Hooks وAngles مختلفة لحد ما وصلنا للـ Winners، وبعدها بدأنا الـ Scaling. نجاح المرحلة الأولى شجع الشركة تطلب 20,000 قطعة إضافية.", "Because the product came from China and competitors could use the same supplier videos, we produced original content. We tested different hooks and angles until we found winning creatives, then began scaling. The results of the first phase encouraged the company to order another 20,000 units."],
-    ["خلال وصول الشحنة الجديدة، المنافسة زادت والفيديوهات الصينية انتشرت في السوق. بدل ما نعتبر المنتج انتهى، جهزنا بنية تسمح بالتوسع، واشتغلنا بأكثر من 10 Ad Accounts وبـ Structures مختلفة على Meta وTikTok.", "While the new shipment was in transit, competition increased and the supplier videos spread across the market. Instead of writing the product off, we built a setup that could support scale, using more than 10 ad accounts and different campaign structures across Meta and TikTok."],
-    ["مع زيادة المنافسة، ارتفعت تكلفة الأوردر من حوالي 60 إلى 90 جنيه. ركزنا على الـ CPM والـ CTR لتشخيص المشكلة، ورجعنا نطوّر الكريتيف بدل زيادة الميزانية بشكل أعمى. اختبرنا UGC وUgly Ads وProfessional Ads وCompare Ads وInfo Ads، برسائل مختلفة لجمهور مختلف.", "As competition increased, cost per order rose from around EGP 60 to EGP 90. We focused on CPM and CTR to diagnose the issue and refreshed the creative instead of blindly increasing budgets. We tested UGC, ugly ads, professional ads, comparison ads, and informational ads — using different messages for different audiences."],
-    ["حوالي 30,000 Order.", "Around 30,000 orders."], ["حوالي 25,000 Delivered Orders، بنسبة تسليم تخطت 80% حسب الأرقام المقدمة.", "Around 25,000 delivered orders, with a delivery rate above 80% based on the supplied figures."], ["Average CPA حوالي 75 جنيه.", "Average CPA of around EGP 75."], ["حملات على Meta وTikTok مع إنفاق يومي وصل لمئات الآلاف من الجنيهات خلال مرحلة التوسع.", "Campaigns ran across Meta and TikTok, with daily spend reaching hundreds of thousands of Egyptian pounds during scaling."],
-    ["أهم درس:", "The key lesson:"], ["الـ Scaling الحقيقي مش مجرد زيادة Budget؛ هو Operation تستحمل، وكريتيف بيتجدد باستمرار، وقدرة على قراءة الـ Metrics الصح. في المرحلة دي، الـ CPM والـ CTR كانوا مؤشرات أساسية لاتخاذ القرار.", "Real scaling is not just increasing budget. It requires operations that can keep up, continuously refreshed creative, and the ability to read the right metrics. At this stage, CPM and CTR were essential decision-making indicators."],
-    ["الأرقام معروضة وفق البيانات التي قدمها صاحب البورتفوليو، وقد تختلف حسب الفترة وإعدادات الإسناد بين المنصات.", "Figures are based on data supplied by the portfolio owner and may vary by reporting period and platform attribution settings."]
-  ];
-  const map = new Map(pairs.map(([en, ar]) => [isArabic ? en : ar, isArabic ? ar : en]));
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
-  for (const node of nodes) { const key = node.nodeValue.trim(); if (map.has(key)) { const leading = node.nodeValue.match(/^\\s*/)[0]; const trailing = node.nodeValue.match(/\\s*$/)[0]; node.nodeValue = leading + map.get(key) + trailing; } }
-  if (isArabic) {
-    document.title = 'مصطفى إيهاب — متخصص إعلانات الأداء';
-    const desc = document.querySelector('meta[name="description"]'); if (desc) desc.content = 'مصطفى إيهاب — متخصص إعلانات الأداء ونمو التجارة الإلكترونية والمنتجات الرقمية.';
-  }
-})();
-
-// Creator photos rail: seamless automatic movement, pauses for manual browsing, then resumes.
-(() => {
-  const viewport = document.querySelector('.collabs-window');
-  const track = viewport?.querySelector('.collabs');
-  if (!viewport || !track || viewport.dataset.autoRailReady === 'true') return;
-  viewport.dataset.autoRailReady = 'true';
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduceMotion) return;
-
-  const originals = Array.from(track.children);
-  if (!originals.length) return;
-  const clone = document.createDocumentFragment();
-  originals.forEach(item => {
-    const copy = item.cloneNode(true);
-    copy.classList.add('is-duplicate');
-    copy.setAttribute('aria-hidden', 'true');
-    copy.setAttribute('tabindex', '-1');
-    copy.querySelectorAll('a,button,[tabindex]').forEach(el => el.setAttribute('tabindex', '-1'));
-    clone.appendChild(copy);
-  });
-  track.appendChild(clone);
-
-  let paused = false;
-  let resumeTimer = null;
-  let raf = 0;
-  let lastTime = 0;
-  const speed = 28; // pixels per second; slow enough to feel premium
-  const pause = (manual = false) => {
-    paused = true;
-    viewport.classList.add('is-auto-paused');
-    if (manual) viewport.classList.add('is-user-dragging');
-    if (resumeTimer) clearTimeout(resumeTimer);
-    if (manual) resumeTimer = setTimeout(() => {
-      paused = false;
-      viewport.classList.remove('is-auto-paused', 'is-user-dragging');
-    }, 2600);
-  };
-  const resume = () => {
-    if (resumeTimer) clearTimeout(resumeTimer);
-    paused = false;
-    viewport.classList.remove('is-auto-paused', 'is-user-dragging');
-  };
-  const tick = time => {
-    if (!lastTime) lastTime = time;
-    const dt = Math.min((time - lastTime) / 1000, 0.05);
-    lastTime = time;
-    if (!paused && !document.hidden) {
-      const loopWidth = track.scrollWidth / 2;
-      if (loopWidth > 0) {
-        viewport.scrollLeft += speed * dt;
-        if (viewport.scrollLeft >= loopWidth) viewport.scrollLeft -= loopWidth;
-      }
-    }
-    raf = requestAnimationFrame(tick);
-  };
-  viewport.addEventListener('pointerdown', () => pause(true), {passive:true});
-  viewport.addEventListener('touchstart', () => pause(true), {passive:true});
-  viewport.addEventListener('wheel', () => pause(true), {passive:true});
-  viewport.addEventListener('keydown', event => {
-    if (['ArrowLeft','ArrowRight','Home','End','PageUp','PageDown',' '].includes(event.key)) pause(true);
-  });
-  viewport.addEventListener('mouseenter', () => pause(false));
-  viewport.addEventListener('mouseleave', resume);
-  viewport.addEventListener('focusin', () => pause(false));
-  viewport.addEventListener('focusout', event => { if (!viewport.contains(event.relatedTarget)) resume(); });
-  document.addEventListener('visibilitychange', () => { lastTime = 0; });
-  window.addEventListener('pagehide', () => cancelAnimationFrame(raf), {once:true});
-  raf = requestAnimationFrame(tick);
-})();
-
-// Certificate carousel + accessible full-screen preview.
-(() => {
-  const slider = document.getElementById('certSlider');
-  const cards = Array.from(document.querySelectorAll('.cert-card'));
-  const prev = document.getElementById('certPrev');
-  const next = document.getElementById('certNext');
-  const count = document.getElementById('certCount');
-  if (slider && cards.length && prev && next && count) {
-    const updateSlider = () => {
-      const maxScroll = Math.max(1, slider.scrollWidth - slider.clientWidth);
-      const ratio = slider.scrollLeft / maxScroll;
-      const active = Math.min(cards.length, Math.max(1, Math.round(ratio * (cards.length - 1)) + 1));
-      count.textContent = `${String(active).padStart(2,'0')} / ${String(cards.length).padStart(2,'0')}`;
-      prev.disabled = slider.scrollLeft <= 3;
-      next.disabled = slider.scrollLeft >= maxScroll - 3;
-    };
-    const step = () => {
-      const card = cards[0];
-      return card ? card.getBoundingClientRect().width + 14 : 250;
-    };
-    prev.addEventListener('click', () => slider.scrollBy({left: -step(), behavior:'smooth'}));
-    next.addEventListener('click', () => slider.scrollBy({left: step(), behavior:'smooth'}));
-    slider.addEventListener('scroll', updateSlider, {passive:true});
-    window.addEventListener('resize', updateSlider);
-    updateSlider();
-  }
-  // Keep a visible fallback if an image was not copied to the GitHub repository.
-  document.querySelectorAll('.cert-card img').forEach(img => {
-    img.addEventListener('error', () => {
-      img.alt = 'Certificate image missing — upload ' + img.getAttribute('src') + ' beside index.html';
-      img.style.display = 'none';
-      const wrap = img.closest('.cert-image-wrap');
-      if (wrap && !wrap.querySelector('.cert-missing')) {
-        const fallback = document.createElement('span');
-        fallback.className = 'cert-missing';
-        fallback.textContent = 'Certificate image missing';
-        fallback.style.cssText = 'display:grid;place-items:center;height:100%;padding:20px;text-align:center;color:#514b45;font-size:12px;line-height:1.5';
-        wrap.prepend(fallback);
-      }
-    });
-  });
-  const layer = document.getElementById('certLightbox');
-  const preview = document.getElementById('certLightboxImage');
-  const caption = document.getElementById('certLightboxCaption');
-  if (!layer || !preview || !caption) return;
-  const closeButton = layer.querySelector('.cert-lightbox-close');
-  let lastFocused = null;
-  const close = () => { layer.classList.remove('is-open'); document.body.style.overflow = ''; preview.src = ''; if (lastFocused) lastFocused.focus(); };
-  cards.forEach(card => card.addEventListener('click', () => {
-    lastFocused = card;
-    preview.src = card.dataset.certImage;
-    preview.alt = `${card.dataset.certTitle} certificate`;
-    caption.textContent = card.querySelector('.cert-meta strong')?.textContent || card.dataset.certTitle;
-    layer.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
-    closeButton.focus();
-  }));
-  closeButton.addEventListener('click', close);
-  layer.addEventListener('click', event => { if (event.target === layer) close(); });
-  document.addEventListener('keydown', event => { if (event.key === 'Escape' && layer.classList.contains('is-open')) close(); });
 })();
 </script>
 </body>

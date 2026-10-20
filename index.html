@@ -938,7 +938,9 @@ function closeHomeLivingCase(event){
 }
 document.querySelectorAll('.home-living-case-link:not(.toys-case-link)').forEach(el=>el.addEventListener('click',openHomeLivingCase));
 if(location.hash==='#case-home-living'){document.body.classList.add('case-open');document.getElementById('case-home-living-view').classList.add('active')}
-window.addEventListener('popstate',()=>{if(location.hash==='#case-home-living'){document.body.classList.add('case-open');document.getElementById('case-home-living-view').classList.add('active')}else{document.body.classList.remove('case-open');document.getElementById('case-home-living-view').classList.remove('active')}});
+if(location.hash==='#case-toys'){document.body.classList.add('case-open');document.getElementById('case-home-living-view').classList.remove('active');document.getElementById('case-toys-view').classList.add('active')}
+window.addEventListener('popstate',()=>{if(location.hash==='#case-home-living'){document.body.classList.add('case-open');document.getElementById('case-home-living-view').classList.add('active')}
+if(location.hash==='#case-toys'){document.body.classList.add('case-open');document.getElementById('case-home-living-view').classList.remove('active');document.getElementById('case-toys-view').classList.add('active')}else{document.body.classList.remove('case-open');document.getElementById('case-home-living-view').classList.remove('active')}});
 </script>
 
 <script>

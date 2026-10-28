@@ -537,29 +537,6 @@ body.case-open>main>#case-home-living-view.active,body.case-open>main>#case-toys
 #case-course-creators-view .creator-proof-grid::-webkit-scrollbar{height:6px}
 #case-course-creators-view .creator-proof-grid::-webkit-scrollbar-thumb{background:#555;border-radius:8px}
 @media(max-width:700px){#case-course-creators-view .creator-proof-grid img{flex-basis:88%;width:88%;height:auto;max-height:68vh;object-fit:contain}}
-
-/* Creator month-to-month carousel */
-#case-course-creators-view .creator-month-carousel{margin:28px 0 42px;position:relative;border:1px solid rgba(243,237,227,.13);border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));padding:18px;overflow:hidden}
-#case-course-creators-view .creator-month-carousel-track{min-width:0}
-#case-course-creators-view .creator-month-carousel .creator-month{display:none;margin:0!important;animation:creatorMonthIn .28s ease both}
-#case-course-creators-view .creator-month-carousel .creator-month.is-active{display:block}
-#case-course-creators-view .creator-month-carousel .creator-month h3{display:inline-flex;align-items:center;gap:9px;font-size:clamp(22px,3vw,30px);margin:0 0 16px}
-#case-course-creators-view .creator-month-carousel .creator-month h3:before{content:"";width:8px;height:8px;border-radius:50%;background:#c74735;box-shadow:0 0 0 5px rgba(199,71,53,.13)}
-#case-course-creators-view .creator-month-carousel .creator-kpis{margin:0 0 18px}
-#case-course-creators-view .creator-month-carousel-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding-top:15px;border-top:1px solid rgba(243,237,227,.1)}
-#case-course-creators-view .creator-month-nav{display:flex;align-items:center;gap:8px}
-#case-course-creators-view .creator-month-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:9px 13px;border-radius:12px;border:1px solid rgba(243,237,227,.18);background:#202022;color:#f3ede3;font:inherit;font-size:13px;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
-#case-course-creators-view .creator-month-btn:hover{background:#302321;border-color:#c74735;transform:translateY(-1px)}
-#case-course-creators-view .creator-month-btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
-#case-course-creators-view .creator-month-progress{display:flex;align-items:center;gap:10px;min-width:0;flex:1;justify-content:center}
-#case-course-creators-view .creator-month-count{white-space:nowrap;color:#c6beb5;font-size:12px;font-variant-numeric:tabular-nums}
-#case-course-creators-view .creator-month-dots{display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap}
-#case-course-creators-view .creator-month-dot{width:7px;height:7px;padding:0;border:0;border-radius:99px;background:#555;cursor:pointer;transition:all .2s}
-#case-course-creators-view .creator-month-dot.is-active{width:23px;background:#c74735}
-#case-course-creators-view .creator-month-carousel .creator-proof-grid{margin-top:4px}
-@keyframes creatorMonthIn{from{opacity:.35;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}
-@media(max-width:700px){#case-course-creators-view .creator-month-carousel{padding:13px;border-radius:16px;margin:20px 0 30px}#case-course-creators-view .creator-month-carousel-controls{gap:7px;flex-wrap:wrap}#case-course-creators-view .creator-month-progress{order:-1;flex-basis:100%;justify-content:space-between}#case-course-creators-view .creator-month-nav{flex:1}#case-course-creators-view .creator-month-btn{flex:1;padding:9px 8px}#case-course-creators-view .creator-month-carousel .creator-kpis{margin-bottom:14px}}
-
 </style>
 <style>
 .creator-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
@@ -1158,46 +1135,6 @@ if(collabWindow&&collabs&&!collabs.dataset.marqueeReady){
  const endDrag=()=>{if(!dragging)return;dragging=false;pause()};
  collabWindow.addEventListener('pointerup',endDrag);collabWindow.addEventListener('pointercancel',endDrag);collabWindow.addEventListener('lostpointercapture',endDrag);
 }
-</script>
-<script>
-(function(){
-  function setupCreatorMonthCarousels(){
-    const root=document.querySelector('#case-course-creators-view');
-    if(!root||root.dataset.monthCarouselsReady==='1') return;
-    root.dataset.monthCarouselsReady='1';
-    const parents=[root,...root.querySelectorAll('.creator-extra-group')];
-    parents.forEach(parent=>{
-      const kids=Array.from(parent.children); let run=[];
-      const build=()=>{
-        if(!run.length)return;
-        const firstInRun=run[0];
-        // Keep the all-creators monthly totals section exactly as a static summary;
-        // only individual creators' monthly results should become carousels.
-        const precedingTitle=firstInRun.previousElementSibling;
-        const isAllCreatorsTotals=parent===root && precedingTitle && precedingTitle.classList.contains('creator-section-title') && (precedingTitle.querySelector('h2')?.textContent||'').includes('كل صُنّاع المحتوى');
-        if(isAllCreatorsTotals){run=[];return;}
-        const months=run.slice(), first=months[0];
-        const carousel=document.createElement('section');carousel.className='creator-month-carousel';carousel.setAttribute('aria-label','التنقل بين النتائج الشهرية');
-        const track=document.createElement('div');track.className='creator-month-carousel-track';
-        months.forEach((month,i)=>{month.classList.toggle('is-active',i===0);month.setAttribute('aria-hidden',i===0?'false':'true');track.appendChild(month)});
-        const controls=document.createElement('div');controls.className='creator-month-carousel-controls';
-        const nav=document.createElement('div');nav.className='creator-month-nav';
-        const prev=document.createElement('button');prev.type='button';prev.className='creator-month-btn';prev.innerHTML='<span aria-hidden="true">←</span> الشهر السابق';
-        const next=document.createElement('button');next.type='button';next.className='creator-month-btn';next.innerHTML='الشهر التالي <span aria-hidden="true">→</span>';
-        const progress=document.createElement('div');progress.className='creator-month-progress';
-        const count=document.createElement('span');count.className='creator-month-count';count.setAttribute('aria-live','polite');
-        const dots=document.createElement('div');dots.className='creator-month-dots';let current=0;
-        const dotButtons=months.map((month,i)=>{const b=document.createElement('button');b.type='button';b.className='creator-month-dot'+(i===0?' is-active':'');b.setAttribute('aria-label','عرض '+(month.querySelector('h3')?.textContent.trim()||('الشهر '+(i+1))));b.title=b.getAttribute('aria-label');b.addEventListener('click',()=>show(i));dots.appendChild(b);return b});
-        function show(i){current=Math.max(0,Math.min(months.length-1,i));months.forEach((m,j)=>{m.classList.toggle('is-active',j===current);m.setAttribute('aria-hidden',j===current?'false':'true')});dotButtons.forEach((d,j)=>{d.classList.toggle('is-active',j===current);d.setAttribute('aria-current',j===current?'step':'false')});count.textContent=(months[current].querySelector('h3')?.textContent.trim()||'')+' · '+(current+1)+' / '+months.length;prev.disabled=current===0;next.disabled=current===months.length-1;}
-        prev.addEventListener('click',()=>show(current-1));next.addEventListener('click',()=>show(current+1));
-        nav.append(prev,next);progress.append(count,dots);controls.append(progress,nav);carousel.append(track,controls);
-        first.parentNode.insertBefore(carousel,first);months.forEach(m=>m.remove());show(0);run=[];
-      };
-      kids.forEach(el=>{if(el.classList&&el.classList.contains('creator-month'))run.push(el);else build()});build();
-    });
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setupCreatorMonthCarousels);else setupCreatorMonthCarousels();
-})();
 </script>
 </body>
 </html>

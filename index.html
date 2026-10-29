@@ -1202,5 +1202,21 @@ if(collabWindow&&collabs&&!collabs.dataset.marqueeReady){
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setupCreatorMonthCarousels);else setupCreatorMonthCarousels();
 })();
 </script>
+<script>
+/* Safety fallback: never leave a creator's monthly results blank if carousel state fails to initialize. */
+(function(){
+  function ensureCreatorResultsVisible(){
+    document.querySelectorAll('#case-course-creators-view .creator-month-carousel-track').forEach(track=>{
+      const months=[...track.querySelectorAll('.creator-month')];
+      if(!months.length)return;
+      if(!months.some(m=>m.classList.contains('is-active'))){
+        months.forEach((m,i)=>{m.classList.toggle('is-active',i===0);m.setAttribute('aria-hidden',i===0?'false':'true');});
+      }
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ensureCreatorResultsVisible);
+  else ensureCreatorResultsVisible();
+})();
+</script>
 </body>
 </html>

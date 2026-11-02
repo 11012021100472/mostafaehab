@@ -629,6 +629,23 @@ body.wahag-case-open>main>#case-wahag-view.active{display:block!important}
 @media(max-width:600px){#case-course-creators-view .creator-extra-heading img{width:62px;height:62px}}
 </style>
 
+
+<style id="wahag-final-fixes">
+/* WAHAG story: preserve the supplied Arabic copy and natural RTL paragraph flow. */
+#case-wahag-view .wahag-intro{direction:rtl;text-align:right}
+#case-wahag-view .wahag-intro p,#case-wahag-view .wahag-intro li{direction:rtl;text-align:right;unicode-bidi:plaintext;line-height:2.05;margin:0 0 15px}
+#case-wahag-view .wahag-intro h2,#case-wahag-view .wahag-intro h3{text-align:right}
+#case-wahag-view .wahag-full-story{direction:rtl;text-align:right}
+#case-wahag-view .wahag-full-story ul{padding-right:24px;padding-left:0;margin:10px 0 20px}
+#case-wahag-view .wahag-full-story h3[dir="ltr"]{text-align:left}
+#case-wahag-view .wahag-case-cover img{object-fit:contain!important;background:#111}
+#case-wahag-view .wahag-slider{position:relative}
+#case-wahag-view .wahag-slider .wahag-redaction{position:absolute;z-index:1;pointer-events:none;background:rgba(235,238,242,.2);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border:1px solid rgba(30,40,50,.12);border-radius:3px}
+#case-wahag-view .wahag-slider .wahag-redaction.campaign{left:16.2%;top:43.2%;width:27.5%;height:37.7%}
+#case-wahag-view .wahag-slider .wahag-redaction.date{left:70.7%;top:25.1%;width:24.3%;height:5.4%}
+@media(max-width:700px){#case-wahag-view .wahag-intro{padding:20px 16px}#case-wahag-view .wahag-slider .wahag-redaction.campaign{left:16.2%;top:43.2%;width:27.5%;height:37.7%}}
+</style>
+
 </head>
 <body>
 <header class="wrap topbar">
@@ -781,7 +798,7 @@ body.wahag-case-open>main>#case-wahag-view.active{display:block!important}
 <div><div class="kicker">Selected Results</div><h2>Real Results. Measurable Growth.</h2></div>
 <p class="section-desc">Campaign results across e-commerce and creator-led digital products.</p>
 </div>
-<a class="home-living-case-link creator-results-link" href="#case-course-creators" aria-label="Open creator course sales case study"><div class="case-cover"><img src="courses-all-time-02.jpg" alt="لوحة الأداء الإجمالية لصناع المحتوى وتظهر صافي ربح يتجاوز 800 ألف دولار" loading="lazy"></div><div class="case-card-copy"><div class="kicker">كورسات صُنّاع المحتوى · يونيو–أكتوبر 2026</div><h3>إدارة وتوسيع مبيعات كورسات صُنّاع المحتوى بالأداء التسويقي</h3><div class="case-label">دراسة حالة</div><p><strong class="creator-cover-sales">$1,560,221</strong> إجمالي المبيعات · <strong class="creator-cover-net">$880,711</strong> صافي الربح (USD)</p><span>عرض دراسة الحالة ↗</span></div></a><a class="home-living-case-link" href="#case-home-living" aria-label="Open confidential home and living Meta Ads case study"><div class="case-cover"><img src="home-living-case-cover.png" alt="Meta Ads performance dashboard preview" loading="lazy"></div><div class="case-card-copy"><div class="kicker">META ADS · 6 MONTHS</div><h3>إزاي قدرنا نحقق 11.3 مليون جنيه لبراند أدوات منزلية</h3><div class="case-label">CASE STUDY</div><p>EGP 11.3M purchase conversion value · 6.6x ROAS</p><span>Explore Case Study ↗</span></div></a><a class="home-living-case-link toys-case-link" href="#case-toys" aria-label="فتح دراسة حالة براند ألعاب الأطفال"><div class="case-cover"><img src="toy-brand-case-cover.png" alt="معاينة نتائج إعلانات براند ألعاب أطفال" loading="lazy"></div><div class="case-card-copy"><div class="kicker">META ADS · 4 MONTHS</div><h3>إزاي حققنا نمو قوي لبراند ألعاب أطفال خلال 4 شهور؟</h3><div class="case-label">CASE STUDY</div><p>EGP 4.33M Revenue · 12,631 Purchases · 4.31x ROAS</p><span>عرض دراسة الحالة ↗</span></div></a><a class="home-living-case-link wahag-case-link" href="#case-wahag" aria-label="فتح دراسة حالة وهج" onclick="openWahagCase(event)"><div class="case-cover"><img src="/images/wahag-001.jpg" alt="معاينة نتائج إعلانات وهج" loading="lazy"></div><div class="case-card-copy"><div class="kicker">E-COMMERCE · WAHAG</div><h3>من 70 ألف جنيه لأول 8 مليون مبيعات!</h3><div class="case-label">CASE STUDY</div><p><strong>EGP 8M</strong> إجمالي المبيعات · <strong>5.33x ROAS</strong></p><span>عرض دراسة الحالة ↗</span></div></a>
+<a class="home-living-case-link creator-results-link" href="#case-course-creators" aria-label="Open creator course sales case study"><div class="case-cover"><img src="courses-all-time-02.jpg" alt="لوحة الأداء الإجمالية لصناع المحتوى وتظهر صافي ربح يتجاوز 800 ألف دولار" loading="lazy"></div><div class="case-card-copy"><div class="kicker">كورسات صُنّاع المحتوى · يونيو–أكتوبر 2026</div><h3>إدارة وتوسيع مبيعات كورسات صُنّاع المحتوى بالأداء التسويقي</h3><div class="case-label">دراسة حالة</div><p><strong class="creator-cover-sales">$1,560,221</strong> إجمالي المبيعات · <strong class="creator-cover-net">$880,711</strong> صافي الربح (USD)</p><span>عرض دراسة الحالة ↗</span></div></a><a class="home-living-case-link" href="#case-home-living" aria-label="Open confidential home and living Meta Ads case study"><div class="case-cover"><img src="home-living-case-cover.png" alt="Meta Ads performance dashboard preview" loading="lazy"></div><div class="case-card-copy"><div class="kicker">META ADS · 6 MONTHS</div><h3>إزاي قدرنا نحقق 11.3 مليون جنيه لبراند أدوات منزلية</h3><div class="case-label">CASE STUDY</div><p>EGP 11.3M purchase conversion value · 6.6x ROAS</p><span>Explore Case Study ↗</span></div></a><a class="home-living-case-link toys-case-link" href="#case-toys" aria-label="فتح دراسة حالة براند ألعاب الأطفال"><div class="case-cover"><img src="toy-brand-case-cover.png" alt="معاينة نتائج إعلانات براند ألعاب أطفال" loading="lazy"></div><div class="case-card-copy"><div class="kicker">META ADS · 4 MONTHS</div><h3>إزاي حققنا نمو قوي لبراند ألعاب أطفال خلال 4 شهور؟</h3><div class="case-label">CASE STUDY</div><p>EGP 4.33M Revenue · 12,631 Purchases · 4.31x ROAS</p><span>عرض دراسة الحالة ↗</span></div></a><a class="home-living-case-link wahag-case-link" href="#case-wahag" aria-label="فتح دراسة حالة وهج" onclick="openWahagCase(event)"><div class="case-cover wahag-case-cover"><img src="110009.jpg" alt="معاينة نتائج إعلانات وهج" loading="lazy"></div><div class="case-card-copy"><div class="kicker">E-COMMERCE · WAHAG</div><h3>من 70 ألف جنيه لأول 8 مليون مبيعات!</h3><div class="case-label">CASE STUDY</div><p><strong>EGP 8M</strong> إجمالي المبيعات · <strong>5.33x ROAS</strong></p><span>عرض دراسة الحالة ↗</span></div></a>
 </div>
 </section>
 <section class="section" id="reviews">
@@ -916,16 +933,26 @@ body.wahag-case-open>main>#case-wahag-view.active{display:block!important}
       <div class="stat"><small>العائد على الإنفاق الإعلاني</small><strong><span class="wahag-counter" data-target="5.33" data-format="roas">5.33</span><em>x</em></strong><div class="stat-note">ROAS</div></div>
     </div>
   </section>
-  <section class="wahag-intro">
-    <div class="kicker">THE JOURNEY</div><h2>القصة بدأت من الأساس… مش من زرار الـ Boost.</h2>
-    <p>في بداية شغلنا مع وهج، كان الموقع غير مستقر بالشكل اللي يسمح ببناء Growth حقيقي. كان Integrated مع شركة Zamit، ومع الوقت قررنا نغيّر الاتجاه ونعيد بناء الموقع من الصفر على WordPress عشان نتحكم في تجربة العميل بشكل أكبر.</p>
-    <p>وسوق النجف والإضاءة له طبيعة مختلفة وتحديات مرتبطة بالمنتجات والأسعار والمنافسة وطريقة اتخاذ قرار الشراء.</p>
-    <div class="wahag-summary"><strong>من 70 ألف جنيه مبيعات كنا بنعتبرها إنجاز كبير… لأول 8 مليون جنيه مبيعات.</strong><p>النمو جه من بناء System قابل للتطوير، مش مجرد زيادة الميزانية الإعلانية.</p></div>
+  <section class="wahag-intro" dir="rtl" lang="ar">
+    <div class="kicker" dir="ltr">THE JOURNEY</div>
+    <h2>القصة بدأت من الأساس… مش من زرار الـ Boost.</h2>
+    <div class="wahag-story-preview">
+      <p>مش كل Case Study بتبدأ بأكونت إعلاني محتاج Optimization… ساعات بتبدأ ببيزنس محتاج يتبني من جديد!</p>
+      <p>وده تقريبًا اللي حصل مع <strong>WAHAG</strong>.</p>
+      <p>في بداية شغلنا مع وهج، كان عندنا تحديات كتير جدًا، وأولها إن الموقع نفسه كان مش مستقر بالشكل اللي يسمح لنا نبني عليه Growth حقيقي.</p>
+      <p>الموقع كان Integrated مع شركة اسمها Zamit، ومع الوقت اكتشفنا إننا محتاجين نتحكم في التجربة بشكل أكبر، فقررنا نغيّر الاتجاه ونعيد بناء الموقع من الصفر على WordPress.</p>
+    </div>
+    <div class="wahag-summary"><strong>في البداية، كنا لما نوصل ل 70 ألف مبيعات بنحس إننا عملنا إنجاز كبير!</strong><p>لكن بدل ما نفضل نحاول نزود الميزانية الإعلانية وخلاص، بدأنا نشتغل على الأساسيات:</p></div>
     <button class="wahag-details-toggle" type="button" aria-expanded="false" aria-controls="wahag-full-story" onclick="toggleWahagDetails(this)">اقرأ تفاصيل الـ Case Study كاملة <span>＋</span></button>
-    <div id="wahag-full-story" class="wahag-full-story" hidden>
-      <h3>التحديات والبداية</h3>
-      <p>في البداية، كنا لما نوصل لمبيعات 70 ألف جنيه بنحس إننا عملنا إنجاز كبير. لكن بدل ما نفضل نحاول نزود الميزانية الإعلانية وخلاص، بدأنا نشتغل على الأساسيات ونبني رحلة شراء وتجربة موقع تسمح بالنمو.</p>
-      <h3>إيه اللي اشتغلنا عليه؟</h3>
+    <div id="wahag-full-story" class="wahag-full-story" dir="rtl" lang="ar" hidden>
+      <p>مش كل Case Study بتبدأ بأكونت إعلاني محتاج Optimization… ساعات بتبدأ ببيزنس محتاج يتبني من جديد!</p>
+      <p>وده تقريبًا اللي حصل مع <strong>WAHAG</strong>.</p>
+      <p>في بداية شغلنا مع وهج، كان عندنا تحديات كتير جدًا، وأولها إن الموقع نفسه كان مش مستقر بالشكل اللي يسمح لنا نبني عليه Growth حقيقي.</p>
+      <p>الموقع كان Integrated مع شركة اسمها Zamit، ومع الوقت اكتشفنا إننا محتاجين نتحكم في التجربة بشكل أكبر، فقررنا نغيّر الاتجاه ونعيد بناء الموقع من الصفر على WordPress.</p>
+      <p>والرحلة مكنتش سهلة.</p>
+      <p>سوق النجف والإضاءة ليه طبيعة مختلفة، وفيه تحديات كتير مرتبطة بالمنتجات، الأسعار، المنافسة، وطريقة اتخاذ قرار الشراء.</p>
+      <p>في البداية، كنا لما نوصل ل 70 ألف مبيعات بنحس إننا عملنا إنجاز كبير!</p>
+      <p>لكن بدل ما نفضل نحاول نزود الميزانية الإعلانية وخلاص، بدأنا نشتغل على الأساسيات:</p>
       <ul>
         <li>فهم السوق وطبيعة الـ Customer Journey.</li>
         <li>تحديد ICP مناسب بدل ما نستهدف كل الناس.</li>
@@ -933,19 +960,25 @@ body.wahag-case-open>main>#case-wahag-view.active{display:block!important}
         <li>تطوير الـ Campaign Structure بناءً على البيانات.</li>
         <li>تحليل النتائج باستمرار وإعادة توزيع الميزانيات على الفرص الأفضل.</li>
       </ul>
-      <p>ومع كل مرحلة، بدأنا نفهم أكتر مين العميل اللي بيشتري، وإيه المنتجات اللي بتتحرك، وأنهي Creatives بتجيب مبيعات فعلية. وصلنا لأول 100 ألف، وبعدها بدأنا نحط أهداف أكبر: 500 ألف، وبعدها أول مليون جنيه مبيعات.</p>
-      <p>والأهم إن النمو مكنش مجرد شهر استثنائي ونرجع تاني لنقطة البداية؛ بدأنا نشوف استقرار وتحسن في النتائج من شهر للتاني، ومع الوقت قدرنا نبني System قابل للتطوير والتوسع.</p>
-      <h3>The Numbers That Matter</h3>
+      <p>ومع كل مرحلة، بدأنا نفهم أكتر مين العميل اللي بيشتري، وإيه المنتجات اللي بتتحرك، وأنهي Creatives بتجيب مبيعات فعلية.</p>
+      <p>وصلنا لأول 100 ألف… وبعدها بدأنا نحط أهداف أكبر.</p>
+      <p><strong>500 ألف، وبعدها أول مليون جنيه مبيعات!</strong></p>
+      <p>والأهم إن النمو مكنش مجرد شهر استثنائي ونرجع تاني لنقطة البداية، لكن بدأنا نشوف استقرار وتحسن في النتائج من شهر للتاني.</p>
+      <p>ومع الوقت، قدرنا نبني System قابل للتطوير والتوسع.</p>
+      <h3 dir="ltr">The Numbers That Matter</h3>
       <p>من يناير 2026، وده الحساب الإعلاني الأساسي اللي اشتغلنا عليه:</p>
-      <ul><li><b>8,000,000 EGP</b> إجمالي المبيعات.</li><li><b>1,500,000 EGP</b> إجمالي الإنفاق الإعلاني.</li><li><b>5.33x ROAS</b> العائد على الإنفاق الإعلاني.</li></ul>
-      <p>الأرقام دي نتيجة شغل مستمر على الـ Website، والـ Creatives، والـ Audience، والـ Campaign Structure، مش مجرد تغيير في إعدادات الحملات. بقالنا كذا شهر بنحقق نتائج قوية ومستقرة، ولسه فيه فرص نمو نقدر نشتغل عليها.</p>
+      <p><strong dir="ltr">8,000,000 EGP</strong><br>إجمالي المبيعات</p>
+      <p><strong dir="ltr">1,500,000 EGP</strong><br>إجمالي الإنفاق الإعلاني</p>
+      <p><strong dir="ltr">5.33x ROAS</strong><br>العائد على الإنفاق الإعلاني</p>
+      <p>والأرقام دي بتمثل نتيجة شغل مستمر على الـ Website، والـ Creatives، والـ Audience، والـ Campaign Structure، مش مجرد تغيير في إعدادات الحملات.</p>
+      <p>الحمد لله، بقالنا كذا شهر بنحقق نتائج قوية ومستقرة، ولسه فيه فرص نمو نقدر نشتغل عليها.</p>
     </div>
   </section>
   <section class="wahag-gallery-section">
     <div class="gallery-head"><div><div class="kicker">PERFORMANCE PROOF</div><h2>نتائج الحملات بالأرقام</h2></div><p>استعرض سكرينات الأداء واحدة واحدة من خلال السلايدر.</p></div>
     <div class="wahag-slider" aria-label="WAHAG campaign results slider">
       <button class="wahag-slide-arrow prev" type="button" aria-label="الصورة السابقة" onclick="moveWahagSlide(-1)">‹</button>
-      <img id="wahag-slide-image" src="assets/images/wahag-001.jpg" alt="لقطة من نتائج إعلانات وهج" loading="lazy">
+      <img id="wahag-slide-image" src="110009.jpg" alt="لقطة من نتائج إعلانات وهج" loading="lazy"><span class="wahag-redaction campaign" aria-hidden="true"></span><span class="wahag-redaction date" aria-hidden="true"></span>
       <button class="wahag-slide-arrow next" type="button" aria-label="الصورة التالية" onclick="moveWahagSlide(1)">›</button>
       <div class="wahag-slide-count"><span id="wahag-slide-current">1</span> / 6</div>
     </div>
@@ -1118,7 +1151,7 @@ function closeHomeLivingCase(event){
   history.pushState({},'', '#results');
   window.scrollTo(0,0);
 }
-document.querySelectorAll('.home-living-case-link:not(.toys-case-link):not(.creator-results-link)').forEach(el=>el.addEventListener('click',openHomeLivingCase));
+document.querySelectorAll('.home-living-case-link:not(.toys-case-link):not(.creator-results-link):not(.wahag-case-link)').forEach(el=>el.addEventListener('click',openHomeLivingCase));
 if(location.hash==='#case-home-living'){document.body.classList.add('case-open');document.getElementById('case-home-living-view').classList.add('active')}
 window.addEventListener('popstate',()=>{if(location.hash==='#case-home-living'){document.body.classList.add('case-open');document.getElementById('case-home-living-view').classList.add('active')}else{document.body.classList.remove('case-open');document.getElementById('case-home-living-view').classList.remove('active')}});
 </script>
@@ -1291,7 +1324,7 @@ if(collabWindow&&collabs&&!collabs.dataset.marqueeReady){
 </script>
 
 <script>
-const wahagSlides=Array.from({length:6},(_,i)=>`assets/images/wahag-${String(i+1).padStart(3,'0')}.jpg`);
+const wahagSlides=['110009.jpg','110010.jpg','110011.jpg','110012.jpg','110013.jpg','110014.jpg'];
 let wahagSlideIndex=0;
 function renderWahagSlide(){
  const image=document.getElementById('wahag-slide-image'); if(!image)return;
@@ -1301,8 +1334,8 @@ function renderWahagSlide(){
 }
 function moveWahagSlide(step){wahagSlideIndex=(wahagSlideIndex+step+wahagSlides.length)%wahagSlides.length;renderWahagSlide()}
 function animateWahagCounters(){document.querySelectorAll('#case-wahag-view .wahag-counter').forEach(el=>{const target=Number(el.dataset.target);const format=el.dataset.format;const start=performance.now();const duration=1100;function frame(now){const t=Math.min(1,(now-start)/duration);const eased=1-Math.pow(1-t,3);const value=target*eased;if(format==='millions')el.textContent=(value/1000000).toFixed(2).replace(/\.?0+$/,'')+'M';else el.textContent=value.toFixed(2);if(t<1)requestAnimationFrame(frame)}requestAnimationFrame(frame)})}
-function openWahagCase(event){if(event)event.preventDefault();document.body.classList.add('wahag-case-open');document.getElementById('case-wahag-view').classList.add('active');history.pushState({wahagCase:true},'','#case-wahag');window.scrollTo(0,0);renderWahagSlide();animateWahagCounters()}
-function closeWahagCase(event){if(event)event.preventDefault();document.body.classList.remove('wahag-case-open');document.getElementById('case-wahag-view').classList.remove('active');history.pushState({},'','#results');window.scrollTo(0,0)}
+function openWahagCase(event){if(event){event.preventDefault();event.stopPropagation();}document.body.classList.remove('case-open','creator-case-open');document.body.classList.add('wahag-case-open');document.querySelectorAll('#case-home-living-view,#case-course-creators-view,#case-toys-view').forEach(v=>v&&v.classList.remove('active'));const view=document.getElementById('case-wahag-view');if(view)view.classList.add('active');history.pushState({wahagCase:true},'','#case-wahag');window.scrollTo(0,0);renderWahagSlide();animateWahagCounters()}
+function closeWahagCase(event){if(event){event.preventDefault();event.stopPropagation();}document.body.classList.remove('wahag-case-open');const view=document.getElementById('case-wahag-view');if(view)view.classList.remove('active');history.pushState({},'','#results');window.scrollTo(0,0)}
 function toggleWahagDetails(button){const panel=document.getElementById('wahag-full-story');const opening=panel.hidden;panel.hidden=!opening;button.setAttribute('aria-expanded',String(opening));button.innerHTML=opening?'إخفاء التفاصيل الكاملة <span>−</span>':'اقرأ تفاصيل الـ Case Study كاملة <span>＋</span>'}
 (function(){const dots=document.getElementById('wahag-slider-dots');if(dots){wahagSlides.forEach((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',`عرض الصورة ${i+1}`);b.addEventListener('click',()=>{wahagSlideIndex=i;renderWahagSlide()});dots.appendChild(b)});renderWahagSlide()}
  if(location.hash==='#case-wahag'){document.body.classList.add('wahag-case-open');document.getElementById('case-wahag-view').classList.add('active');animateWahagCounters()}

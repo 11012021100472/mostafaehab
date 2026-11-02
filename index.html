@@ -1193,7 +1193,7 @@ if(collabWindow&&collabs&&!collabs.dataset.marqueeReady){
         function show(i){current=Math.max(0,Math.min(months.length-1,i));months.forEach((m,j)=>{m.classList.toggle('is-active',j===current);m.setAttribute('aria-hidden',j===current?'false':'true')});dotButtons.forEach((d,j)=>{d.classList.toggle('is-active',j===current);d.setAttribute('aria-current',j===current?'step':'false')});count.textContent=(months[current].querySelector('h3')?.textContent.trim()||'')+' · '+(current+1)+' / '+months.length;prev.disabled=current===0;next.disabled=current===months.length-1;}
         prev.addEventListener('click',()=>show(current-1));next.addEventListener('click',()=>show(current+1));
         nav.append(prev,next);progress.append(count,dots);controls.append(progress,nav);carousel.append(track,controls);
-        first.parentNode.insertBefore(carousel,first);months.forEach(m=>m.remove());show(0);run=[];
+        first.parentNode.insertBefore(carousel,first);show(0);run=[];
       };
       kids.forEach(el=>{if(el.classList&&el.classList.contains('creator-month'))run.push(el);else build()});build();
     });
